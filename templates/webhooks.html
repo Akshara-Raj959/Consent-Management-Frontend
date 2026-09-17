@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Webhooks</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+
+            --navy: #0f172a;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow: 0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding: 2.25rem 3rem 4rem;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            margin-bottom: 1.5rem;
+
+            color: var(--muted);
+            font-size: 0.6875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb i {
+            font-size: 0.5rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .page-icon {
+            width: 3.25rem;
+            height: 3.25rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.75rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.25rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.8125rem;
+            line-height: 1.6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .primary-button {
+            min-height: 2.5rem;
+
+            padding: 0.6875rem 1rem;
+
+            border: none;
+            border-radius: 0.5rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            white-space: nowrap;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.75rem;
+
+            padding: 1.125rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 0.875rem;
+        }
+
+        .summary-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.875rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            color: var(--navy);
+
+            font-size: 1.375rem;
+            font-weight: 800;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-description {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.75rem;
+
+            padding: 1rem 1.125rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 1rem;
+
+            margin-bottom: 1rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 25rem;
+
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 0.75rem;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 2.5rem;
+
+            padding: 0 0.75rem 0 2.25rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: #f8fafc;
+
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 0.6875rem;
+        }
+
+        .search-box input:focus {
+            border-color: #93c5fd;
+            background: var(--white);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .filter-select {
+            height: 2.5rem;
+
+            min-width: 10rem;
+
+            padding: 0 0.75rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            outline: none;
+
+            font-size: 0.625rem;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.125rem 1.5rem;
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .table-title {
+            color: var(--navy);
+
+            font-size: 0.875rem;
+            font-weight: 800;
+        }
+
+        .table-count {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 72rem;
+        }
+
+        th {
+            padding: 0.875rem 1rem;
+
+            background: #f8fafc;
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.025rem;
+
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+
+            border-bottom: 0.0625rem solid #f1f5f9;
+
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* =========================
+           WEBHOOK NAME
+        ========================= */
+
+        .webhook-name {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .webhook-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.75rem;
+        }
+
+        .webhook-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .webhook-title {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        .webhook-id {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        /* =========================
+           EVENT BADGES
+        ========================= */
+
+        .event-badge {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 0.375rem 0.625rem;
+
+            border-radius: 0.375rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .event-withdraw {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .event-granted {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .event-deletion {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .event-update {
+            background: #f1f5f9;
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           ENDPOINT
+        ========================= */
+
+        .endpoint {
+            max-width: 18rem;
+
+            color: var(--text-secondary);
+
+            font-family: "Courier New", monospace;
+
+            font-size: 0.5625rem;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+
+            padding: 0.375rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-active .status-dot {
+            background: var(--success);
+        }
+
+        .status-inactive {
+            background: #f1f5f9;
+            color: var(--text-secondary);
+        }
+
+        .status-inactive .status-dot {
+            background: var(--muted);
+        }
+
+        .status-failed {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .status-failed .status-dot {
+            background: var(--danger);
+        }
+
+        /* =========================
+           ACTION BUTTONS
+        ========================= */
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .icon-button {
+            width: 2rem;
+            height: 2rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.4375rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.625rem;
+        }
+
+        .icon-button:hover {
+            color: var(--primary);
+
+            border-color: #bfdbfe;
+
+            background: #f8fafc;
+        }
+
+        .icon-button.delete:hover {
+            color: var(--danger);
+
+            border-color: #fecaca;
+
+            background: #fef2f2;
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination {
+            padding: 1rem 1.5rem;
+
+            border-top: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pagination-info {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .page-button {
+            min-width: 2rem;
+            height: 2rem;
+
+            padding: 0 0.5rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.375rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            font-size: 0.5625rem;
+            font-weight: 600;
+        }
+
+        .page-button:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .page-button.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding: 1.5rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .primary-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+
+        }
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .title-section {
+                gap: 0.75rem;
+            }
+
+            .page-icon {
+                width: 2.875rem;
+                height: 2.875rem;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .table-header {
+                padding: 1rem 1.125rem;
+            }
+
+            .pagination {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+        }
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.6875rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button class="notification" title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="font-size:0.625rem;color:#94a3b8;"
+                ></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb">
+
+            <a href="#">
+                Privacy Operations
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                Webhooks
+            </span>
+
+        </div>
+
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div class="title-section">
+
+                <div class="page-icon">
+
+                    <i class="fa-solid fa-webhook"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1 class="page-title">
+                        Webhooks
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Configure event-driven notifications and deliver
+                        privacy events to external systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button class="primary-button">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Webhook
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY
+        ========================= -->
+
+        <section class="summary-grid">
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-webhook"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Total Webhooks
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    12
+                </div>
+
+                <div class="summary-description">
+                    Webhook endpoints configured
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Active
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    10
+                </div>
+
+                <div class="summary-description">
+                    Currently delivering events
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Events Delivered
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    3.8K
+                </div>
+
+                <div class="summary-description">
+                    Events successfully delivered
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Failed
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    2
+                </div>
+
+                <div class="summary-description">
+                    Endpoints requiring attention
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TOOLBAR
+        ========================= -->
+
+        <section class="toolbar">
+
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search webhooks..."
+                >
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <select class="filter-select">
+
+                    <option>
+                        All Events
+                    </option>
+
+                    <option>
+                        Consent Granted
+                    </option>
+
+                    <option>
+                        Consent Withdrawn
+                    </option>
+
+                    <option>
+                        Deletion Requested
+                    </option>
+
+                    <option>
+                        Data Updated
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option>
+                        All Status
+                    </option>
+
+                    <option>
+                        Active
+                    </option>
+
+                    <option>
+                        Inactive
+                    </option>
+
+                    <option>
+                        Failed
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             WEBHOOK TABLE
+        ========================= -->
+
+        <section class="table-card">
+
+
+            <div class="table-header">
+
+                <h2 class="table-title">
+                    Webhook Inventory
+                </h2>
+
+                <span class="table-count">
+                    12 webhooks
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Webhook
+                            </th>
+
+                            <th>
+                                Event Type
+                            </th>
+
+                            <th>
+                                Endpoint
+                            </th>
+
+                            <th>
+                                Integration
+                            </th>
+
+                            <th>
+                                Last Delivery
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- Webhook 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="webhook-name">
+
+                                    <div class="webhook-icon">
+                                        <i class="fa-solid fa-bell"></i>
+                                    </div>
+
+                                    <div class="webhook-info">
+
+                                        <span class="webhook-title">
+                                            Consent Granted
+                                        </span>
+
+                                        <span class="webhook-id">
+                                            WH-001
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="event-badge event-granted">
+                                    consent.granted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="endpoint">
+                                    https://api.example.com/webhooks/consent
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                CRM Integration
+                            </td>
+
+
+                            <td>
+                                3 min ago
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button
+                                        class="icon-button"
+                                        title="View"
+                                    >
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="icon-button"
+                                        title="Edit"
+                                    >
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button
+                                        class="icon-button"
+                                        title="Test"
+                                    >
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+
+                                    <button
+                                        class="icon-button delete"
+                                        title="Delete"
+                                    >
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Webhook 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="webhook-name">
+
+                                    <div class="webhook-icon">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </div>
+
+                                    <div class="webhook-info">
+
+                                        <span class="webhook-title">
+                                            Consent Withdrawal
+                                        </span>
+
+                                        <span class="webhook-id">
+                                            WH-002
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="event-badge event-withdraw">
+                                    consent.withdrawn
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="endpoint">
+                                    https://api.example.com/webhooks/withdraw
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                CRM Integration
+                            </td>
+
+
+                            <td>
+                                8 min ago
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Webhook 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="webhook-name">
+
+                                    <div class="webhook-icon">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </div>
+
+                                    <div class="webhook-info">
+
+                                        <span class="webhook-title">
+                                            Deletion Request
+                                        </span>
+
+                                        <span class="webhook-id">
+                                            WH-003
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="event-badge event-deletion">
+                                    deletion.requested
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="endpoint">
+                                    https://privacy.example.com/events/delete
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Privacy Operations
+                            </td>
+
+
+                            <td>
+                                15 min ago
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Webhook 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="webhook-name">
+
+                                    <div class="webhook-icon">
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </div>
+
+                                    <div class="webhook-info">
+
+                                        <span class="webhook-title">
+                                            Data Updated
+                                        </span>
+
+                                        <span class="webhook-id">
+                                            WH-004
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="event-badge event-update">
+                                    data.updated
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="endpoint">
+                                    https://events.example.com/privacy/update
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Data Platform
+                            </td>
+
+
+                            <td>
+                                24 min ago
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Webhook 5 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="webhook-name">
+
+                                    <div class="webhook-icon">
+                                        <i class="fa-solid fa-bell"></i>
+                                    </div>
+
+                                    <div class="webhook-info">
+
+                                        <span class="webhook-title">
+                                            Consent Events
+                                        </span>
+
+                                        <span class="webhook-id">
+                                            WH-005
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="event-badge">
+                                    consent.updated
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="endpoint">
+                                    https://hooks.example.com/consent/events
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Custom Integration
+                            </td>
+
+
+                            <td>
+                                31 min ago
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-failed">
+
+                                    <span class="status-dot"></span>
+
+                                    Failed
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Webhook 6 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="webhook-name">
+
+                                    <div class="webhook-icon">
+                                        <i class="fa-solid fa-database"></i>
+                                    </div>
+
+                                    <div class="webhook-info">
+
+                                        <span class="webhook-title">
+                                            Data Deletion Completed
+                                        </span>
+
+                                        <span class="webhook-id">
+                                            WH-006
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="event-badge event-deletion">
+                                    deletion.completed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="endpoint">
+                                    https://system.example.com/hooks/deletion
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Data Platform
+                            </td>
+
+
+                            <td>
+                                1 hour ago
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-inactive">
+
+                                    <span class="status-dot"></span>
+
+                                    Inactive
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 1–6 of 12 webhooks
+                </div>
+
+
+                <div class="pagination-buttons">
+
+                    <button class="page-button">
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+
+                    <button class="page-button active">
+                        1
+                    </button>
+
+
+                    <button class="page-button">
+                        2
+                    </button>
+
+
+                    <button class="page-button">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Consent Management</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================== */
+
+        .topbar {
+            height: 4.5rem;
+            background: #ffffff;
+            border-bottom: 0.0625rem solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #0f172a;
+            font-size: 1.0625rem;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.625rem;
+            background: #2563eb;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .notification {
+            position: relative;
+            color: #64748b;
+            font-size: 1.05rem;
+            cursor: pointer;
+        }
+
+        .notification::after {
+            content: "";
+            position: absolute;
+            top: -0.125rem;
+            right: -0.1875rem;
+            width: 0.4375rem;
+            height: 0.4375rem;
+            border-radius: 50%;
+            background: #dc2626;
+            border: 0.125rem solid #ffffff;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .avatar {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info strong {
+            display: block;
+            color: #1e293b;
+            font-size: 0.8125rem;
+        }
+
+        .profile-info span {
+            display: block;
+            margin-top: 0.125rem;
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .page {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 2rem 2.5rem 3rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        .breadcrumb i {
+            font-size: 0.625rem;
+        }
+
+        .breadcrumb .current {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* =========================
+           PAGE HEADING
+        ========================== */
+
+        .page-heading {
+            margin-bottom: 1.75rem;
+        }
+
+        .page-heading h1 {
+            color: #0f172a;
+            font-size: 1.75rem;
+            line-height: 1.25;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-heading p {
+            color: #64748b;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           SETTINGS LAYOUT
+        ========================== */
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 15rem 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        /* =========================
+           SETTINGS NAV
+        ========================== */
+
+        .settings-nav {
+            background: #ffffff;
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 0.625rem;
+        }
+
+        .nav-title {
+            padding: 0.75rem 0.75rem 0.625rem;
+            color: #94a3b8;
+            font-size: 0.625rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+        }
+
+        .nav-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 0.6875rem;
+
+            padding: 0.6875rem 0.75rem;
+            margin-bottom: 0.25rem;
+
+            border: none;
+            border-radius: 0.5rem;
+
+            background: transparent;
+            color: #64748b;
+
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 500;
+
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            width: 1rem;
+            text-align: center;
+            font-size: 0.8125rem;
+        }
+
+        .nav-item:hover {
+            background: #f8fafc;
+            color: #2563eb;
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        /* =========================
+           CONTENT
+        ========================== */
+
+        .settings-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .settings-card {
+            background: #ffffff;
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 0.0625rem solid #e2e8f0;
+        }
+
+        .card-header h2 {
+            color: #0f172a;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.375rem;
+        }
+
+        .card-header p {
+            color: #94a3b8;
+            font-size: 0.6875rem;
+            line-height: 1.5;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* =========================
+           PROFILE
+        ========================== */
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 0.0625rem solid #f1f5f9;
+        }
+
+        .large-avatar {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.125rem;
+            font-weight: 700;
+        }
+
+        .profile-details h3 {
+            color: #1e293b;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-details p {
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        .change-photo {
+            margin-left: auto;
+
+            padding: 0.5rem 0.75rem;
+
+            background: #ffffff;
+            color: #475569;
+
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.4375rem;
+
+            font-family: inherit;
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .change-photo:hover {
+            color: #2563eb;
+            border-color: #bfdbfe;
+        }
+
+        /* =========================
+           FORM
+        ========================== */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.125rem 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4375rem;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #334155;
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            height: 2.5rem;
+
+            padding: 0 0.75rem;
+
+            background: #ffffff;
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.4375rem;
+
+            color: #334155;
+            font-family: inherit;
+            font-size: 0.75rem;
+
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
+        .form-hint {
+            color: #94a3b8;
+            font-size: 0.625rem;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.625rem;
+
+            padding: 1rem 1.5rem;
+
+            background: #f8fafc;
+            border-top: 0.0625rem solid #e2e8f0;
+        }
+
+        .btn {
+            padding: 0.625rem 1rem;
+
+            border-radius: 0.4375rem;
+
+            font-family: inherit;
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #475569;
+            border: 0.0625rem solid #e2e8f0;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+            border: 0.0625rem solid #2563eb;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        /* =========================
+           SECURITY
+        ========================== */
+
+        .security-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+
+            padding: 1rem 0;
+            border-bottom: 0.0625rem solid #f1f5f9;
+        }
+
+        .security-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .security-row:first-child {
+            padding-top: 0;
+        }
+
+        .security-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .security-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 0.5rem;
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .security-text h3 {
+            color: #334155;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .security-text p {
+            color: #94a3b8;
+            font-size: 0.625rem;
+            line-height: 1.4;
+        }
+
+        .security-action {
+            padding: 0.5rem 0.75rem;
+
+            background: #ffffff;
+            color: #2563eb;
+
+            border: 0.0625rem solid #bfdbfe;
+            border-radius: 0.4375rem;
+
+            font-family: inherit;
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .security-action:hover {
+            background: #eff6ff;
+        }
+
+        /* =========================
+           NOTIFICATIONS
+        ========================== */
+
+        .notification-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+
+            padding: 1rem 0;
+            border-bottom: 0.0625rem solid #f1f5f9;
+        }
+
+        .notification-row:first-child {
+            padding-top: 0;
+        }
+
+        .notification-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .notification-info h3 {
+            color: #334155;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .notification-info p {
+            color: #94a3b8;
+            font-size: 0.625rem;
+            line-height: 1.4;
+        }
+
+        /* =========================
+           TOGGLE
+        ========================== */
+
+        .toggle {
+            position: relative;
+            width: 2.625rem;
+            height: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+
+            background: #cbd5e1;
+            border-radius: 999rem;
+
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: "";
+
+            position: absolute;
+            width: 1.125rem;
+            height: 1.125rem;
+
+            left: 0.1875rem;
+            top: 0.1875rem;
+
+            background: #ffffff;
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background: #2563eb;
+        }
+
+        .toggle input:checked + .toggle-slider::before {
+            transform: translateX(1.125rem);
+        }
+
+        /* =========================
+           DANGER ZONE
+        ========================== */
+
+        .danger-card {
+            border-color: #fecaca;
+        }
+
+        .danger-card .card-header {
+            background: #fffafa;
+            border-bottom-color: #fee2e2;
+        }
+
+        .danger-card .card-header h2 {
+            color: #b91c1c;
+        }
+
+        .danger-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .danger-content p {
+            color: #64748b;
+            font-size: 0.6875rem;
+            line-height: 1.5;
+        }
+
+        .danger-btn {
+            padding: 0.625rem 0.875rem;
+
+            background: #ffffff;
+            color: #dc2626;
+
+            border: 0.0625rem solid #fecaca;
+            border-radius: 0.4375rem;
+
+            font-family: inherit;
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .danger-btn:hover {
+            background: #fef2f2;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding-top: 1.75rem;
+            text-align: center;
+
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 1.5rem;
+            }
+
+            .page {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .settings-layout {
+                grid-template-columns: 13rem 1fr;
+            }
+        }
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-nav {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.25rem;
+            }
+
+            .nav-title {
+                grid-column: 1 / -1;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand {
+                font-size: 0.9375rem;
+            }
+
+            .page {
+                padding: 1.5rem 1rem 2.5rem;
+            }
+
+            .page-heading h1 {
+                font-size: 1.5rem;
+            }
+
+            .settings-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-title {
+                grid-column: auto;
+            }
+
+            .card-header,
+            .card-body {
+                padding: 1.125rem;
+            }
+
+            .card-actions {
+                padding: 1rem 1.125rem;
+            }
+
+            .profile-section,
+            .security-row,
+            .notification-row,
+            .danger-content {
+                align-items: flex-start;
+            }
+
+            .profile-section {
+                flex-wrap: wrap;
+            }
+
+            .change-photo {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .security-row,
+            .notification-row,
+            .danger-content {
+                flex-direction: column;
+            }
+
+            .security-action,
+            .danger-btn {
+                width: 100%;
+            }
+
+            .card-actions {
+                flex-direction: column-reverse;
+            }
+
+            .card-actions .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 22.5rem) {
+
+            .topbar-right {
+                gap: 0.75rem;
+            }
+
+            .brand-icon {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span>Consent Management</span>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="notification" title="Notifications">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+
+
+            <div class="profile">
+
+                <div class="avatar">
+                    AU
+                </div>
+
+                <div class="profile-info">
+                    <strong>Admin User</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN PAGE
+    ========================== -->
+
+    <main class="page">
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb">
+
+            <span>Administration</span>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span class="current">Settings</span>
+
+        </div>
+
+
+        <!-- Page Heading -->
+
+        <section class="page-heading">
+
+            <h1>Settings</h1>
+
+            <p>
+                Manage your account, security preferences, notifications,
+                and organization settings.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS LAYOUT
+        ========================== -->
+
+        <div class="settings-layout">
+
+            <!-- =========================
+                 SETTINGS NAVIGATION
+            ========================== -->
+
+            <aside class="settings-nav">
+
+                <div class="nav-title">
+                    Settings
+                </div>
+
+                <button class="nav-item active">
+                    <i class="fa-solid fa-user"></i>
+                    Profile
+                </button>
+
+                <button class="nav-item">
+                    <i class="fa-solid fa-lock"></i>
+                    Security
+                </button>
+
+                <button class="nav-item">
+                    <i class="fa-regular fa-bell"></i>
+                    Notifications
+                </button>
+
+                <button class="nav-item">
+                    <i class="fa-solid fa-building"></i>
+                    Organization
+                </button>
+
+                <button class="nav-item">
+                    <i class="fa-solid fa-users-gear"></i>
+                    Access Control
+                </button>
+
+            </aside>
+
+
+            <!-- =========================
+                 SETTINGS CONTENT
+            ========================== -->
+
+            <section class="settings-content">
+
+                <!-- =========================
+                     PROFILE CARD
+                ========================== -->
+
+                <div class="settings-card">
+
+                    <div class="card-header">
+
+                        <h2>Profile Information</h2>
+
+                        <p>
+                            Update your personal information and account details.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="profile-section">
+
+                            <div class="large-avatar">
+                                AU
+                            </div>
+
+                            <div class="profile-details">
+
+                                <h3>Admin User</h3>
+
+                                <p>
+                                    Administrator account
+                                </p>
+
+                            </div>
+
+                            <button class="change-photo">
+                                Change Photo
+                            </button>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="first-name">
+                                    First Name
+                                </label>
+
+                                <input
+                                    id="first-name"
+                                    type="text"
+                                    value="Admin"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="last-name">
+                                    Last Name
+                                </label>
+
+                                <input
+                                    id="last-name"
+                                    type="text"
+                                    value="User"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="email">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    id="email"
+                                    type="email"
+                                    value="admin@example.com"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="phone">
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    id="phone"
+                                    type="tel"
+                                    value="+91 98765 43210"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label for="timezone">
+                                    Timezone
+                                </label>
+
+                                <select id="timezone">
+
+                                    <option selected>
+                                        (GMT+05:30) India Standard Time
+                                    </option>
+
+                                    <option>
+                                        (GMT+00:00) Greenwich Mean Time
+                                    </option>
+
+                                    <option>
+                                        (GMT-05:00) Eastern Time
+                                    </option>
+
+                                </select>
+
+                                <span class="form-hint">
+                                    Dates and times in audit logs will use this timezone.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-actions">
+
+                        <button class="btn btn-secondary">
+                            Cancel
+                        </button>
+
+                        <button class="btn btn-primary">
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     SECURITY CARD
+                ========================== -->
+
+                <div class="settings-card">
+
+                    <div class="card-header">
+
+                        <h2>Security</h2>
+
+                        <p>
+                            Manage your password and authentication settings.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="security-row">
+
+                            <div class="security-info">
+
+                                <div class="security-icon">
+                                    <i class="fa-solid fa-key"></i>
+                                </div>
+
+                                <div class="security-text">
+
+                                    <h3>Password</h3>
+
+                                    <p>
+                                        Last changed 30 days ago
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <button class="security-action">
+                                Change Password
+                            </button>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div class="security-info">
+
+                                <div class="security-icon">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+
+                                <div class="security-text">
+
+                                    <h3>Two-Factor Authentication</h3>
+
+                                    <p>
+                                        Add an extra layer of security to your account.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <button class="security-action">
+                                Enable
+                            </button>
+
+                        </div>
+
+
+                        <div class="security-row">
+
+                            <div class="security-info">
+
+                                <div class="security-icon">
+                                    <i class="fa-solid fa-desktop"></i>
+                                </div>
+
+                                <div class="security-text">
+
+                                    <h3>Active Sessions</h3>
+
+                                    <p>
+                                        2 active sessions on your account.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <button class="security-action">
+                                Manage
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     NOTIFICATION CARD
+                ========================== -->
+
+                <div class="settings-card">
+
+                    <div class="card-header">
+
+                        <h2>Notifications</h2>
+
+                        <p>
+                            Choose which system notifications you want to receive.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="notification-row">
+
+                            <div class="notification-info">
+
+                                <h3>Security Alerts</h3>
+
+                                <p>
+                                    Receive alerts about suspicious login attempts
+                                    and security events.
+                                </p>
+
+                            </div>
+
+                            <label class="toggle">
+
+                                <input type="checkbox" checked>
+
+                                <span class="toggle-slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="notification-row">
+
+                            <div class="notification-info">
+
+                                <h3>Consent Activity</h3>
+
+                                <p>
+                                    Receive notifications about important consent events.
+                                </p>
+
+                            </div>
+
+                            <label class="toggle">
+
+                                <input type="checkbox" checked>
+
+                                <span class="toggle-slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="notification-row">
+
+                            <div class="notification-info">
+
+                                <h3>Deletion Requests</h3>
+
+                                <p>
+                                    Receive notifications when new deletion requests
+                                    require attention.
+                                </p>
+
+                            </div>
+
+                            <label class="toggle">
+
+                                <input type="checkbox" checked>
+
+                                <span class="toggle-slider"></span>
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="notification-row">
+
+                            <div class="notification-info">
+
+                                <h3>System Updates</h3>
+
+                                <p>
+                                    Receive updates about system maintenance and changes.
+                                </p>
+
+                            </div>
+
+                            <label class="toggle">
+
+                                <input type="checkbox">
+
+                                <span class="toggle-slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     DANGER ZONE
+                ========================== -->
+
+                <div class="settings-card danger-card">
+
+                    <div class="card-header">
+
+                        <h2>Danger Zone</h2>
+
+                        <p>
+                            Actions in this section may affect your account or organization.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="danger-content">
+
+                            <p>
+                                Deactivate your account and remove your access
+                                to the Consent Management platform.
+                            </p>
+
+                            <button class="danger-btn">
+                                Deactivate Account
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- Footer -->
+
+        <footer>
+            Consent Management System &nbsp;•&nbsp;
+            Administration &amp; Settings
+        </footer>
+
+    </main>
+
+</body>
+</html>

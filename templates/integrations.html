@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Integrations</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+
+            --navy: #0f172a;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow: 0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding: 2.25rem 3rem 4rem;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            margin-bottom: 1.5rem;
+
+            color: var(--muted);
+            font-size: 0.6875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb i {
+            font-size: 0.5rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .page-icon {
+            width: 3.25rem;
+            height: 3.25rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.75rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.25rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.8125rem;
+            line-height: 1.6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .primary-button {
+            min-height: 2.5rem;
+
+            padding: 0.6875rem 1rem;
+
+            border: none;
+            border-radius: 0.5rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            white-space: nowrap;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.75rem;
+
+            padding: 1.125rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 0.875rem;
+        }
+
+        .summary-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.875rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            color: var(--navy);
+
+            font-size: 1.375rem;
+            font-weight: 800;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-description {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.75rem;
+
+            padding: 1rem 1.125rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 1rem;
+
+            margin-bottom: 1rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 25rem;
+
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 0.75rem;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 2.5rem;
+
+            padding: 0 0.75rem 0 2.25rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: #f8fafc;
+
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 0.6875rem;
+        }
+
+        .search-box input:focus {
+            border-color: #93c5fd;
+            background: var(--white);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .filter-select {
+            height: 2.5rem;
+
+            min-width: 10rem;
+
+            padding: 0 0.75rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            outline: none;
+
+            font-size: 0.625rem;
+        }
+
+        /* =========================
+           INTEGRATION GRID
+        ========================= */
+
+        .integration-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            gap: 1rem;
+        }
+
+        .integration-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.875rem;
+
+            padding: 1.25rem;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-0.125rem);
+
+            box-shadow:
+                0 0.875rem 2.25rem rgba(15, 23, 42, 0.08);
+
+            border-color: #bfdbfe;
+        }
+
+        .integration-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 1rem;
+
+            margin-bottom: 1rem;
+        }
+
+        .integration-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .integration-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+
+            border-radius: 0.625rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1rem;
+        }
+
+        .integration-name {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .integration-type {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+
+            padding: 0.375rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-connected {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-connected .status-dot {
+            background: var(--success);
+        }
+
+        .status-inactive {
+            background: #f1f5f9;
+            color: var(--text-secondary);
+        }
+
+        .status-inactive .status-dot {
+            background: var(--muted);
+        }
+
+        .integration-description {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            line-height: 1.7;
+
+            margin-bottom: 1rem;
+        }
+
+        .integration-meta {
+            display: grid;
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 0.75rem;
+
+            padding-top: 1rem;
+
+            border-top: 0.0625rem solid #f1f5f9;
+
+            margin-bottom: 1rem;
+        }
+
+        .meta-label {
+            color: var(--muted);
+
+            font-size: 0.5rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            color: var(--navy);
+
+            font-size: 0.5625rem;
+            font-weight: 600;
+        }
+
+        .integration-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .secondary-button {
+            flex: 1;
+
+            min-height: 2.25rem;
+
+            padding: 0.625rem 0.75rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 0.375rem;
+        }
+
+        .secondary-button:hover {
+            color: var(--primary);
+            border-color: #bfdbfe;
+            background: #f8fafc;
+        }
+
+        .danger-button {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.625rem;
+        }
+
+        .danger-button:hover {
+            color: var(--danger);
+
+            border-color: #fecaca;
+
+            background: #fef2f2;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .integration-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding: 1.5rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .primary-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .integration-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+
+        }
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .title-section {
+                gap: 0.75rem;
+            }
+
+            .page-icon {
+                width: 2.875rem;
+                height: 2.875rem;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .integration-card {
+                padding: 1rem;
+            }
+
+        }
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.6875rem;
+            }
+
+            .integration-top {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button class="notification" title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="font-size:0.625rem;color:#94a3b8;"
+                ></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb">
+
+            <a href="#">
+                Privacy Operations
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                Integrations
+            </span>
+
+        </div>
+
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div class="title-section">
+
+                <div class="page-icon">
+
+                    <i class="fa-solid fa-plug"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1 class="page-title">
+                        Integrations
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Connect external services to automate consent,
+                        privacy, and compliance workflows.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button class="primary-button">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Integration
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================= -->
+
+        <section class="summary-grid">
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-plug"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Total Integrations
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    8
+                </div>
+
+                <div class="summary-description">
+                    Configured external services
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Connected
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    6
+                </div>
+
+                <div class="summary-description">
+                    Currently active integrations
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-power-off"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Inactive
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    2
+                </div>
+
+                <div class="summary-description">
+                    Integrations requiring attention
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        API Syncs
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    1.2K
+                </div>
+
+                <div class="summary-description">
+                    Successful synchronization events
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TOOLBAR
+        ========================= -->
+
+        <section class="toolbar">
+
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search integrations..."
+                >
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <select class="filter-select">
+
+                    <option>
+                        All Types
+                    </option>
+
+                    <option>
+                        Identity
+                    </option>
+
+                    <option>
+                        Analytics
+                    </option>
+
+                    <option>
+                        CRM
+                    </option>
+
+                    <option>
+                        Communication
+                    </option>
+
+                    <option>
+                        Storage
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option>
+                        All Status
+                    </option>
+
+                    <option>
+                        Connected
+                    </option>
+
+                    <option>
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INTEGRATION CARDS
+        ========================= -->
+
+        <section class="integration-grid">
+
+
+            <!-- Google -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-brands fa-google"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Google
+                            </div>
+
+                            <div class="integration-type">
+                                Identity & Authentication
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-connected">
+
+                        <span class="status-dot"></span>
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Connect Google services for authentication,
+                    account management, and privacy workflows.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-001
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            5 min ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Configure
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-link-slash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Salesforce -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-solid fa-cloud"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Salesforce
+                            </div>
+
+                            <div class="integration-type">
+                                CRM
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-connected">
+
+                        <span class="status-dot"></span>
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Synchronize customer records and privacy requests
+                    with your Salesforce environment.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-002
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            12 min ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Configure
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-link-slash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Slack -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-brands fa-slack"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Slack
+                            </div>
+
+                            <div class="integration-type">
+                                Communication
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-connected">
+
+                        <span class="status-dot"></span>
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Receive privacy alerts, consent events, and
+                    operational notifications through Slack.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-003
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            2 min ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Configure
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-link-slash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Microsoft -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-brands fa-microsoft"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Microsoft 365
+                            </div>
+
+                            <div class="integration-type">
+                                Identity & Productivity
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-connected">
+
+                        <span class="status-dot"></span>
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Integrate Microsoft identity and productivity
+                    services with privacy management workflows.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-004
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            18 min ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Configure
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-link-slash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Google Analytics -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Google Analytics
+                            </div>
+
+                            <div class="integration-type">
+                                Analytics
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-connected">
+
+                        <span class="status-dot"></span>
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Manage analytics-related consent signals and
+                    synchronize tracking preferences.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-005
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            8 min ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Configure
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-link-slash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- HubSpot -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                HubSpot
+                            </div>
+
+                            <div class="integration-type">
+                                CRM & Marketing
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-connected">
+
+                        <span class="status-dot"></span>
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Synchronize marketing preferences and consent
+                    information with HubSpot.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-006
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            25 min ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        Configure
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-link-slash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- AWS -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-brands fa-aws"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Amazon Web Services
+                            </div>
+
+                            <div class="integration-type">
+                                Cloud & Storage
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-inactive">
+
+                        <span class="status-dot"></span>
+
+                        Inactive
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Connect cloud infrastructure for privacy data
+                    workflows and storage-related operations.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-007
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-plug"></i>
+
+                        Connect
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Webhook -->
+
+            <article class="integration-card">
+
+                <div class="integration-top">
+
+                    <div class="integration-brand">
+
+                        <div class="integration-icon">
+                            <i class="fa-solid fa-webhook"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="integration-name">
+                                Custom Webhook
+                            </div>
+
+                            <div class="integration-type">
+                                Event Delivery
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="status status-inactive">
+
+                        <span class="status-dot"></span>
+
+                        Inactive
+
+                    </span>
+
+                </div>
+
+
+                <p class="integration-description">
+                    Send consent and privacy events to custom
+                    external endpoints using webhooks.
+                </p>
+
+
+                <div class="integration-meta">
+
+                    <div>
+
+                        <div class="meta-label">
+                            Integration ID
+                        </div>
+
+                        <div class="meta-value">
+                            INT-008
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="meta-label">
+                            Last Sync
+                        </div>
+
+                        <div class="meta-value">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="integration-actions">
+
+                    <button class="secondary-button">
+
+                        <i class="fa-solid fa-plug"></i>
+
+                        Connect
+
+                    </button>
+
+                    <button class="danger-button">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+
+    </main>
+
+</body>
+</html>

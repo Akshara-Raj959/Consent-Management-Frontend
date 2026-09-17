@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Audit Logs | Consent Management</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================== */
+
+        .topbar {
+            height: 4.5rem;
+            background: #ffffff;
+            border-bottom: 0.0625rem solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #0f172a;
+            font-size: 1.0625rem;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 0.625rem;
+            background: #2563eb;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .notification {
+            position: relative;
+            color: #64748b;
+            font-size: 1.05rem;
+            cursor: pointer;
+        }
+
+        .notification::after {
+            content: "";
+            position: absolute;
+            top: -0.125rem;
+            right: -0.1875rem;
+            width: 0.4375rem;
+            height: 0.4375rem;
+            border-radius: 50%;
+            background: #dc2626;
+            border: 0.125rem solid #ffffff;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .avatar {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info strong {
+            display: block;
+            color: #1e293b;
+            font-size: 0.8125rem;
+        }
+
+        .profile-info span {
+            display: block;
+            margin-top: 0.125rem;
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .page {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: 2rem 2.5rem 3rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        .breadcrumb i {
+            font-size: 0.625rem;
+        }
+
+        .breadcrumb .current {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================== */
+
+        .page-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .page-heading h1 {
+            color: #0f172a;
+            font-size: 1.75rem;
+            line-height: 1.25;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-heading p {
+            color: #64748b;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .export-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            padding: 0.6875rem 1rem;
+
+            background: #ffffff;
+            color: #334155;
+
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.5rem;
+
+            font-family: inherit;
+            font-size: 0.8125rem;
+            font-weight: 600;
+
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .export-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        /* =========================
+           SUMMARY CARDS
+        ========================== */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.125rem 1.25rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .summary-label {
+            color: #64748b;
+            font-size: 0.75rem;
+            margin-bottom: 0.375rem;
+        }
+
+        .summary-value {
+            color: #0f172a;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .summary-icon {
+            width: 2.625rem;
+            height: 2.625rem;
+            border-radius: 0.625rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* =========================
+           LOGS CARD
+        ========================== */
+
+        .logs-card {
+            background: #ffffff;
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================== */
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+
+            padding: 1rem 1.25rem;
+            border-bottom: 0.0625rem solid #e2e8f0;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 15rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 0.8125rem;
+            top: 50%;
+            transform: translateY(-50%);
+
+            color: #94a3b8;
+            font-size: 0.8125rem;
+        }
+
+        .search-box input,
+        .filter-select {
+            height: 2.5rem;
+
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.5rem;
+
+            background: #ffffff;
+            color: #334155;
+
+            font-family: inherit;
+            font-size: 0.75rem;
+
+            outline: none;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0 0.75rem 0 2.25rem;
+        }
+
+        .filter-select {
+            min-width: 9.5rem;
+            padding: 0 0.75rem;
+        }
+
+        .search-box input:focus,
+        .filter-select:focus {
+            border-color: #2563eb;
+        }
+
+        /* =========================
+           TABLE
+        ========================== */
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 62rem;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            padding: 0.8125rem 1.25rem;
+
+            color: #64748b;
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 0.025rem;
+
+            border-bottom: 0.0625rem solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 1rem 1.25rem;
+
+            font-size: 0.75rem;
+
+            border-bottom: 0.0625rem solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
+        }
+
+        /* =========================
+           EVENT
+        ========================== */
+
+        .event-name {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .event-id {
+            display: inline-block;
+
+            margin-top: 0.25rem;
+            padding: 0.1875rem 0.375rem;
+
+            background: #f1f5f9;
+            color: #64748b;
+
+            border-radius: 0.25rem;
+
+            font-family: monospace;
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           ACTOR
+        ========================== */
+
+        .actor {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .actor-avatar {
+            width: 1.875rem;
+            height: 1.875rem;
+
+            border-radius: 50%;
+            background: #eff6ff;
+            color: #2563eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        .actor-name {
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .actor-role {
+            display: block;
+            margin-top: 0.125rem;
+
+            color: #94a3b8;
+            font-size: 0.625rem;
+        }
+
+        /* =========================
+           BADGES
+        ========================== */
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+
+            padding: 0.3125rem 0.5625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+
+        .badge.success {
+            background: #f0fdf4;
+            color: #15803d;
+        }
+
+        .badge.warning {
+            background: #fffbeb;
+            color: #b45309;
+        }
+
+        .badge.danger {
+            background: #fef2f2;
+            color: #b91c1c;
+        }
+
+        .badge.info {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+
+        .badge-dot {
+            width: 0.3125rem;
+            height: 0.3125rem;
+
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* =========================
+           IP & TIMESTAMP
+        ========================== */
+
+        .ip-address {
+            color: #64748b;
+            font-size: 0.6875rem;
+        }
+
+        .timestamp {
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        .timestamp strong {
+            display: block;
+
+            color: #334155;
+            font-size: 0.6875rem;
+            font-weight: 500;
+
+            margin-bottom: 0.1875rem;
+        }
+
+        /* =========================
+           ACTION BUTTON
+        ========================== */
+
+        .action-btn {
+            width: 2rem;
+            height: 2rem;
+
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.375rem;
+
+            background: #ffffff;
+            color: #64748b;
+
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            border-color: #bfdbfe;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* =========================
+           PAGINATION
+        ========================== */
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 1rem 1.25rem;
+
+            border-top: 0.0625rem solid #e2e8f0;
+        }
+
+        .pagination-info {
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 0.375rem;
+        }
+
+        .page-btn {
+            min-width: 2rem;
+            height: 2rem;
+
+            padding: 0 0.5rem;
+
+            border: 0.0625rem solid #e2e8f0;
+            border-radius: 0.375rem;
+
+            background: #ffffff;
+            color: #64748b;
+
+            font-family: inherit;
+            font-size: 0.6875rem;
+
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .page-btn:hover:not(.active) {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding-top: 1.75rem;
+
+            text-align: center;
+
+            color: #94a3b8;
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 1.5rem;
+            }
+
+            .page {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .page-heading {
+                flex-direction: column;
+            }
+
+            .export-btn {
+                width: 100%;
+            }
+
+            .toolbar {
+                align-items: stretch;
+            }
+
+            .search-box,
+            .filter-select {
+                width: 100%;
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand {
+                font-size: 0.9375rem;
+            }
+
+            .page {
+                padding: 1.5rem 1rem 2.5rem;
+            }
+
+            .page-heading h1 {
+                font-size: 1.5rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pagination {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 22.5rem) {
+
+            .topbar-right {
+                gap: 0.75rem;
+            }
+
+            .brand-icon {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span>Consent Management</span>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="notification" title="Notifications">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+
+
+            <div class="profile">
+
+                <div class="avatar">
+                    AU
+                </div>
+
+                <div class="profile-info">
+                    <strong>Admin User</strong>
+                    <span>Administrator</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN PAGE
+    ========================== -->
+
+    <main class="page">
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb">
+
+            <span>Privacy Operations</span>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span class="current">Audit Logs</span>
+
+        </div>
+
+
+        <!-- Page Heading -->
+
+        <section class="page-heading">
+
+            <div>
+
+                <h1>Audit Logs</h1>
+
+                <p>
+                    Monitor administrative actions, consent activity,
+                    security events, and system changes.
+                </p>
+
+            </div>
+
+
+            <button class="export-btn">
+
+                <i class="fa-solid fa-download"></i>
+
+                Export Logs
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================== -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div>
+
+                    <div class="summary-label">
+                        Total Events
+                    </div>
+
+                    <div class="summary-value">
+                        18,426
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div>
+
+                    <div class="summary-label">
+                        Today
+                    </div>
+
+                    <div class="summary-value">
+                        486
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-calendar-day"></i>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div>
+
+                    <div class="summary-label">
+                        Admin Actions
+                    </div>
+
+                    <div class="summary-value">
+                        124
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div>
+
+                    <div class="summary-label">
+                        Security Events
+                    </div>
+
+                    <div class="summary-value">
+                        17
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+                    <i class="fa-solid fa-shield-virus"></i>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AUDIT LOG TABLE
+        ========================== -->
+
+        <section class="logs-card">
+
+            <!-- Filters -->
+
+            <div class="toolbar">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search event, actor, IP address..."
+                    >
+
+                </div>
+
+
+                <select class="filter-select">
+
+                    <option>All Event Types</option>
+                    <option>Consent</option>
+                    <option>Data Principal</option>
+                    <option>Deletion</option>
+                    <option>Authentication</option>
+                    <option>Configuration</option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option>All Statuses</option>
+                    <option>Success</option>
+                    <option>Warning</option>
+                    <option>Failed</option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option>Last 30 Days</option>
+                    <option>Today</option>
+                    <option>Last 7 Days</option>
+                    <option>Last 90 Days</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Table -->
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Event</th>
+                            <th>Actor</th>
+                            <th>Status</th>
+                            <th>IP Address</th>
+                            <th>Date &amp; Time</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <!-- Row 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="event-name">
+                                    Consent Granted
+                                </div>
+
+                                <span class="event-id">
+                                    consent.granted
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actor">
+
+                                    <div class="actor-avatar">
+                                        AR
+                                    </div>
+
+                                    <div>
+
+                                        <span class="actor-name">
+                                            Aarav Rao
+                                        </span>
+
+                                        <span class="actor-role">
+                                            Data Principal
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge success">
+                                    <span class="badge-dot"></span>
+                                    Success
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                <span class="ip-address">
+                                    103.82.14.26
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="timestamp">
+
+                                    <strong>
+                                        16 Sep 2026, 10:42 AM
+                                    </strong>
+
+                                    2 minutes ago
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    title="View details"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="event-name">
+                                    Policy Updated
+                                </div>
+
+                                <span class="event-id">
+                                    policy.updated
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actor">
+
+                                    <div class="actor-avatar">
+                                        AU
+                                    </div>
+
+                                    <div>
+
+                                        <span class="actor-name">
+                                            Admin User
+                                        </span>
+
+                                        <span class="actor-role">
+                                            Administrator
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge success">
+                                    <span class="badge-dot"></span>
+                                    Success
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                <span class="ip-address">
+                                    117.201.44.81
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="timestamp">
+
+                                    <strong>
+                                        16 Sep 2026, 09:58 AM
+                                    </strong>
+
+                                    46 minutes ago
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    title="View details"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="event-name">
+                                    Deletion Request Created
+                                </div>
+
+                                <span class="event-id">
+                                    deletion.requested
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actor">
+
+                                    <div class="actor-avatar">
+                                        NS
+                                    </div>
+
+                                    <div>
+
+                                        <span class="actor-name">
+                                            Neha Sharma
+                                        </span>
+
+                                        <span class="actor-role">
+                                            Data Principal
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge info">
+                                    <span class="badge-dot"></span>
+                                    Processed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                <span class="ip-address">
+                                    49.36.182.10
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="timestamp">
+
+                                    <strong>
+                                        16 Sep 2026, 09:31 AM
+                                    </strong>
+
+                                    1 hour ago
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    title="View details"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="event-name">
+                                    Login Attempt
+                                </div>
+
+                                <span class="event-id">
+                                    auth.login
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actor">
+
+                                    <div class="actor-avatar">
+                                        RK
+                                    </div>
+
+                                    <div>
+
+                                        <span class="actor-name">
+                                            Rohan Kumar
+                                        </span>
+
+                                        <span class="actor-role">
+                                            Administrator
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge warning">
+                                    <span class="badge-dot"></span>
+                                    Warning
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                <span class="ip-address">
+                                    185.73.21.91
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="timestamp">
+
+                                    <strong>
+                                        16 Sep 2026, 08:44 AM
+                                    </strong>
+
+                                    2 hours ago
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    title="View details"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 5 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="event-name">
+                                    Webhook Delivery Failed
+                                </div>
+
+                                <span class="event-id">
+                                    webhook.failed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actor">
+
+                                    <div class="actor-avatar">
+                                        SY
+                                    </div>
+
+                                    <div>
+
+                                        <span class="actor-name">
+                                            System
+                                        </span>
+
+                                        <span class="actor-role">
+                                            Automated Service
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge danger">
+                                    <span class="badge-dot"></span>
+                                    Failed
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                <span class="ip-address">
+                                    10.0.4.18
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="timestamp">
+
+                                    <strong>
+                                        16 Sep 2026, 07:16 AM
+                                    </strong>
+
+                                    4 hours ago
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    title="View details"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 6 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="event-name">
+                                    Processor Added
+                                </div>
+
+                                <span class="event-id">
+                                    processor.created
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actor">
+
+                                    <div class="actor-avatar">
+                                        AU
+                                    </div>
+
+                                    <div>
+
+                                        <span class="actor-name">
+                                            Admin User
+                                        </span>
+
+                                        <span class="actor-role">
+                                            Administrator
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="badge success">
+                                    <span class="badge-dot"></span>
+                                    Success
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                <span class="ip-address">
+                                    117.201.44.81
+                                </span>
+                            </td>
+
+
+                            <td>
+
+                                <div class="timestamp">
+
+                                    <strong>
+                                        15 Sep 2026, 06:22 PM
+                                    </strong>
+
+                                    Yesterday
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    title="View details"
+                                >
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 1–6 of 18,426 events
+                </div>
+
+
+                <div class="pagination-buttons">
+
+                    <button class="page-btn">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button class="page-btn active">
+                        1
+                    </button>
+
+                    <button class="page-btn">
+                        2
+                    </button>
+
+                    <button class="page-btn">
+                        3
+                    </button>
+
+                    <button class="page-btn">
+                        ...
+                    </button>
+
+                    <button class="page-btn">
+                        3071
+                    </button>
+
+                    <button class="page-btn">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer>
+            Consent Management System &nbsp;•&nbsp;
+            Audit and Compliance Operations
+        </footer>
+
+    </main>
+
+</body>
+</html>
