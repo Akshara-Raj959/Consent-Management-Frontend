@@ -1,0 +1,1022 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+:root {
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --navy: #0f172a;
+    --navy-light: #172554;
+
+    --background: #f5f7fb;
+
+    --white: #ffffff;
+
+    --text: #0f172a;
+    --text-secondary: #64748b;
+
+    --border: #dbe3ef;
+
+    --input-background: #f8fafc;
+
+    --success: #16a34a;
+
+}
+
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    font-size: 100%;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family: "Inter", sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+}
+
+
+button,
+input {
+
+    font-family: inherit;
+
+}
+
+
+a {
+
+    text-decoration: none;
+
+}
+
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.auth-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 2rem;
+
+}
+
+
+.auth-container {
+
+    width: 100%;
+
+    max-width: 75rem;
+
+    min-height: 43.75rem;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: var(--white);
+
+    border-radius: 1.5rem;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 1.5rem 4rem rgba(15, 23, 42, 0.15);
+
+}
+
+
+
+/* =========================================================
+   LEFT BRAND PANEL
+========================================================= */
+
+.auth-brand-panel {
+
+    background:
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #172554
+        );
+
+    color: var(--white);
+
+    padding: 4rem;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.brand-content {
+
+    max-width: 31.25rem;
+
+}
+
+
+.brand-icon {
+
+    width: 4.5rem;
+
+    height: 4.5rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 1.125rem;
+
+    background:
+        rgba(37, 99, 235, 0.2);
+
+    border:
+        0.0625rem solid
+        rgba(147, 197, 253, 0.25);
+
+    color: #60a5fa;
+
+    font-size: 2rem;
+
+    margin-bottom: 2rem;
+
+}
+
+
+.brand-content h1 {
+
+    font-size: 2.5rem;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.brand-description {
+
+    font-size: 1rem;
+
+    line-height: 1.8;
+
+    color: #cbd5e1;
+
+    margin-bottom: 2.5rem;
+
+}
+
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.feature-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+}
+
+
+.feature-item {
+
+    display: flex;
+
+    gap: 1rem;
+
+    align-items: flex-start;
+
+}
+
+
+.feature-icon {
+
+    min-width: 2.75rem;
+
+    height: 2.75rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 0.75rem;
+
+    background:
+        rgba(37, 99, 235, 0.2);
+
+    color: #60a5fa;
+
+}
+
+
+.feature-item h3 {
+
+    font-size: 0.9375rem;
+
+    font-weight: 700;
+
+    margin-bottom: 0.375rem;
+
+}
+
+
+.feature-item p {
+
+    color: #94a3b8;
+
+    font-size: 0.8125rem;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =========================================================
+   RIGHT FORM PANEL
+========================================================= */
+
+.auth-form-panel {
+
+    background: var(--white);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 4rem;
+
+}
+
+
+.form-wrapper {
+
+    width: 100%;
+
+    max-width: 28rem;
+
+}
+
+
+.mobile-brand {
+
+    display: none;
+
+}
+
+
+.form-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding:
+        0.4375rem
+        0.75rem;
+
+    border-radius: 2rem;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 0.6875rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.05rem;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.form-wrapper h2 {
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    margin-bottom: 0.625rem;
+
+}
+
+
+.form-subtitle {
+
+    color: var(--text-secondary);
+
+    font-size: 0.875rem;
+
+    line-height: 1.6;
+
+    margin-bottom: 2rem;
+
+}
+
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.login-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.375rem;
+
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+}
+
+
+.form-group label {
+
+    font-size: 0.8125rem;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+
+.label-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.forgot-link {
+
+    color: var(--primary);
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+}
+
+
+.forgot-link:hover {
+
+    color: var(--primary-dark);
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-wrapper {
+
+    position: relative;
+
+}
+
+
+.input-wrapper > i {
+
+    position: absolute;
+
+    left: 1rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #94a3b8;
+
+    font-size: 0.875rem;
+
+}
+
+
+.input-wrapper input {
+
+    width: 100%;
+
+    height: 3.25rem;
+
+    border:
+        0.0625rem solid
+        var(--border);
+
+    border-radius: 0.75rem;
+
+    background: var(--input-background);
+
+    color: var(--text);
+
+    padding:
+        0
+        3rem;
+
+    outline: none;
+
+    font-size: 0.875rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.input-wrapper input::placeholder {
+
+    color: #94a3b8;
+
+}
+
+
+.input-wrapper input:focus {
+
+    border-color: var(--primary);
+
+    background: var(--white);
+
+    box-shadow:
+        0 0 0 0.1875rem
+        rgba(37, 99, 235, 0.1);
+
+}
+
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 0.875rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    cursor: pointer;
+
+    font-size: 0.875rem;
+
+}
+
+
+
+/* =========================================================
+   REMEMBER ME
+========================================================= */
+
+.remember-row {
+
+    margin-top: -0.375rem;
+
+}
+
+
+.remember-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+    cursor: pointer;
+
+}
+
+
+.remember-label input {
+
+    width: 1rem;
+
+    height: 1rem;
+
+    accent-color: var(--primary);
+
+}
+
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-button {
+
+    height: 3.25rem;
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 0.75rem;
+
+    background: var(--primary);
+
+    color: var(--white);
+
+    font-size: 0.875rem;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.625rem;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.login-button:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-0.0625rem);
+
+}
+
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    margin:
+        1.75rem
+        0;
+
+    color: #94a3b8;
+
+    font-size: 0.6875rem;
+
+    font-weight: 600;
+
+}
+
+
+.divider::before,
+.divider::after {
+
+    content: "";
+
+    height: 0.0625rem;
+
+    background: var(--border);
+
+    flex: 1;
+
+}
+
+
+
+/* =========================================================
+   GOOGLE / SSO
+========================================================= */
+
+.sso-button {
+
+    width: 100%;
+
+    height: 3.125rem;
+
+    border:
+        0.0625rem solid
+        var(--border);
+
+    border-radius: 0.75rem;
+
+    background: var(--white);
+
+    color: #334155;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.75rem;
+
+    font-size: 0.8125rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.sso-button:hover {
+
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+}
+
+
+.sso-button i {
+
+    color: #4285f4;
+
+    font-size: 1rem;
+
+}
+
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
+
+.signup-text {
+
+    text-align: center;
+
+    margin-top: 1.75rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+}
+
+
+.signup-text a {
+
+    color: var(--primary);
+
+    font-weight: 700;
+
+    margin-left: 0.25rem;
+
+}
+
+
+.signup-text a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.auth-footer {
+
+    margin-top: 3rem;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    color: #94a3b8;
+
+    font-size: 0.6875rem;
+
+}
+
+
+.auth-footer a {
+
+    color: #64748b;
+
+}
+
+
+.auth-footer a:hover {
+
+    color: var(--primary);
+
+}
+
+
+.footer-dot {
+
+    color: #cbd5e1;
+
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 62.5rem) {
+
+    .auth-page {
+
+        padding: 1.5rem;
+
+    }
+
+
+    .auth-container {
+
+        max-width: 62.5rem;
+
+    }
+
+
+    .auth-brand-panel {
+
+        padding: 3rem;
+
+    }
+
+
+    .auth-form-panel {
+
+        padding: 3rem;
+
+    }
+
+
+    .brand-content h1 {
+
+        font-size: 2.125rem;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 48rem) {
+
+    .auth-page {
+
+        padding: 1rem;
+
+        align-items: stretch;
+
+    }
+
+
+    .auth-container {
+
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        border-radius: 1rem;
+
+    }
+
+
+    .auth-brand-panel {
+
+        display: none;
+
+    }
+
+
+    .auth-form-panel {
+
+        min-height: calc(100vh - 2rem);
+
+        padding: 2rem 1.5rem;
+
+        align-items: center;
+
+    }
+
+
+    .mobile-brand {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 0.625rem;
+
+        margin-bottom: 2rem;
+
+        color: var(--navy);
+
+        font-weight: 800;
+
+        font-size: 1rem;
+
+    }
+
+
+    .mobile-brand-icon {
+
+        width: 2.5rem;
+
+        height: 2.5rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #eff6ff;
+
+        color: var(--primary);
+
+        border-radius: 0.75rem;
+
+    }
+
+
+    .form-wrapper {
+
+        max-width: 32rem;
+
+    }
+
+
+    .form-wrapper h2 {
+
+        font-size: 1.75rem;
+
+    }
+
+
+    .auth-footer {
+
+        margin-top: 2rem;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 30rem) {
+
+    .auth-page {
+
+        padding: 0.75rem;
+
+    }
+
+
+    .auth-form-panel {
+
+        padding:
+            1.5rem
+            1rem;
+
+    }
+
+
+    .auth-container {
+
+        border-radius: 0.875rem;
+
+    }
+
+
+    .form-wrapper h2 {
+
+        font-size: 1.5rem;
+
+    }
+
+
+    .form-subtitle {
+
+        font-size: 0.8125rem;
+
+    }
+
+
+    .label-row {
+
+        align-items: flex-start;
+
+        gap: 0.5rem;
+
+        flex-direction: column;
+
+    }
+
+
+    .auth-footer {
+
+        flex-wrap: wrap;
+
+    }
+
+}

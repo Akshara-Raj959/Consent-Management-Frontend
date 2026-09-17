@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Consents</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+            background: var(--white);
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            background: var(--danger);
+            border-radius: 50%;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            font-size: 0.6875rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+            margin: 0 auto;
+
+            padding: 2.5rem 3rem 4rem;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            color: var(--navy);
+
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .add-button {
+            border: none;
+
+            background: var(--primary);
+            color: var(--white);
+
+            padding: 0.75rem 1.125rem;
+
+            border-radius: 0.5rem;
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            transition: background 0.2s ease;
+        }
+
+        .add-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+
+            border-radius: 0.75rem;
+
+            padding: 1.125rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-value {
+            color: var(--navy);
+
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .summary-description {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+
+            margin-top: 0.3125rem;
+        }
+
+        /* =========================
+           TABLE CARD
+        ========================= */
+
+        .table-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filters {
+            padding: 1.25rem 1.5rem;
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.75rem;
+
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 15rem;
+
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 0.875rem;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 0.75rem;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            height: 2.5rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: #f8fafc;
+
+            padding:
+                0 0.875rem 0 2.375rem;
+
+            outline: none;
+
+            font-size: 0.75rem;
+
+            color: var(--text);
+        }
+
+        .search-box input:focus {
+            border-color: #93c5fd;
+            background: var(--white);
+        }
+
+        .filter-select {
+            height: 2.5rem;
+
+            min-width: 8.75rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            padding: 0 0.75rem;
+
+            font-size: 0.75rem;
+
+            outline: none;
+        }
+
+        .filter-select:focus {
+            border-color: #93c5fd;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            min-width: 65rem;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            padding: 0.875rem 1rem;
+
+            text-align: left;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+
+            color: var(--text-secondary);
+
+            text-transform: uppercase;
+            letter-spacing: 0.025rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+        }
+
+        td {
+            padding: 1rem;
+
+            font-size: 0.75rem;
+
+            color: var(--text);
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .principal {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .principal-avatar {
+            width: 2rem;
+            height: 2rem;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        .principal-name {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .principal-id {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+
+            margin-top: 0.125rem;
+        }
+
+        .purpose {
+            font-weight: 600;
+        }
+
+        .type {
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding: 0.3125rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-active .status-dot {
+            background: var(--success);
+        }
+
+        .status-withdrawn {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .status-withdrawn .status-dot {
+            background: var(--danger);
+        }
+
+        .status-expired {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .status-expired .status-dot {
+            background: var(--warning);
+        }
+
+        .status-granted {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .status-granted .status-dot {
+            background: var(--primary);
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .action-button {
+            width: 2rem;
+            height: 2rem;
+
+            border: 0.0625rem solid var(--border);
+
+            background: var(--white);
+
+            border-radius: 0.375rem;
+
+            color: var(--text-secondary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+        }
+
+        .action-button:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .action-button.danger:hover {
+            border-color: #fecaca;
+            color: var(--danger);
+            background: #fef2f2;
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination {
+            padding: 1rem 1.5rem;
+
+            border-top: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pagination-info {
+            font-size: 0.6875rem;
+            color: var(--text-secondary);
+        }
+
+        .pagination-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.3125rem;
+        }
+
+        .page-button {
+            width: 2rem;
+            height: 2rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            background: var(--white);
+
+            border-radius: 0.375rem;
+
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .page-button:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .page-button.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding:
+                    1.75rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .add-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .pagination {
+                align-items: flex-start;
+                flex-direction: column;
+
+                gap: 0.875rem;
+            }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .summary-card {
+                padding: 1rem;
+            }
+
+            .filters {
+                padding: 1rem;
+            }
+
+            .pagination {
+                padding:
+                    1rem;
+            }
+        }
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button class="notification">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="font-size: 0.625rem; color: #94a3b8;">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Consent Management
+                </h1>
+
+                <p class="page-subtitle">
+                    View, monitor, and manage consent records for data principals.
+                </p>
+
+            </div>
+
+
+            <button class="add-button">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Record New Consent
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY
+        ========================= -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Total Consents
+                </div>
+
+                <div class="summary-value">
+                    2,486
+                </div>
+
+                <div class="summary-description">
+                    All recorded consent entries
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Active
+                </div>
+
+                <div class="summary-value">
+                    1,942
+                </div>
+
+                <div class="summary-description">
+                    Currently active consents
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Withdrawn
+                </div>
+
+                <div class="summary-value">
+                    347
+                </div>
+
+                <div class="summary-description">
+                    Consents withdrawn by users
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Expired
+                </div>
+
+                <div class="summary-value">
+                    197
+                </div>
+
+                <div class="summary-description">
+                    Consents past their expiry date
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONSENT TABLE
+        ========================= -->
+
+        <section class="table-card">
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search by purpose, principal, or consent ID..."
+                    >
+
+                </div>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="granted">
+                        Granted
+                    </option>
+
+                    <option value="withdrawn">
+                        Withdrawn
+                    </option>
+
+                    <option value="expired">
+                        Expired
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Types
+                    </option>
+
+                    <option value="explicit">
+                        Explicit
+                    </option>
+
+                    <option value="implicit">
+                        Implicit
+                    </option>
+
+                    <option value="opt-in">
+                        Opt-in
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Sources
+                    </option>
+
+                    <option value="web">
+                        Web
+                    </option>
+
+                    <option value="mobile">
+                        Mobile
+                    </option>
+
+                    <option value="api">
+                        API
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Data Principal
+                            </th>
+
+                            <th>
+                                Purpose
+                            </th>
+
+                            <th>
+                                Consent Type
+                            </th>
+
+                            <th>
+                                Notice Version
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Consented At
+                            </th>
+
+                            <th>
+                                Expires
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- RECORD 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        AK
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Akash Kumar
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10248
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                <span class="purpose">
+                                    Marketing
+                                </span>
+                            </td>
+
+
+                            <td>
+                                <span class="type">
+                                    Explicit
+                                </span>
+                            </td>
+
+
+                            <td>
+                                v2.1
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Sep 16, 2026
+                                <br>
+                                <span style="color:#94a3b8;">
+                                    10:32 AM
+                                </span>
+                            </td>
+
+
+                            <td>
+                                Dec 16, 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-button danger"
+                                        title="Withdraw">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- RECORD 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        RS
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Riya Sharma
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10247
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                <span class="purpose">
+                                    Analytics
+                                </span>
+                            </td>
+
+
+                            <td>
+                                <span class="type">
+                                    Explicit
+                                </span>
+                            </td>
+
+
+                            <td>
+                                v2.1
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Sep 15, 2026
+                                <br>
+                                <span style="color:#94a3b8;">
+                                    04:18 PM
+                                </span>
+                            </td>
+
+
+                            <td>
+                                Sep 15, 2027
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-button danger"
+                                        title="Withdraw">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- RECORD 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        VM
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Vikram Mehta
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10246
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                <span class="purpose">
+                                    Service Delivery
+                                </span>
+                            </td>
+
+
+                            <td>
+                                <span class="type">
+                                    Opt-in
+                                </span>
+                            </td>
+
+
+                            <td>
+                                v2.0
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-withdrawn">
+
+                                    <span class="status-dot"></span>
+
+                                    Withdrawn
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Sep 12, 2026
+                            </td>
+
+
+                            <td>
+                                —
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- RECORD 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        NP
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Neha Patel
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10245
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                <span class="purpose">
+                                    Personalization
+                                </span>
+                            </td>
+
+
+                            <td>
+                                <span class="type">
+                                    Explicit
+                                </span>
+                            </td>
+
+
+                            <td>
+                                v1.8
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-expired">
+
+                                    <span class="status-dot"></span>
+
+                                    Expired
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Jun 10, 2026
+                            </td>
+
+
+                            <td>
+                                Sep 10, 2026
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Renew">
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- RECORD 5 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        SK
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Sameer Khan
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10244
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                <span class="purpose">
+                                    Communications
+                                </span>
+                            </td>
+
+
+                            <td>
+                                <span class="type">
+                                    Explicit
+                                </span>
+                            </td>
+
+
+                            <td>
+                                v2.1
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-granted">
+
+                                    <span class="status-dot"></span>
+
+                                    Granted
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+                                Sep 08, 2026
+                            </td>
+
+
+                            <td>
+                                Mar 08, 2027
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="action-button danger"
+                                        title="Withdraw">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 1–5 of 2,486 consents
+                </div>
+
+
+                <div class="pagination-buttons">
+
+                    <button class="page-button">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button class="page-button active">
+                        1
+                    </button>
+
+                    <button class="page-button">
+                        2
+                    </button>
+
+                    <button class="page-button">
+                        3
+                    </button>
+
+                    <button class="page-button">
+                        4
+                    </button>
+
+                    <button class="page-button">
+                        5
+                    </button>
+
+                    <button class="page-button">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

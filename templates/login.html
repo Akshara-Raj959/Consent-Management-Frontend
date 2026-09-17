@@ -1,0 +1,1820 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DPDP Compliance | Login</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#0a0f1c;
+    --sidebar:#0f172a;
+    --card:#111827;
+    --border:#1f2937;
+    --primary:#3b82f6;
+    --primary-hover:#2563eb;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #111827
+    );
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-container{
+    width:100%;
+    max-width:1100px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    overflow:hidden;
+    border-radius:24px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+/* LEFT PANEL */
+
+.left-panel{
+    padding:60px;
+    background: linear-gradient(
+    135deg,
+    #4c1d95,
+    #6d28d9,
+    #8b5cf6
+);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.logo{
+    width:80px;
+    height:80px;
+    border-radius:20px;
+    background:rgba(255,255,255,.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    margin-bottom:25px;
+}
+
+.left-panel h1{
+    font-size:42px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.left-panel p{
+    line-height:1.8;
+    opacity:.95;
+}
+
+.feature{
+    margin-top:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:15px;
+}
+
+/* RIGHT PANEL */
+
+.right-panel{
+    padding:60px;
+    color:var(--text);
+}
+
+.badge-enterprise{
+    display:inline-block;
+    background:rgba(59,130,246,.15);
+    color:#60a5fa;
+    padding:6px 12px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.right-panel h2{
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-bottom:30px;
+}
+
+.form-label{
+    color:#cbd5e1;
+    font-weight:600;
+}
+
+.form-control{
+    background:#1e293b;
+    border:1px solid #334155;
+    color:white;
+    height:54px;
+    border-radius:12px;
+}
+
+.form-control:focus{
+    background:#1e293b;
+    color:white;
+    border-color:var(--primary);
+    box-shadow:none;
+}
+
+.form-control::placeholder{
+    color:#64748b;
+}
+
+.btn-login{
+    width:100%;
+    height:54px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-weight:700;
+    margin-top:15px;
+    transition:.3s;
+}
+
+.btn-login:hover{
+    background:var(--primary-hover);
+}
+
+.extra-links{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+}
+
+.extra-links a{
+    color:#60a5fa;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.divider{
+    text-align:center;
+    margin:25px 0;
+    color:var(--muted);
+    position:relative;
+}
+
+.divider::before,
+.divider::after{
+    content:'';
+    position:absolute;
+    top:50%;
+    width:40%;
+    height:1px;
+    background:#334155;
+}
+
+.divider::before{
+    left:0;
+}
+
+.divider::after{
+    right:0;
+}
+
+.sso-btn{
+    width:100%;
+    height:50px;
+    border-radius:12px;
+    border:1px solid #334155;
+    background:#1e293b;
+    color:white;
+    margin-bottom:12px;
+    transition:.3s;
+}
+
+.sso-btn:hover{
+    border-color:var(--primary);
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:var(--muted);
+}
+
+.footer a{
+    color:#60a5fa;
+    text-decoration:none;
+    font-weight:600;
+}
+
+@media(max-width:900px){
+
+    .login-container{
+        grid-template-columns:1fr;
+    }
+
+    .left-panel{
+        display:none;
+    }
+
+    .right-panel{
+        padding:35px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+
+    <div class="left-panel">
+
+        <div class="logo">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <h1>DPDP Compliance Platform</h1>
+        <p>
+            Enterprise privacy, compliance,
+            consent management and PII
+            discovery platform.
+        </p>
+
+        <div class="feature">
+            <i class="fa-solid fa-lock"></i>
+            Privacy Risk Monitoring
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-user-shield"></i>
+            Consent Governance
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-database"></i>
+            Automated PII Discovery
+        </div>
+
+        <div class="feature">
+            <i class="fa-solid fa-chart-line"></i>
+            Compliance Analytics
+        </div>
+
+    </div>
+
+
+    <div class="right-panel">
+
+        <span class="badge-enterprise">
+            ORGANISATION LOGIN
+        </span>
+
+        <h2>Welcome Back</h2>
+
+        <p class="subtitle">
+            Sign in to access your compliance dashboard.
+        </p>
+
+        <form method="POST" action="/auth/login">
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="john@company.com"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter password"
+                    required>
+            </div>
+
+            <button type="submit" class="btn-login">
+                <i class="fa-solid fa-right-to-bracket me-2"></i>
+                Login
+            </button>
+        </form>
+
+        <div class="extra-links">
+            <a href="#">Forgot Password?</a>
+            <a href="/signup">Create Account</a>
+        </div>
+
+        <div class="divider">
+            OR
+        </div>
+
+        <button class="sso-btn">
+            <i class="fa-brands fa-google me-2"></i>
+            Continue with Google
+        </button>
+
+
+        <div class="footer">
+            Secure access powered by DPDP Compliance
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Consent Management System | Login</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+<style>
+
+:root {
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --navy: #0f172a;
+    --navy-light: #172554;
+
+    --background: #f5f7fb;
+
+    --white: #ffffff;
+
+    --text: #0f172a;
+    --text-secondary: #64748b;
+
+    --border: #dbe3ef;
+
+    --input-background: #f8fafc;
+
+    --success: #16a34a;
+
+}
+
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    font-size: 100%;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family: "Inter", sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+}
+
+
+button,
+input {
+
+    font-family: inherit;
+
+}
+
+
+a {
+
+    text-decoration: none;
+
+}
+
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.auth-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 2rem;
+
+}
+
+
+.auth-container {
+
+    width: 100%;
+
+    max-width: 75rem;
+
+    min-height: 43.75rem;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: var(--white);
+
+    border-radius: 1.5rem;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 1.5rem 4rem rgba(15, 23, 42, 0.15);
+
+}
+
+
+
+/* =========================================================
+   LEFT BRAND PANEL
+========================================================= */
+
+.auth-brand-panel {
+
+    background:
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #172554
+        );
+
+    color: var(--white);
+
+    padding: 4rem;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.brand-content {
+
+    max-width: 31.25rem;
+
+}
+
+
+.brand-icon {
+
+    width: 4.5rem;
+
+    height: 4.5rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 1.125rem;
+
+    background:
+        rgba(37, 99, 235, 0.2);
+
+    border:
+        0.0625rem solid
+        rgba(147, 197, 253, 0.25);
+
+    color: #60a5fa;
+
+    font-size: 2rem;
+
+    margin-bottom: 2rem;
+
+}
+
+
+.brand-content h1 {
+
+    font-size: 2.5rem;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.brand-description {
+
+    font-size: 1rem;
+
+    line-height: 1.8;
+
+    color: #cbd5e1;
+
+    margin-bottom: 2.5rem;
+
+}
+
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.feature-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+}
+
+
+.feature-item {
+
+    display: flex;
+
+    gap: 1rem;
+
+    align-items: flex-start;
+
+}
+
+
+.feature-icon {
+
+    min-width: 2.75rem;
+
+    height: 2.75rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 0.75rem;
+
+    background:
+        rgba(37, 99, 235, 0.2);
+
+    color: #60a5fa;
+
+}
+
+
+.feature-item h3 {
+
+    font-size: 0.9375rem;
+
+    font-weight: 700;
+
+    margin-bottom: 0.375rem;
+
+}
+
+
+.feature-item p {
+
+    color: #94a3b8;
+
+    font-size: 0.8125rem;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =========================================================
+   RIGHT FORM PANEL
+========================================================= */
+
+.auth-form-panel {
+
+    background: var(--white);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 4rem;
+
+}
+
+
+.form-wrapper {
+
+    width: 100%;
+
+    max-width: 28rem;
+
+}
+
+
+.mobile-brand {
+
+    display: none;
+
+}
+
+
+.form-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding:
+        0.4375rem
+        0.75rem;
+
+    border-radius: 2rem;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 0.6875rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.05rem;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.form-wrapper h2 {
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    margin-bottom: 0.625rem;
+
+}
+
+
+.form-subtitle {
+
+    color: var(--text-secondary);
+
+    font-size: 0.875rem;
+
+    line-height: 1.6;
+
+    margin-bottom: 2rem;
+
+}
+
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.login-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.375rem;
+
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+}
+
+
+.form-group label {
+
+    font-size: 0.8125rem;
+
+    font-weight: 600;
+
+    color: #334155;
+
+}
+
+
+.label-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.forgot-link {
+
+    color: var(--primary);
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+}
+
+
+.forgot-link:hover {
+
+    color: var(--primary-dark);
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-wrapper {
+
+    position: relative;
+
+}
+
+
+.input-wrapper > i {
+
+    position: absolute;
+
+    left: 1rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #94a3b8;
+
+    font-size: 0.875rem;
+
+}
+
+
+.input-wrapper input {
+
+    width: 100%;
+
+    height: 3.25rem;
+
+    border:
+        0.0625rem solid
+        var(--border);
+
+    border-radius: 0.75rem;
+
+    background: var(--input-background);
+
+    color: var(--text);
+
+    padding:
+        0
+        3rem;
+
+    outline: none;
+
+    font-size: 0.875rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.input-wrapper input::placeholder {
+
+    color: #94a3b8;
+
+}
+
+
+.input-wrapper input:focus {
+
+    border-color: var(--primary);
+
+    background: var(--white);
+
+    box-shadow:
+        0 0 0 0.1875rem
+        rgba(37, 99, 235, 0.1);
+
+}
+
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 0.875rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    cursor: pointer;
+
+    font-size: 0.875rem;
+
+}
+
+
+
+/* =========================================================
+   REMEMBER ME
+========================================================= */
+
+.remember-row {
+
+    margin-top: -0.375rem;
+
+}
+
+
+.remember-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+    cursor: pointer;
+
+}
+
+
+.remember-label input {
+
+    width: 1rem;
+
+    height: 1rem;
+
+    accent-color: var(--primary);
+
+}
+
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-button {
+
+    height: 3.25rem;
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 0.75rem;
+
+    background: var(--primary);
+
+    color: var(--white);
+
+    font-size: 0.875rem;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.625rem;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.login-button:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-0.0625rem);
+
+}
+
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    margin:
+        1.75rem
+        0;
+
+    color: #94a3b8;
+
+    font-size: 0.6875rem;
+
+    font-weight: 600;
+
+}
+
+
+.divider::before,
+.divider::after {
+
+    content: "";
+
+    height: 0.0625rem;
+
+    background: var(--border);
+
+    flex: 1;
+
+}
+
+
+
+/* =========================================================
+   GOOGLE / SSO
+========================================================= */
+
+.sso-button {
+
+    width: 100%;
+
+    height: 3.125rem;
+
+    border:
+        0.0625rem solid
+        var(--border);
+
+    border-radius: 0.75rem;
+
+    background: var(--white);
+
+    color: #334155;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.75rem;
+
+    font-size: 0.8125rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.sso-button:hover {
+
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+}
+
+
+.sso-button i {
+
+    color: #4285f4;
+
+    font-size: 1rem;
+
+}
+
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
+
+.signup-text {
+
+    text-align: center;
+
+    margin-top: 1.75rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+}
+
+
+.signup-text a {
+
+    color: var(--primary);
+
+    font-weight: 700;
+
+    margin-left: 0.25rem;
+
+}
+
+
+.signup-text a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.auth-footer {
+
+    margin-top: 3rem;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    color: #94a3b8;
+
+    font-size: 0.6875rem;
+
+}
+
+
+.auth-footer a {
+
+    color: #64748b;
+
+}
+
+
+.auth-footer a:hover {
+
+    color: var(--primary);
+
+}
+
+
+.footer-dot {
+
+    color: #cbd5e1;
+
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 62.5rem) {
+
+    .auth-page {
+
+        padding: 1.5rem;
+
+    }
+
+
+    .auth-container {
+
+        max-width: 62.5rem;
+
+    }
+
+
+    .auth-brand-panel {
+
+        padding: 3rem;
+
+    }
+
+
+    .auth-form-panel {
+
+        padding: 3rem;
+
+    }
+
+
+    .brand-content h1 {
+
+        font-size: 2.125rem;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 48rem) {
+
+    .auth-page {
+
+        padding: 1rem;
+
+        align-items: stretch;
+
+    }
+
+
+    .auth-container {
+
+        min-height: auto;
+
+        grid-template-columns: 1fr;
+
+        border-radius: 1rem;
+
+    }
+
+
+    .auth-brand-panel {
+
+        display: none;
+
+    }
+
+
+    .auth-form-panel {
+
+        min-height: calc(100vh - 2rem);
+
+        padding: 2rem 1.5rem;
+
+        align-items: center;
+
+    }
+
+
+    .mobile-brand {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 0.625rem;
+
+        margin-bottom: 2rem;
+
+        color: var(--navy);
+
+        font-weight: 800;
+
+        font-size: 1rem;
+
+    }
+
+
+    .mobile-brand-icon {
+
+        width: 2.5rem;
+
+        height: 2.5rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #eff6ff;
+
+        color: var(--primary);
+
+        border-radius: 0.75rem;
+
+    }
+
+
+    .form-wrapper {
+
+        max-width: 32rem;
+
+    }
+
+
+    .form-wrapper h2 {
+
+        font-size: 1.75rem;
+
+    }
+
+
+    .auth-footer {
+
+        margin-top: 2rem;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 30rem) {
+
+    .auth-page {
+
+        padding: 0.75rem;
+
+    }
+
+
+    .auth-form-panel {
+
+        padding:
+            1.5rem
+            1rem;
+
+    }
+
+
+    .auth-container {
+
+        border-radius: 0.875rem;
+
+    }
+
+
+    .form-wrapper h2 {
+
+        font-size: 1.5rem;
+
+    }
+
+
+    .form-subtitle {
+
+        font-size: 0.8125rem;
+
+    }
+
+
+    .label-row {
+
+        align-items: flex-start;
+
+        gap: 0.5rem;
+
+        flex-direction: column;
+
+    }
+
+
+    .auth-footer {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+</style>
+
+
+</head>
+
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-container">
+
+
+            <!-- =========================
+                 LEFT PANEL
+            ========================== -->
+
+            <div class="auth-brand-panel">
+
+                <div class="brand-content">
+
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+
+                    <h1>
+                        Consent Management
+                    </h1>
+
+
+                    <p class="brand-description">
+                        A centralized platform to manage,
+                        monitor and govern user consent
+                        across your organisation.
+                    </p>
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+
+                            <div>
+                                <h3>
+                                    Consent Governance
+                                </h3>
+
+                                <p>
+                                    Manage consent lifecycle
+                                    and user preferences.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+
+                            <div>
+                                <h3>
+                                    Privacy Notice Management
+                                </h3>
+
+                                <p>
+                                    Maintain versioned privacy
+                                    notices linked with consent.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+
+                            <div>
+                                <h3>
+                                    User Privacy
+                                </h3>
+
+                                <p>
+                                    Give users transparency and
+                                    control over their consent.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 RIGHT PANEL
+            ========================== -->
+
+            <div class="auth-form-panel">
+
+
+                <div class="form-wrapper">
+
+
+                    <div class="mobile-brand">
+
+                        <div class="mobile-brand-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <span>
+                            Consent Management
+                        </span>
+
+                    </div>
+
+
+                    <span class="form-badge">
+                        ORGANISATION LOGIN
+                    </span>
+
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+
+                    <p class="form-subtitle">
+                        Sign in to access your consent
+                        management dashboard.
+                    </p>
+
+
+
+                    <!-- LOGIN FORM -->
+
+                    <form
+                        action="/auth/login"
+                        method="POST"
+                        class="login-form"
+                    >
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="admin@company.com"
+                                    autocomplete="email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="form-group">
+
+                            <div class="label-row">
+
+                                <label for="password">
+                                    Password
+                                </label>
+
+                                <a
+                                    href="forgot-password.html"
+                                    class="forgot-link"
+                                >
+                                    Forgot Password?
+                                </a>
+
+                            </div>
+
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    aria-label="Show password"
+                                    onclick="togglePassword()"
+                                >
+
+                                    <i
+                                        id="passwordIcon"
+                                        class="fa-regular fa-eye"
+                                    ></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- REMEMBER -->
+
+                        <div class="remember-row">
+
+                            <label class="remember-label">
+
+                                <input
+                                    type="checkbox"
+                                    name="remember"
+                                >
+
+                                <span>
+                                    Remember me
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+
+                        <!-- LOGIN BUTTON -->
+
+                        <button
+                            type="submit"
+                            class="login-button"
+                        >
+
+                            <span>
+                                Sign In
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- DIVIDER -->
+
+                    <div class="divider">
+
+                        <span>
+                            OR
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- SSO -->
+
+                    <button
+                        type="button"
+                        class="sso-button"
+                    >
+
+                        <i class="fa-brands fa-google"></i>
+
+                        <span>
+                            Continue with Google
+                        </span>
+
+                    </button>
+
+
+
+                    <!-- SIGNUP -->
+
+                    <p class="signup-text">
+
+                        Don't have an organisation account?
+
+                        <a href="signup.html">
+                            Create Account
+                        </a>
+
+                    </p>
+
+
+
+                    <!-- FOOTER -->
+
+                    <div class="auth-footer">
+
+                        <span>
+                            Secure consent governance
+                        </span>
+
+                        <span class="footer-dot">
+                            •
+                        </span>
+
+                        <a href="#">
+                            Privacy
+                        </a>
+
+                        <span class="footer-dot">
+                            •
+                        </span>
+
+                        <a href="#">
+                            Terms
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const icon =
+                document.getElementById("passwordIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove(
+                    "fa-eye"
+                );
+
+                icon.classList.add(
+                    "fa-eye-slash"
+                );
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove(
+                    "fa-eye-slash"
+                );
+
+                icon.classList.add(
+                    "fa-eye"
+                );
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

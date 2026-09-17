@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Deletion Requests</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+
+            background: transparent;
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding: 2.5rem 3rem 4rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.875rem;
+
+            line-height: 1.6;
+        }
+
+        .export-button {
+            min-height: 2.625rem;
+
+            padding: 0.75rem 1.125rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 0.5rem;
+        }
+
+        .export-button:hover {
+            color: var(--primary);
+            border-color: #bfdbfe;
+            background: #f8fafc;
+        }
+
+        /* =========================
+           SUMMARY CARDS
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.75rem;
+
+            padding: 1.25rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 1rem;
+        }
+
+        .summary-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.875rem;
+        }
+
+        .summary-icon.blue {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .summary-icon.orange {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .summary-icon.green {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .summary-icon.red {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .summary-value {
+            color: var(--navy);
+
+            font-size: 1.5rem;
+            font-weight: 800;
+
+            margin-bottom: 0.3125rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           TABLE CARD
+        ========================= */
+
+        .table-card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filters {
+            padding: 1.25rem 1.5rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.75rem;
+
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 18rem;
+
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 0.875rem;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 0.75rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 2.5rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: #f8fafc;
+
+            padding:
+                0 0.875rem 0 2.375rem;
+
+            outline: none;
+
+            color: var(--text);
+
+            font-size: 0.75rem;
+        }
+
+        .search-box input:focus {
+            background: var(--white);
+            border-color: #93c5fd;
+        }
+
+        .filter-select {
+            height: 2.5rem;
+
+            min-width: 9rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            padding: 0 0.75rem;
+
+            font-size: 0.75rem;
+
+            outline: none;
+        }
+
+        .filter-select:focus {
+            border-color: #93c5fd;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 72rem;
+
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            padding: 0.875rem 1rem;
+
+            text-align: left;
+
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.025rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+        }
+
+        td {
+            padding: 1rem;
+
+            color: var(--text);
+
+            font-size: 0.75rem;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* =========================
+           REQUEST ID
+        ========================= */
+
+        .request-id {
+            color: var(--primary);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        .request-date {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            margin-top: 0.25rem;
+        }
+
+        /* =========================
+           PRINCIPAL
+        ========================= */
+
+        .principal {
+            display: flex;
+            align-items: center;
+
+            gap: 0.625rem;
+        }
+
+        .principal-avatar {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+            font-weight: 800;
+        }
+
+        .principal-name {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            margin-bottom: 0.1875rem;
+        }
+
+        .principal-id {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+        }
+
+        /* =========================
+           REQUEST TYPE
+        ========================= */
+
+        .request-type {
+            display: flex;
+            align-items: center;
+
+            gap: 0.5rem;
+        }
+
+        .type-icon {
+            width: 1.875rem;
+            height: 1.875rem;
+
+            border-radius: 0.5rem;
+
+            background: #fef2f2;
+            color: var(--danger);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+        }
+
+        .type-name {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding: 0.3125rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-pending {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .status-pending .status-dot {
+            background: var(--warning);
+        }
+
+        .status-progress {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .status-progress .status-dot {
+            background: var(--primary);
+        }
+
+        .status-completed {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-completed .status-dot {
+            background: var(--success);
+        }
+
+        .status-rejected {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .status-rejected .status-dot {
+            background: var(--danger);
+        }
+
+        /* =========================
+           PRIORITY
+        ========================= */
+
+        .priority {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .priority-bar {
+            width: 0.25rem;
+            height: 1rem;
+
+            border-radius: 999rem;
+        }
+
+        .priority-high {
+            color: var(--danger);
+        }
+
+        .priority-high .priority-bar {
+            background: var(--danger);
+        }
+
+        .priority-medium {
+            color: var(--warning);
+        }
+
+        .priority-medium .priority-bar {
+            background: var(--warning);
+        }
+
+        .priority-low {
+            color: var(--success);
+        }
+
+        .priority-low .priority-bar {
+            background: var(--success);
+        }
+
+        /* =========================
+           DUE DATE
+        ========================= */
+
+        .due-date {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+
+        .due-date.overdue {
+            color: var(--danger);
+        }
+
+        .due-label {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            margin-top: 0.1875rem;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            align-items: center;
+
+            gap: 0.375rem;
+        }
+
+        .action-button {
+            width: 2rem;
+            height: 2rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.375rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+        }
+
+        .action-button:hover {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .action-button.danger:hover {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: var(--danger);
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination {
+            padding: 1rem 1.5rem;
+
+            border-top:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pagination-info {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            align-items: center;
+
+            gap: 0.3125rem;
+        }
+
+        .page-button {
+            width: 2rem;
+            height: 2rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.375rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .page-button:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .page-button.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding:
+                    1.75rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .export-button {
+                width: 100%;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .pagination {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 0.875rem;
+            }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .summary-card {
+                padding: 1rem;
+            }
+
+            .filters {
+                padding: 1rem;
+            }
+
+            .pagination {
+                padding: 1rem;
+            }
+        }
+
+        /* =========================
+           VERY SMALL
+        ========================= */
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .summary-value {
+                font-size: 1.375rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button
+                class="notification"
+                title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="
+                        font-size: 0.625rem;
+                        color: #94a3b8;
+                    ">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Deletion Requests
+                </h1>
+
+                <p class="page-subtitle">
+                    Review, process, and track personal data deletion requests
+                    submitted by data principals.
+                </p>
+
+            </div>
+
+
+            <button class="export-button">
+
+                <i class="fa-solid fa-download"></i>
+
+                Export Requests
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY
+        ========================= -->
+
+        <section class="summary-grid">
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon blue">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    128
+                </div>
+
+                <div class="summary-label">
+                    Total Requests
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon orange">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    24
+                </div>
+
+                <div class="summary-label">
+                    Pending Requests
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    96
+                </div>
+
+                <div class="summary-label">
+                    Completed
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon red">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    8
+                </div>
+
+                <div class="summary-label">
+                    Overdue
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             REQUEST TABLE
+        ========================= -->
+
+        <section class="table-card">
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search by request ID, name, email, or principal ID..."
+                    >
+
+                </div>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="progress">
+                        In Progress
+                    </option>
+
+                    <option value="completed">
+                        Completed
+                    </option>
+
+                    <option value="rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Priorities
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                    <option value="medium">
+                        Medium
+                    </option>
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Request
+                            </th>
+
+                            <th>
+                                Data Principal
+                            </th>
+
+                            <th>
+                                Request Type
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Due Date
+                            </th>
+
+                            <th>
+                                Assigned To
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- REQUEST 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="request-id">
+                                    DEL-00128
+                                </div>
+
+                                <div class="request-date">
+                                    Sep 16, 2026
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        AK
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Akash Kumar
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10248
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="request-type">
+
+                                    <div class="type-icon">
+
+                                        <i class="fa-solid fa-user-slash"></i>
+
+                                    </div>
+
+                                    <div class="type-name">
+                                        Full Deletion
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="priority priority-high">
+
+                                    <span class="priority-bar"></span>
+
+                                    High
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-pending">
+
+                                    <span class="status-dot"></span>
+
+                                    Pending
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="due-date">
+                                    Sep 22, 2026
+                                </div>
+
+                                <div class="due-label">
+                                    6 days remaining
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Privacy Team
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Request">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Process">
+
+                                        <i class="fa-solid fa-arrow-right"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- REQUEST 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="request-id">
+                                    DEL-00127
+                                </div>
+
+                                <div class="request-date">
+                                    Sep 15, 2026
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        RS
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Riya Sharma
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10247
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="request-type">
+
+                                    <div class="type-icon">
+
+                                        <i class="fa-solid fa-database"></i>
+
+                                    </div>
+
+                                    <div class="type-name">
+                                        Data Deletion
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="priority priority-medium">
+
+                                    <span class="priority-bar"></span>
+
+                                    Medium
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-progress">
+
+                                    <span class="status-dot"></span>
+
+                                    In Progress
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="due-date">
+                                    Sep 21, 2026
+                                </div>
+
+                                <div class="due-label">
+                                    5 days remaining
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Privacy Team
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Request">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Process">
+
+                                        <i class="fa-solid fa-arrow-right"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- REQUEST 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="request-id">
+                                    DEL-00126
+                                </div>
+
+                                <div class="request-date">
+                                    Sep 13, 2026
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        VM
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Vikram Mehta
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10246
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="request-type">
+
+                                    <div class="type-icon">
+
+                                        <i class="fa-solid fa-folder-minus"></i>
+
+                                    </div>
+
+                                    <div class="type-name">
+                                        Data Erasure
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="priority priority-high">
+
+                                    <span class="priority-bar"></span>
+
+                                    High
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-progress">
+
+                                    <span class="status-dot"></span>
+
+                                    In Progress
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="due-date overdue">
+                                    Sep 18, 2026
+                                </div>
+
+                                <div class="due-label">
+                                    Due soon
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Compliance Team
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Request">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Process">
+
+                                        <i class="fa-solid fa-arrow-right"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- REQUEST 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="request-id">
+                                    DEL-00125
+                                </div>
+
+                                <div class="request-date">
+                                    Sep 10, 2026
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        NP
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Neha Patel
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10245
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="request-type">
+
+                                    <div class="type-icon">
+
+                                        <i class="fa-solid fa-user-slash"></i>
+
+                                    </div>
+
+                                    <div class="type-name">
+                                        Full Deletion
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="priority priority-low">
+
+                                    <span class="priority-bar"></span>
+
+                                    Low
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-completed">
+
+                                    <span class="status-dot"></span>
+
+                                    Completed
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="due-date">
+                                    Sep 16, 2026
+                                </div>
+
+                                <div class="due-label">
+                                    Completed
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Privacy Team
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Request">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- REQUEST 5 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="request-id">
+                                    DEL-00124
+                                </div>
+
+                                <div class="request-date">
+                                    Sep 08, 2026
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="principal">
+
+                                    <div class="principal-avatar">
+                                        SK
+                                    </div>
+
+                                    <div>
+
+                                        <div class="principal-name">
+                                            Sameer Khan
+                                        </div>
+
+                                        <div class="principal-id">
+                                            DP-10244
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="request-type">
+
+                                    <div class="type-icon">
+
+                                        <i class="fa-solid fa-database"></i>
+
+                                    </div>
+
+                                    <div class="type-name">
+                                        Data Deletion
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="priority priority-medium">
+
+                                    <span class="priority-bar"></span>
+
+                                    Medium
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-rejected">
+
+                                    <span class="status-dot"></span>
+
+                                    Rejected
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="due-date">
+                                    Sep 14, 2026
+                                </div>
+
+                                <div class="due-label">
+                                    Request closed
+                                </div>
+
+                            </td>
+
+
+                            <td>
+                                Compliance Team
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Request">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 1–5 of 128 deletion requests
+                </div>
+
+
+                <div class="pagination-buttons">
+
+                    <button class="page-button">
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+
+                    <button class="page-button active">
+                        1
+                    </button>
+
+
+                    <button class="page-button">
+                        2
+                    </button>
+
+
+                    <button class="page-button">
+                        3
+                    </button>
+
+
+                    <button class="page-button">
+                        4
+                    </button>
+
+
+                    <button class="page-button">
+                        5
+                    </button>
+
+
+                    <button class="page-button">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

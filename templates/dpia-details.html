@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | DPIA Details</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+
+            background: transparent;
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding:
+                2.25rem 3rem 4rem;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+
+            gap: 0.5rem;
+
+            margin-bottom: 1.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb i {
+            font-size: 0.5rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 1rem;
+        }
+
+        .page-icon {
+            width: 3.25rem;
+            height: 3.25rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.75rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.25rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .dpia-id {
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+
+            margin-bottom: 0.625rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.8125rem;
+
+            line-height: 1.6;
+
+            max-width: 48rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+
+            gap: 0.625rem;
+        }
+
+        .secondary-button {
+            min-height: 2.5rem;
+
+            padding:
+                0.6875rem 1rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.5rem;
+        }
+
+        .secondary-button:hover {
+            border-color: #bfdbfe;
+
+            color: var(--primary);
+
+            background: #f8fafc;
+        }
+
+        .primary-button {
+            min-height: 2.5rem;
+
+            padding:
+                0.6875rem 1rem;
+
+            border: none;
+
+            border-radius: 0.5rem;
+
+            background: var(--primary);
+
+            color: var(--white);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.5rem;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           STATUS BAR
+        ========================= */
+
+        .status-bar {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.75rem;
+
+            padding: 1rem 1.25rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 1.5rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+
+            gap: 1.25rem;
+        }
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding:
+                0.375rem 0.75rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-review {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .status-review .status-dot {
+            background: var(--warning);
+        }
+
+        .status-completed {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-completed .status-dot {
+            background: var(--success);
+        }
+
+        .status-meta {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .status-meta strong {
+            color: var(--navy);
+        }
+
+        /* =========================
+           CONTENT GRID
+        ========================= */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(18rem, 1fr);
+
+            gap: 1.5rem;
+
+            align-items: start;
+        }
+
+        .main-column,
+        .side-column {
+            display: flex;
+            flex-direction: column;
+
+            gap: 1.5rem;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding:
+                1.125rem 1.5rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            color: var(--navy);
+
+            font-size: 0.875rem;
+            font-weight: 800;
+        }
+
+        .card-title-icon {
+            color: var(--primary);
+
+            margin-right: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* =========================
+           INFORMATION GRID
+        ========================= */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 1.25rem 2rem;
+        }
+
+        .info-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .info-label {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.025rem;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .info-value {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           TAGS
+        ========================= */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 0.375rem;
+        }
+
+        .tag {
+            padding:
+                0.3125rem 0.625rem;
+
+            border-radius: 0.375rem;
+
+            background: #f1f5f9;
+
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        /* =========================
+           RISK CARD
+        ========================= */
+
+        .risk-summary {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 0.75rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .risk-summary-card {
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.625rem;
+
+            padding: 0.875rem;
+
+            background: #fafcff;
+        }
+
+        .risk-summary-label {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            text-transform: uppercase;
+
+            font-weight: 700;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .risk-summary-value {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+
+            font-weight: 800;
+        }
+
+        /* =========================
+           RISK TABLE
+        ========================= */
+
+        .risk-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .risk-table {
+            width: 100%;
+
+            min-width: 42rem;
+
+            border-collapse: collapse;
+        }
+
+        .risk-table th {
+            padding:
+                0.75rem 0.625rem;
+
+            text-align: left;
+
+            background: #f8fafc;
+
+            color: var(--text-secondary);
+
+            font-size: 0.5625rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+        }
+
+        .risk-table td {
+            padding:
+                0.875rem 0.625rem;
+
+            color: var(--text);
+
+            font-size: 0.6875rem;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+
+            vertical-align: top;
+        }
+
+        .risk-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .risk-name {
+            color: var(--navy);
+
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .risk-description {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            line-height: 1.5;
+
+            max-width: 16rem;
+        }
+
+        /* =========================
+           RISK BADGES
+        ========================= */
+
+        .risk-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .risk-badge-dot {
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+        }
+
+        .risk-high {
+            color: var(--danger);
+        }
+
+        .risk-high .risk-badge-dot {
+            background: var(--danger);
+        }
+
+        .risk-medium {
+            color: var(--warning);
+        }
+
+        .risk-medium .risk-badge-dot {
+            background: var(--warning);
+        }
+
+        .risk-low {
+            color: var(--success);
+        }
+
+        .risk-low .risk-badge-dot {
+            background: var(--success);
+        }
+
+        .risk-critical {
+            color: #991b1b;
+        }
+
+        .risk-critical .risk-badge-dot {
+            background: #991b1b;
+        }
+
+        /* =========================
+           SCORE
+        ========================= */
+
+        .score {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 2rem;
+
+            height: 1.75rem;
+
+            padding: 0 0.375rem;
+
+            border-radius: 0.375rem;
+
+            font-size: 0.6875rem;
+            font-weight: 800;
+        }
+
+        .score-high {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .score-medium {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .score-low {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        /* =========================
+           MITIGATION
+        ========================= */
+
+        .mitigation {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            line-height: 1.5;
+
+            max-width: 15rem;
+        }
+
+        /* =========================
+           SIDE DETAILS
+        ========================= */
+
+        .side-item {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 0.75rem;
+
+            padding-bottom: 1rem;
+
+            margin-bottom: 1rem;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+        }
+
+        .side-item:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+
+            border-bottom: none;
+        }
+
+        .side-icon {
+            width: 2rem;
+            height: 2rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+        }
+
+        .side-label {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            text-transform: uppercase;
+
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .side-value {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           REVIEW BOX
+        ========================= */
+
+        .review-box {
+            padding: 1rem;
+
+            border-radius: 0.625rem;
+
+            background: #fff7ed;
+
+            border:
+                0.0625rem solid #fed7aa;
+        }
+
+        .review-box-title {
+            color: #9a3412;
+
+            font-size: 0.6875rem;
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .review-box-text {
+            color: #c2410c;
+
+            font-size: 0.625rem;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline {
+            position: relative;
+
+            padding-left: 1.5rem;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0.375rem;
+            top: 0.375rem;
+            bottom: 0.375rem;
+
+            width: 0.0625rem;
+
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+
+            padding-bottom: 1.25rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+
+            left: -1.5rem;
+            top: 0.1875rem;
+
+            width: 0.75rem;
+            height: 0.75rem;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+
+            border:
+                0.125rem solid var(--white);
+
+            box-shadow:
+                0 0 0 0.0625rem var(--primary);
+        }
+
+        .timeline-title {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-date {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-text {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .side-column {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .side-column .card:last-child {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+
+                padding:
+                    0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding:
+                    1.5rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 1rem;
+            }
+
+            .title-section {
+                gap: 0.75rem;
+            }
+
+            .page-icon {
+                width: 2.875rem;
+                height: 2.875rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .secondary-button,
+            .primary-button {
+                flex: 1;
+            }
+
+            .status-bar {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 0.75rem;
+            }
+
+            .status-left {
+                flex-wrap: wrap;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-item.full {
+                grid-column: auto;
+            }
+
+            .risk-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .side-column {
+                display: flex;
+            }
+
+            .card-header {
+                padding:
+                    1rem 1.125rem;
+            }
+
+            .card-body {
+                padding: 1.125rem;
+            }
+
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .secondary-button,
+            .primary-button {
+                width: 100%;
+            }
+
+            .status-left {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+
+        }
+
+        /* =========================
+           VERY SMALL
+        ========================= */
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button
+                class="notification"
+                title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="
+                        font-size: 0.625rem;
+                        color: #94a3b8;
+                    ">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- BREADCRUMB -->
+
+        <div class="breadcrumb">
+
+            <a href="#">
+                DPIA
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                DPIA-00042
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================= -->
+
+        <section class="page-header">
+
+            <div class="title-section">
+
+                <div class="page-icon">
+
+                    <i class="fa-solid fa-file-shield"></i>
+
+                </div>
+
+                <div>
+
+                    <h1 class="page-title">
+                        Customer Analytics
+                    </h1>
+
+                    <div class="dpia-id">
+                        DPIA-00042
+                    </div>
+
+                    <p class="page-subtitle">
+                        Data Protection Impact Assessment for customer
+                        behavior and analytics processing activities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button class="secondary-button">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </button>
+
+
+                <button class="secondary-button">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Edit
+
+                </button>
+
+
+                <button class="primary-button">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Complete Assessment
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATUS BAR
+        ========================= -->
+
+        <div class="status-bar">
+
+            <div class="status-left">
+
+                <span class="status status-review">
+
+                    <span class="status-dot"></span>
+
+                    Under Review
+
+                </span>
+
+                <span class="status-meta">
+                    Created by <strong>Rahul Kumar</strong>
+                </span>
+
+                <span class="status-meta">
+                    Last updated <strong>Sep 15, 2026</strong>
+                </span>
+
+            </div>
+
+
+            <span class="status-meta">
+
+                Review date:
+                <strong>Sep 25, 2026</strong>
+
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             CONTENT
+        ========================= -->
+
+        <div class="content-grid">
+
+
+            <!-- =====================
+                 MAIN COLUMN
+            ===================== -->
+
+            <div class="main-column">
+
+
+                <!-- OVERVIEW -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-circle-info card-title-icon">
+                            </i>
+
+                            Assessment Overview
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="info-grid">
+
+
+                            <div class="info-item full">
+
+                                <div class="info-label">
+                                    Description
+                                </div>
+
+                                <div class="info-value">
+
+                                    Assessment of the privacy risks associated
+                                    with collecting and analyzing customer
+                                    behavior data for improving products,
+                                    services, and customer experience.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Processing Purpose
+                                </div>
+
+                                <div class="info-value">
+                                    Customer analytics and service
+                                    personalization
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Processing Activity
+                                </div>
+
+                                <div class="info-value">
+                                    Customer behavior and analytics
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Data Categories
+                                </div>
+
+                                <div class="tags">
+
+                                    <span class="tag">
+                                        Identity Data
+                                    </span>
+
+                                    <span class="tag">
+                                        Contact Data
+                                    </span>
+
+                                    <span class="tag">
+                                        Usage Data
+                                    </span>
+
+                                    <span class="tag">
+                                        Transaction Data
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Data Subjects
+                                </div>
+
+                                <div class="tags">
+
+                                    <span class="tag">
+                                        Customers
+                                    </span>
+
+                                    <span class="tag">
+                                        Website Visitors
+                                    </span>
+
+                                    <span class="tag">
+                                        App Users
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Data Sources
+                                </div>
+
+                                <div class="info-value">
+                                    Website, mobile application,
+                                    CRM, transaction systems
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Assessment Owner
+                                </div>
+
+                                <div class="info-value">
+                                    Rahul Kumar
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RISK ASSESSMENT -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-triangle-exclamation card-title-icon">
+                            </i>
+
+                            Risk Assessment
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+
+                        <div class="risk-summary">
+
+
+                            <div class="risk-summary-card">
+
+                                <div class="risk-summary-label">
+                                    Total Risks
+                                </div>
+
+                                <div class="risk-summary-value">
+                                    6
+                                </div>
+
+                            </div>
+
+
+                            <div class="risk-summary-card">
+
+                                <div class="risk-summary-label">
+                                    High / Critical
+                                </div>
+
+                                <div class="risk-summary-value">
+                                    2
+                                </div>
+
+                            </div>
+
+
+                            <div class="risk-summary-card">
+
+                                <div class="risk-summary-label">
+                                    Mitigation Required
+                                </div>
+
+                                <div class="risk-summary-value">
+                                    4
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="risk-table-wrapper">
+
+                            <table class="risk-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Risk
+                                        </th>
+
+                                        <th>
+                                            Likelihood
+                                        </th>
+
+                                        <th>
+                                            Impact
+                                        </th>
+
+                                        <th>
+                                            Score
+                                        </th>
+
+                                        <th>
+                                            Level
+                                        </th>
+
+                                        <th>
+                                            Mitigation
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody>
+
+
+                                    <!-- RISK 1 -->
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="risk-name">
+                                                Unauthorized Data Access
+                                            </div>
+
+                                            <div class="risk-description">
+                                                Unauthorized users may gain
+                                                access to customer analytics
+                                                data.
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            3
+                                        </td>
+
+                                        <td>
+                                            3
+                                        </td>
+
+                                        <td>
+
+                                            <span class="score score-high">
+                                                9
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <span class="risk-badge risk-high">
+
+                                                <span class="risk-badge-dot"></span>
+
+                                                High
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="mitigation">
+                                                RBAC, access logging,
+                                                encryption, and periodic
+                                                access reviews.
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- RISK 2 -->
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="risk-name">
+                                                Excessive Data Collection
+                                            </div>
+
+                                            <div class="risk-description">
+                                                Collection of more personal
+                                                data than required for the
+                                                stated purpose.
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            2
+                                        </td>
+
+                                        <td>
+                                            3
+                                        </td>
+
+                                        <td>
+
+                                            <span class="score score-medium">
+                                                6
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <span class="risk-badge risk-medium">
+
+                                                <span class="risk-badge-dot"></span>
+
+                                                Medium
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="mitigation">
+                                                Data minimization and
+                                                periodic collection review.
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- RISK 3 -->
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="risk-name">
+                                                Data Retention
+                                            </div>
+
+                                            <div class="risk-description">
+                                                Personal data may be retained
+                                                beyond the required period.
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            2
+                                        </td>
+
+                                        <td>
+                                            2
+                                        </td>
+
+                                        <td>
+
+                                            <span class="score score-medium">
+                                                4
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <span class="risk-badge risk-medium">
+
+                                                <span class="risk-badge-dot"></span>
+
+                                                Medium
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="mitigation">
+                                                Retention schedules and
+                                                automated deletion controls.
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- RISK 4 -->
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="risk-name">
+                                                Data Leakage
+                                            </div>
+
+                                            <div class="risk-description">
+                                                Sensitive information could
+                                                be exposed through unauthorized
+                                                disclosure.
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            2
+                                        </td>
+
+                                        <td>
+                                            3
+                                        </td>
+
+                                        <td>
+
+                                            <span class="score score-medium">
+                                                6
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <span class="risk-badge risk-medium">
+
+                                                <span class="risk-badge-dot"></span>
+
+                                                Medium
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="mitigation">
+                                                Encryption, monitoring,
+                                                DLP controls, and audit logs.
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- RISK 5 -->
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="risk-name">
+                                                Identity Correlation
+                                            </div>
+
+                                            <div class="risk-description">
+                                                Multiple datasets may be
+                                                correlated to identify
+                                                individuals.
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            1
+                                        </td>
+
+                                        <td>
+                                            2
+                                        </td>
+
+                                        <td>
+
+                                            <span class="score score-low">
+                                                2
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <span class="risk-badge risk-low">
+
+                                                <span class="risk-badge-dot"></span>
+
+                                                Low
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div class="mitigation">
+                                                Pseudonymization and
+                                                controlled dataset access.
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- MITIGATION -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-shield-halved card-title-icon">
+                            </i>
+
+                            Overall Mitigation Measures
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="info-grid">
+
+
+                            <div class="info-item full">
+
+                                <div class="info-label">
+                                    Technical Measures
+                                </div>
+
+                                <div class="info-value">
+
+                                    Encryption at rest and in transit,
+                                    role-based access control, authentication,
+                                    audit logging, monitoring, and controlled
+                                    access to analytics datasets.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Organizational Measures
+                                </div>
+
+                                <div class="info-value">
+
+                                    Privacy policies, employee training,
+                                    access reviews, processor oversight,
+                                    and periodic privacy assessments.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Data Minimization
+                                </div>
+
+                                <div class="info-value">
+
+                                    Only data necessary for the defined
+                                    analytics purpose should be collected
+                                    and processed.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Retention Controls
+                                </div>
+
+                                <div class="info-value">
+
+                                    Defined retention periods with periodic
+                                    review and deletion of data that is no
+                                    longer required.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Residual Risk
+                                </div>
+
+                                <div class="info-value">
+
+                                    <span class="risk-badge risk-medium">
+
+                                        <span class="risk-badge-dot"></span>
+
+                                        Medium
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+            <!-- =====================
+                 SIDE COLUMN
+            ===================== -->
+
+            <aside class="side-column">
+
+
+                <!-- ASSESSMENT DETAILS -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            Assessment Details
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Owner
+                                </div>
+
+                                <div class="side-value">
+                                    Rahul Kumar
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Created
+                                </div>
+
+                                <div class="side-value">
+                                    Aug 18, 2026
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Last Updated
+                                </div>
+
+                                <div class="side-value">
+                                    Sep 15, 2026
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Next Review
+                                </div>
+
+                                <div class="side-value">
+                                    Sep 25, 2026
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-list-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Risk Count
+                                </div>
+
+                                <div class="side-value">
+                                    6 identified risks
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- REVIEW -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-calendar-days card-title-icon">
+                            </i>
+
+                            Review
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="review-box">
+
+                            <div class="review-box-title">
+
+                                Review Required
+
+                            </div>
+
+                            <div class="review-box-text">
+
+                                This assessment is scheduled for review
+                                on Sep 25, 2026. Review the identified
+                                risks and mitigation measures before
+                                completing the assessment.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ACTIVITY TIMELINE -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-timeline card-title-icon">
+                            </i>
+
+                            Activity
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="timeline">
+
+
+                            <div class="timeline-item">
+
+                                <span class="timeline-dot"></span>
+
+                                <div class="timeline-title">
+                                    Assessment updated
+                                </div>
+
+                                <div class="timeline-date">
+                                    Sep 15, 2026
+                                </div>
+
+                                <div class="timeline-text">
+                                    Risk assessment and mitigation
+                                    measures were updated.
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item">
+
+                                <span class="timeline-dot"></span>
+
+                                <div class="timeline-title">
+                                    Risk added
+                                </div>
+
+                                <div class="timeline-date">
+                                    Sep 10, 2026
+                                </div>
+
+                                <div class="timeline-text">
+                                    Unauthorized data access risk
+                                    was added to the assessment.
+                                </div>
+
+                            </div>
+
+
+                            <div class="timeline-item">
+
+                                <span class="timeline-dot"></span>
+
+                                <div class="timeline-title">
+                                    DPIA created
+                                </div>
+
+                                <div class="timeline-date">
+                                    Aug 18, 2026
+                                </div>
+
+                                <div class="timeline-text">
+                                    DPIA assessment was created
+                                    by Rahul Kumar.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </aside>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

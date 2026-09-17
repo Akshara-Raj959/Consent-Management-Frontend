@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Consent Management System | Create Account</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+    /* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --navy: #0f172a;
+    --navy-light: #172554;
+
+    --background: #f5f7fb;
+
+    --white: #ffffff;
+
+    --text: #0f172a;
+    --text-secondary: #64748b;
+
+    --border: #dbe3ef;
+
+    --input-background: #f8fafc;
+
+    --success: #16a34a;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    font-size: 100%;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family: "Inter", sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+}
+
+
+button,
+input,
+select {
+
+    font-family: inherit;
+
+}
+
+
+button {
+
+    cursor: pointer;
+
+}
+
+
+a {
+
+    text-decoration: none;
+
+}
+
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.signup-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 2rem;
+
+}
+
+
+.signup-container {
+
+    width: 100%;
+
+    max-width: 75rem;
+
+    display: grid;
+
+    grid-template-columns: 0.9fr 1.1fr;
+
+    background: var(--white);
+
+    border-radius: 1.5rem;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 1.5rem 4rem
+        rgba(15, 23, 42, 0.15);
+
+}
+
+
+
+/* =========================================================
+   LEFT PANEL
+========================================================= */
+
+.signup-brand-panel {
+
+    background:
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #172554
+        );
+
+    color: var(--white);
+
+    padding: 3.5rem;
+
+    display: flex;
+
+    min-height: 53rem;
+
+}
+
+
+.brand-content {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+
+/* =========================================================
+   BRAND LOGO
+========================================================= */
+
+.brand-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+
+    color: var(--white);
+
+    font-size: 0.9375rem;
+
+    font-weight: 800;
+
+}
+
+
+.brand-icon {
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 0.75rem;
+
+    background:
+        rgba(37, 99, 235, 0.2);
+
+    border:
+        0.0625rem solid
+        rgba(147, 197, 253, 0.25);
+
+    color: #60a5fa;
+
+    font-size: 1.125rem;
+
+}
+
+
+
+/* =========================================================
+   BRAND MAIN
+========================================================= */
+
+.brand-main {
+
+    margin-top: 7rem;
+
+}
+
+
+.brand-badge {
+
+    display: inline-flex;
+
+    padding:
+        0.4375rem
+        0.75rem;
+
+    border-radius: 2rem;
+
+    background:
+        rgba(37, 99, 235, 0.15);
+
+    color: #93c5fd;
+
+    font-size: 0.625rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.05rem;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.brand-main h1 {
+
+    font-size: 2.75rem;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.brand-main h1 span {
+
+    color: #60a5fa;
+
+}
+
+
+.brand-main > p {
+
+    color: #cbd5e1;
+
+    font-size: 0.9375rem;
+
+    line-height: 1.8;
+
+    max-width: 27rem;
+
+    margin-bottom: 3rem;
+
+}
+
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.feature-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+}
+
+
+.feature-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+
+}
+
+
+.feature-icon {
+
+    width: 2.75rem;
+
+    height: 2.75rem;
+
+    min-width: 2.75rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 0.75rem;
+
+    background:
+        rgba(37, 99, 235, 0.18);
+
+    color: #60a5fa;
+
+}
+
+
+.feature-item h3 {
+
+    font-size: 0.875rem;
+
+    font-weight: 700;
+
+    margin-bottom: 0.375rem;
+
+}
+
+
+.feature-item p {
+
+    color: #94a3b8;
+
+    font-size: 0.75rem;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =========================================================
+   BRAND FOOTER
+========================================================= */
+
+.brand-footer {
+
+    margin-top: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    color: #64748b;
+
+    font-size: 0.6875rem;
+
+}
+
+
+.brand-footer .footer-dot {
+
+    color: #475569;
+
+}
+
+
+
+/* =========================================================
+   FORM PANEL
+========================================================= */
+
+.signup-form-panel {
+
+    background: var(--white);
+
+    padding: 3.5rem;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+
+.form-wrapper {
+
+    width: 100%;
+
+    max-width: 38rem;
+
+}
+
+
+
+/* =========================================================
+   MOBILE BRAND
+========================================================= */
+
+.mobile-brand {
+
+    display: none;
+
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.form-badge {
+
+    display: inline-flex;
+
+    padding:
+        0.4375rem
+        0.75rem;
+
+    border-radius: 2rem;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 0.625rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.05rem;
+
+    margin-bottom: 1rem;
+
+}
+
+
+.form-wrapper h2 {
+
+    font-size: 2rem;
+
+    font-weight: 800;
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+.form-subtitle {
+
+    color: var(--text-secondary);
+
+    font-size: 0.8125rem;
+
+    line-height: 1.6;
+
+    margin-bottom: 2rem;
+
+}
+
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.signup-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+
+    margin-bottom: 1rem;
+
+}
+
+
+.section-number {
+
+    width: 2rem;
+
+    height: 2rem;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 0.5rem;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 0.625rem;
+
+    font-weight: 800;
+
+}
+
+
+.section-heading h3 {
+
+    font-size: 0.8125rem;
+
+    font-weight: 700;
+
+}
+
+
+.section-heading p {
+
+    color: var(--text-secondary);
+
+    font-size: 0.6875rem;
+
+    margin-top: 0.1875rem;
+
+}
+
+
+.admin-section {
+
+    margin-top: 1.75rem;
+
+}
+
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4375rem;
+
+    margin-bottom: 1rem;
+
+}
+
+
+.form-group label {
+
+    color: #334155;
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+
+}
+
+
+.optional {
+
+    color: #94a3b8;
+
+    font-size: 0.625rem;
+
+    font-weight: 400;
+
+    margin-left: 0.25rem;
+
+}
+
+
+
+/* =========================================================
+   TWO COLUMN FORM
+========================================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 1rem;
+
+}
+
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.input-wrapper {
+
+    position: relative;
+
+}
+
+
+.input-wrapper > i {
+
+    position: absolute;
+
+    left: 0.875rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #94a3b8;
+
+    font-size: 0.75rem;
+
+    pointer-events: none;
+
+}
+
+
+.input-wrapper input,
+.input-wrapper select {
+
+    width: 100%;
+
+    height: 2.875rem;
+
+    border:
+        0.0625rem solid
+        var(--border);
+
+    border-radius: 0.625rem;
+
+    background: var(--input-background);
+
+    color: var(--text);
+
+    padding:
+        0
+        2.75rem;
+
+    outline: none;
+
+    font-size: 0.75rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.input-wrapper select {
+
+    appearance: none;
+
+    cursor: pointer;
+
+}
+
+
+.input-wrapper input::placeholder {
+
+    color: #94a3b8;
+
+}
+
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+
+    border-color: var(--primary);
+
+    background: var(--white);
+
+    box-shadow:
+        0 0 0 0.1875rem
+        rgba(37, 99, 235, 0.1);
+
+}
+
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 0.75rem;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #94a3b8;
+
+    font-size: 0.75rem;
+
+}
+
+
+
+/* =========================================================
+   PASSWORD REQUIREMENTS
+========================================================= */
+
+.password-requirements {
+
+    padding:
+        0.75rem
+        0.875rem;
+
+    border-radius: 0.625rem;
+
+    background: #f8fafc;
+
+    margin-top: -0.25rem;
+
+    margin-bottom: 1rem;
+
+}
+
+
+.requirements-title {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 0.625rem;
+
+    font-weight: 600;
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+.requirements-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0.875rem;
+
+}
+
+
+.requirements-list span {
+
+    color: #64748b;
+
+    font-size: 0.625rem;
+
+}
+
+
+.requirements-list i {
+
+    color: #cbd5e1;
+
+    font-size: 0.3125rem;
+
+    vertical-align: middle;
+
+    margin-right: 0.25rem;
+
+}
+
+
+
+/* =========================================================
+   AGREEMENT
+========================================================= */
+
+.agreement-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.75rem;
+
+    margin-top: 0.5rem;
+
+    margin-bottom: 1.25rem;
+
+}
+
+
+.checkbox-row {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 0.625rem;
+
+    color: #64748b;
+
+    font-size: 0.6875rem;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+
+}
+
+
+.checkbox-row input {
+
+    width: 0.875rem;
+
+    height: 0.875rem;
+
+    min-width: 0.875rem;
+
+    margin-top: 0.0625rem;
+
+    accent-color: var(--primary);
+
+}
+
+
+.checkbox-row a {
+
+    color: var(--primary);
+
+    font-weight: 600;
+
+}
+
+
+.checkbox-row a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================================================
+   SIGNUP BUTTON
+========================================================= */
+
+.signup-button {
+
+    width: 100%;
+
+    height: 3.125rem;
+
+    border: none;
+
+    border-radius: 0.625rem;
+
+    background: var(--primary);
+
+    color: var(--white);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.625rem;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.signup-button:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-0.0625rem);
+
+}
+
+
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
+
+.login-text {
+
+    text-align: center;
+
+    color: var(--text-secondary);
+
+    font-size: 0.6875rem;
+
+    margin-top: 1.25rem;
+
+}
+
+
+.login-text a {
+
+    color: var(--primary);
+
+    font-weight: 700;
+
+    margin-left: 0.25rem;
+
+}
+
+
+.login-text a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.form-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+
+    margin-top: 1.75rem;
+
+    color: #94a3b8;
+
+    font-size: 0.625rem;
+
+}
+
+
+.form-footer a {
+
+    color: #64748b;
+
+}
+
+
+.form-footer a:hover {
+
+    color: var(--primary);
+
+}
+
+
+.footer-dot {
+
+    color: #cbd5e1;
+
+}
+
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 62.5rem) {
+
+    .signup-page {
+
+        padding: 1.5rem;
+
+    }
+
+
+    .signup-container {
+
+        max-width: 62.5rem;
+
+    }
+
+
+    .signup-brand-panel {
+
+        padding: 2.5rem;
+
+    }
+
+
+    .signup-form-panel {
+
+        padding: 2.5rem;
+
+    }
+
+
+    .brand-main {
+
+        margin-top: 5rem;
+
+    }
+
+
+    .brand-main h1 {
+
+        font-size: 2.25rem;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 48rem) {
+
+    .signup-page {
+
+        padding: 1rem;
+
+        align-items: stretch;
+
+    }
+
+
+    .signup-container {
+
+        grid-template-columns: 1fr;
+
+        border-radius: 1rem;
+
+    }
+
+
+    .signup-brand-panel {
+
+        display: none;
+
+    }
+
+
+    .signup-form-panel {
+
+        min-height: calc(100vh - 2rem);
+
+        padding:
+            2rem
+            1.5rem;
+
+        align-items: center;
+
+    }
+
+
+    .form-wrapper {
+
+        max-width: 32rem;
+
+    }
+
+
+    .mobile-brand {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 0.625rem;
+
+        margin-bottom: 2rem;
+
+        color: var(--navy);
+
+        font-size: 0.9375rem;
+
+        font-weight: 800;
+
+    }
+
+
+    .mobile-brand-icon {
+
+        width: 2.5rem;
+
+        height: 2.5rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 0.75rem;
+
+        background: #eff6ff;
+
+        color: var(--primary);
+
+    }
+
+
+    .form-wrapper h2 {
+
+        font-size: 1.75rem;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 30rem) {
+
+    .signup-page {
+
+        padding: 0.75rem;
+
+    }
+
+
+    .signup-form-panel {
+
+        padding:
+            1.5rem
+            1rem;
+
+    }
+
+
+    .signup-container {
+
+        border-radius: 0.875rem;
+
+    }
+
+
+    .form-wrapper h2 {
+
+        font-size: 1.5rem;
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+
+    .form-group {
+
+        margin-bottom: 0.875rem;
+
+    }
+
+
+    .section-heading {
+
+        margin-bottom: 0.875rem;
+
+    }
+
+
+    .admin-section {
+
+        margin-top: 1.25rem;
+
+    }
+
+
+    .requirements-list {
+
+        flex-direction: column;
+
+        gap: 0.375rem;
+
+    }
+
+}
+</style>
+
+
+</head>
+
+
+<body>
+
+    <main class="signup-page">
+
+        <section class="signup-container">
+
+
+            <!-- ==========================================
+                 LEFT BRAND PANEL
+            =========================================== -->
+
+            <div class="signup-brand-panel">
+
+                <div class="brand-content">
+
+
+                    <a
+                        href="login.html"
+                        class="brand-logo"
+                    >
+
+                        <div class="brand-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+                        <span>
+                            Consent Management
+                        </span>
+
+                    </a>
+
+
+                    <div class="brand-main">
+
+                        <span class="brand-badge">
+                            ORGANISATION ONBOARDING
+                        </span>
+
+
+                        <h1>
+                            Take control of
+                            <span>consent.</span>
+                        </h1>
+
+
+                        <p>
+                            Create your organisation account and
+                            manage the complete consent lifecycle
+                            from one secure platform.
+                        </p>
+
+
+                        <div class="feature-list">
+
+
+                            <div class="feature-item">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Consent Management
+                                    </h3>
+
+                                    <p>
+                                        Create, track, update and
+                                        withdraw user consent.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature-item">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-file-shield"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Privacy Governance
+                                    </h3>
+
+                                    <p>
+                                        Manage privacy notices,
+                                        processors and assessments.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature-item">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        Centralised Visibility
+                                    </h3>
+
+                                    <p>
+                                        Monitor privacy operations
+                                        through a unified dashboard.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="brand-footer">
+
+                        <span>
+                            Secure
+                        </span>
+
+                        <span class="footer-dot">
+                            •
+                        </span>
+
+                        <span>
+                            Transparent
+                        </span>
+
+                        <span class="footer-dot">
+                            •
+                        </span>
+
+                        <span>
+                            Consent-first
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 RIGHT SIGNUP PANEL
+            =========================================== -->
+
+            <div class="signup-form-panel">
+
+
+                <div class="form-wrapper">
+
+
+                    <!-- MOBILE BRAND -->
+
+                    <div class="mobile-brand">
+
+                        <div class="mobile-brand-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+                        <span>
+                            Consent Management
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- HEADING -->
+
+                    <span class="form-badge">
+                        CREATE ORGANISATION
+                    </span>
+
+
+                    <h2>
+                        Create your account
+                    </h2>
+
+
+                    <p class="form-subtitle">
+                        Set up your organisation and administrator
+                        account to get started.
+                    </p>
+
+
+
+                    <!-- ======================================
+                         SIGNUP FORM
+                    ======================================= -->
+
+                    <form
+                        action="/auth/signup"
+                        method="POST"
+                        class="signup-form"
+                    >
+
+
+                        <!-- ==================================
+                             ORGANISATION INFORMATION
+                        =================================== -->
+
+                        <div class="section-heading">
+
+                            <div class="section-number">
+                                01
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Organisation Information
+                                </h3>
+
+                                <p>
+                                    Tell us about your organisation.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ORGANISATION NAME -->
+
+                        <div class="form-group">
+
+                            <label for="organisationName">
+                                Organisation Name
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-building"></i>
+
+                                <input
+                                    type="text"
+                                    id="organisationName"
+                                    name="organisation_name"
+                                    placeholder="Enter organisation name"
+                                    autocomplete="organization"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- INDUSTRY + WEBSITE -->
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label for="industry">
+                                    Industry
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="fa-solid fa-briefcase"></i>
+
+                                    <select
+                                        id="industry"
+                                        name="industry"
+                                        required
+                                    >
+
+                                        <option
+                                            value=""
+                                            selected
+                                            disabled
+                                        >
+                                            Select industry
+                                        </option>
+
+                                        <option value="technology">
+                                            Technology
+                                        </option>
+
+                                        <option value="healthcare">
+                                            Healthcare
+                                        </option>
+
+                                        <option value="finance">
+                                            Banking / Finance
+                                        </option>
+
+                                        <option value="education">
+                                            Education
+                                        </option>
+
+                                        <option value="retail">
+                                            Retail / E-commerce
+                                        </option>
+
+                                        <option value="government">
+                                            Government
+                                        </option>
+
+                                        <option value="manufacturing">
+                                            Manufacturing
+                                        </option>
+
+                                        <option value="other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label for="website">
+                                    Website
+                                    <span class="optional">
+                                        Optional
+                                    </span>
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="fa-solid fa-globe"></i>
+
+                                    <input
+                                        type="url"
+                                        id="website"
+                                        name="website"
+                                        placeholder="https://company.com"
+                                        autocomplete="url"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ==================================
+                             ADMIN INFORMATION
+                        =================================== -->
+
+                        <div class="section-heading admin-section">
+
+                            <div class="section-number">
+                                02
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Administrator Information
+                                </h3>
+
+                                <p>
+                                    Create your organisation administrator.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- FULL NAME -->
+
+                        <div class="form-group">
+
+                            <label for="fullName">
+                                Full Name
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="full_name"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Administrator Email
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-regular fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="admin@company.com"
+                                    autocomplete="email"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PASSWORD GRID -->
+
+                        <div class="form-grid">
+
+
+                            <!-- PASSWORD -->
+
+                            <div class="form-group">
+
+                                <label for="password">
+                                    Password
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="fa-solid fa-lock"></i>
+
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder="Create password"
+                                        autocomplete="new-password"
+                                        required
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword(
+                                            'password',
+                                            'passwordIcon'
+                                        )"
+                                        aria-label="Show password"
+                                    >
+
+                                        <i
+                                            id="passwordIcon"
+                                            class="fa-regular fa-eye"
+                                        ></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- CONFIRM PASSWORD -->
+
+                            <div class="form-group">
+
+                                <label for="confirmPassword">
+                                    Confirm Password
+                                </label>
+
+                                <div class="input-wrapper">
+
+                                    <i class="fa-solid fa-lock"></i>
+
+                                    <input
+                                        type="password"
+                                        id="confirmPassword"
+                                        name="confirm_password"
+                                        placeholder="Confirm password"
+                                        autocomplete="new-password"
+                                        required
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword(
+                                            'confirmPassword',
+                                            'confirmPasswordIcon'
+                                        )"
+                                        aria-label="Show password"
+                                    >
+
+                                        <i
+                                            id="confirmPasswordIcon"
+                                            class="fa-regular fa-eye"
+                                        ></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- PASSWORD REQUIREMENTS -->
+
+                        <div class="password-requirements">
+
+                            <span class="requirements-title">
+                                Password should contain:
+                            </span>
+
+                            <div class="requirements-list">
+
+                                <span>
+                                    <i class="fa-solid fa-circle"></i>
+                                    8+ characters
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-circle"></i>
+                                    Uppercase letter
+                                </span>
+
+                                <span>
+                                    <i class="fa-solid fa-circle"></i>
+                                    Number
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ==================================
+                             AGREEMENT
+                        =================================== -->
+
+                        <div class="agreement-section">
+
+
+                            <label class="checkbox-row">
+
+                                <input
+                                    type="checkbox"
+                                    name="terms_accepted"
+                                    required
+                                >
+
+                                <span>
+
+                                    I agree to the
+                                    <a href="#">
+                                        Terms of Service
+                                    </a>
+                                    and
+                                    <a href="#">
+                                        Privacy Policy
+                                    </a>.
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="checkbox-row">
+
+                                <input
+                                    type="checkbox"
+                                    name="product_updates"
+                                >
+
+                                <span>
+                                    I would like to receive product
+                                    updates and important notifications.
+                                </span>
+
+                            </label>
+
+
+                        </div>
+
+
+
+                        <!-- CREATE ACCOUNT -->
+
+                        <button
+                            type="submit"
+                            class="signup-button"
+                        >
+
+                            <span>
+                                Create Organisation Account
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- LOGIN LINK -->
+
+                    <p class="login-text">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Sign in
+                        </a>
+
+                    </p>
+
+
+
+                    <!-- FOOTER -->
+
+                    <div class="form-footer">
+
+                        <span>
+                            Consent Management System
+                        </span>
+
+                        <span class="footer-dot">
+                            •
+                        </span>
+
+                        <a href="#">
+                            Privacy
+                        </a>
+
+                        <span class="footer-dot">
+                            •
+                        </span>
+
+                        <a href="#">
+                            Terms
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    =========================================== -->
+
+    <script>
+
+        function togglePassword(
+            inputId,
+            iconId
+        ) {
+
+            const input =
+                document.getElementById(inputId);
+
+            const icon =
+                document.getElementById(iconId);
+
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                icon.classList.remove(
+                    "fa-eye"
+                );
+
+                icon.classList.add(
+                    "fa-eye-slash"
+                );
+
+            } else {
+
+                input.type = "password";
+
+                icon.classList.remove(
+                    "fa-eye-slash"
+                );
+
+                icon.classList.add(
+                    "fa-eye"
+                );
+
+            }
+
+        }
+
+
+        const form =
+            document.querySelector(".signup-form");
+
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    ).value;
+
+
+                if (password !== confirmPassword) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "Passwords do not match."
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

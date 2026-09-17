@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Dashboard</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --card-shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+            background: var(--white);
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            border-radius: 0.625rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.1rem;
+        }
+
+        .brand-text {
+            font-size: 1.125rem;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            font-size: 1rem;
+
+            border-radius: 0.5rem;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            background: var(--danger);
+            border-radius: 50%;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+
+            cursor: pointer;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            font-size: 0.6875rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           LAYOUT
+        ========================= */
+
+        .dashboard-container {
+            max-width: 90rem;
+            margin: 0 auto;
+
+            padding: 2.5rem 3rem 4rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            color: var(--navy);
+
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .date-info {
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            white-space: nowrap;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 1.25rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.875rem;
+
+            padding: 1.375rem;
+
+            box-shadow: var(--card-shadow);
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 1.125rem;
+        }
+
+        .stat-icon {
+            width: 2.625rem;
+            height: 2.625rem;
+
+            border-radius: 0.625rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.9375rem;
+        }
+
+        .blue {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .green {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .orange {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .red {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .stat-change {
+            font-size: 0.6875rem;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            color: var(--navy);
+
+            margin-bottom: 0.3125rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           MAIN GRID
+        ========================= */
+
+        .main-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(18rem, 1fr);
+
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.875rem;
+
+            box-shadow: var(--card-shadow);
+        }
+
+        .card-header {
+            padding: 1.375rem 1.5rem;
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 0.9375rem;
+            font-weight: 700;
+
+            color: var(--navy);
+        }
+
+        .card-subtitle {
+            margin-top: 0.25rem;
+
+            font-size: 0.6875rem;
+            color: var(--text-secondary);
+        }
+
+        .view-link {
+            border: none;
+            background: transparent;
+
+            color: var(--primary);
+
+            font-size: 0.75rem;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .view-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* =========================
+           ACTIVITY
+        ========================= */
+
+        .activity-list {
+            padding: 0.5rem 1.5rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 0.875rem;
+
+            padding: 1rem 0;
+
+            border-bottom: 0.0625rem solid #f1f5f9;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 2rem;
+            height: 2rem;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.75rem;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-size: 0.75rem;
+            line-height: 1.5;
+
+            color: var(--text);
+        }
+
+        .activity-time {
+            font-size: 0.625rem;
+            color: var(--muted);
+
+            margin-top: 0.25rem;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .actions-list {
+            padding: 0.75rem 1rem 1rem;
+        }
+
+        .action {
+            width: 100%;
+
+            border: 0.0625rem solid var(--border);
+            background: var(--white);
+
+            border-radius: 0.625rem;
+
+            padding: 0.875rem;
+
+            margin-bottom: 0.625rem;
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.75rem;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .action:last-child {
+            margin-bottom: 0;
+        }
+
+        .action:hover {
+            background: #f8fafc;
+            border-color: #bfdbfe;
+            transform: translateY(-0.0625rem);
+        }
+
+        .action-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            border-radius: 0.5rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            color: var(--navy);
+
+            margin-bottom: 0.1875rem;
+        }
+
+        .action-description {
+            font-size: 0.625rem;
+            color: var(--text-secondary);
+        }
+
+        .action-arrow {
+            color: var(--muted);
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONSENT OVERVIEW
+        ========================= */
+
+        .consent-section {
+            margin-top: 1.5rem;
+        }
+
+        .consent-content {
+            padding: 1.5rem;
+        }
+
+        .progress-row {
+            margin-bottom: 1.25rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 0.5rem;
+
+            font-size: 0.6875rem;
+        }
+
+        .progress-label {
+            color: var(--text-secondary);
+        }
+
+        .progress-value {
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 0.5rem;
+
+            background: #e2e8f0;
+
+            border-radius: 999rem;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+
+            border-radius: inherit;
+
+            background: var(--primary);
+        }
+
+        .progress-fill.green-fill {
+            background: var(--success);
+        }
+
+        .progress-fill.orange-fill {
+            background: var(--warning);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            font-size: 0.6875rem;
+            color: var(--muted);
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .dashboard-container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .header-right {
+                gap: 0.5rem;
+            }
+
+            .dashboard-container {
+                padding:
+                    1.75rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+
+                gap: 0.75rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .dashboard-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.125rem;
+            }
+
+            .card-header {
+                padding:
+                    1.125rem;
+            }
+
+            .activity-list {
+                padding:
+                    0.5rem 1.125rem;
+            }
+
+            .consent-content {
+                padding: 1.125rem;
+            }
+        }
+
+        /* =========================
+           VERY SMALL DEVICES
+        ========================= */
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+        </div>
+
+        <div class="header-right">
+
+            <button class="notification" title="Notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot"></span>
+            </button>
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+                </div>
+
+                <i class="fa-solid fa-chevron-down"
+                   style="font-size: 0.625rem; color: #94a3b8;">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================= -->
+
+    <main class="dashboard-container">
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div>
+                <h1 class="page-title">
+                    Dashboard
+                </h1>
+
+                <p class="page-subtitle">
+                    Monitor consent, privacy operations, and data protection
+                    activities from one place.
+                </p>
+            </div>
+
+            <div class="date-info">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Today, September 16, 2026</span>
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <span class="stat-change positive">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        8.4%
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    2,486
+                </div>
+
+                <div class="stat-label">
+                    Total Data Principals
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span class="stat-change positive">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        5.2%
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    1,942
+                </div>
+
+                <div class="stat-label">
+                    Active Consents
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <span class="stat-change">
+                        This week
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    37
+                </div>
+
+                <div class="stat-label">
+                    Pending Requests
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div class="stat-icon red">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <span class="stat-change negative">
+                        <i class="fa-solid fa-arrow-up"></i>
+                        3
+                    </span>
+
+                </div>
+
+                <div class="stat-value">
+                    12
+                </div>
+
+                <div class="stat-label">
+                    High Risk Items
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================= -->
+
+        <section class="main-grid">
+
+
+            <!-- Recent Activity -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">
+                            Recent Activity
+                        </div>
+
+                        <div class="card-subtitle">
+                            Latest privacy and consent operations
+                        </div>
+                    </div>
+
+                    <button class="view-link">
+                        View all
+                    </button>
+
+                </div>
+
+
+                <div class="activity-list">
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon green">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <div class="activity-text">
+                                New consent recorded for Marketing
+                                Communications.
+                            </div>
+
+                            <div class="activity-time">
+                                12 minutes ago
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon orange">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <div class="activity-text">
+                                Data deletion request is awaiting review.
+                            </div>
+
+                            <div class="activity-time">
+                                34 minutes ago
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon blue">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <div class="activity-text">
+                                Privacy Notice v2.1 was published successfully.
+                            </div>
+
+                            <div class="activity-time">
+                                1 hour ago
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon red">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <div class="activity-text">
+                                A high-risk DPIA item requires mitigation.
+                            </div>
+
+                            <div class="activity-time">
+                                2 hours ago
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon green">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <div class="activity-text">
+                                Data principal request was successfully completed.
+                            </div>
+
+                            <div class="activity-time">
+                                3 hours ago
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Quick Actions -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">
+                            Quick Actions
+                        </div>
+
+                        <div class="card-subtitle">
+                            Frequently used operations
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="actions-list">
+
+                    <button class="action">
+
+                        <div class="action-icon">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+
+                        <div class="action-content">
+
+                            <div class="action-title">
+                                Add Data Principal
+                            </div>
+
+                            <div class="action-description">
+                                Register a new data principal
+                            </div>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                    </button>
+
+
+                    <button class="action">
+
+                        <div class="action-icon">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                        </div>
+
+                        <div class="action-content">
+
+                            <div class="action-title">
+                                Create Privacy Notice
+                            </div>
+
+                            <div class="action-description">
+                                Create a new privacy notice
+                            </div>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                    </button>
+
+
+                    <button class="action">
+
+                        <div class="action-icon">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+
+                        <div class="action-content">
+
+                            <div class="action-title">
+                                Start DPIA
+                            </div>
+
+                            <div class="action-description">
+                                Create a privacy impact assessment
+                            </div>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                    </button>
+
+
+                    <button class="action">
+
+                        <div class="action-icon">
+                            <i class="fa-solid fa-cookie-bite"></i>
+                        </div>
+
+                        <div class="action-content">
+
+                            <div class="action-title">
+                                Manage Cookies
+                            </div>
+
+                            <div class="action-description">
+                                Review and manage cookies
+                            </div>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                    </button>
+
+
+                    <button class="action">
+
+                        <div class="action-icon">
+                            <i class="fa-solid fa-plug"></i>
+                        </div>
+
+                        <div class="action-content">
+
+                            <div class="action-title">
+                                External Integrations
+                            </div>
+
+                            <div class="action-description">
+                                Manage connected services
+                            </div>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONSENT OVERVIEW
+        ========================= -->
+
+        <section class="consent-section">
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">
+                            Consent Overview
+                        </div>
+
+                        <div class="card-subtitle">
+                            Current consent distribution
+                        </div>
+                    </div>
+
+                    <button class="view-link">
+                        Manage Consents
+                    </button>
+
+                </div>
+
+
+                <div class="consent-content">
+
+                    <div class="progress-row">
+
+                        <div class="progress-header">
+
+                            <span class="progress-label">
+                                Active
+                            </span>
+
+                            <span class="progress-value">
+                                78%
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+                            <div
+                                class="progress-fill green-fill"
+                                style="width: 78%;">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="progress-row">
+
+                        <div class="progress-header">
+
+                            <span class="progress-label">
+                                Withdrawn
+                            </span>
+
+                            <span class="progress-value">
+                                14%
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+                            <div
+                                class="progress-fill"
+                                style="width: 14%;">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="progress-row">
+
+                        <div class="progress-header">
+
+                            <span class="progress-label">
+                                Expired
+                            </span>
+
+                            <span class="progress-value">
+                                8%
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+                            <div
+                                class="progress-fill orange-fill"
+                                style="width: 8%;">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

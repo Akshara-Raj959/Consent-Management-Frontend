@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Consent Details</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            font-size: 0.6875rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 78rem;
+
+            margin: 0 auto;
+
+            padding: 2.5rem 3rem 4rem;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+
+            gap: 0.5rem;
+
+            margin-bottom: 1.5rem;
+
+            font-size: 0.6875rem;
+
+            color: var(--muted);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb i {
+            font-size: 0.5rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 1.5rem;
+
+            margin-bottom: 1.75rem;
+        }
+
+        .heading-area {
+            display: flex;
+            align-items: center;
+
+            gap: 0.875rem;
+        }
+
+        .heading-icon {
+            width: 3rem;
+            height: 3rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            border-radius: 0.75rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.125rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.625rem;
+            font-weight: 800;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .record-id {
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .button {
+            min-height: 2.5rem;
+
+            padding: 0.6875rem 1rem;
+
+            border-radius: 0.5rem;
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 0.5rem;
+        }
+
+        .button-secondary {
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            border:
+                0.0625rem solid var(--border);
+        }
+
+        .button-secondary:hover {
+            color: var(--primary);
+            border-color: #bfdbfe;
+            background: #f8fafc;
+        }
+
+        .button-danger {
+            background: var(--white);
+
+            color: var(--danger);
+
+            border:
+                0.0625rem solid #fecaca;
+        }
+
+        .button-danger:hover {
+            background: #fef2f2;
+        }
+
+        /* =========================
+           STATUS BANNER
+        ========================= */
+
+        .status-banner {
+            background: #f0fdf4;
+
+            border:
+                0.0625rem solid #bbf7d0;
+
+            border-radius: 0.75rem;
+
+            padding: 1rem 1.125rem;
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.75rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .status-banner-icon {
+            width: 2rem;
+            height: 2rem;
+
+            border-radius: 50%;
+
+            background: #dcfce7;
+            color: var(--success);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            font-size: 0.75rem;
+        }
+
+        .status-banner-content {
+            flex: 1;
+        }
+
+        .status-banner-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            color: #166534;
+
+            margin-bottom: 0.1875rem;
+        }
+
+        .status-banner-text {
+            font-size: 0.625rem;
+            color: #4d7c5a;
+        }
+
+        /* =========================
+           MAIN GRID
+        ========================= */
+
+        .main-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(16rem, 1fr);
+
+            gap: 1.5rem;
+
+            align-items: start;
+        }
+
+        .card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+        }
+
+        .card-title {
+            color: var(--navy);
+
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            margin-top: 0.25rem;
+        }
+
+        /* =========================
+           DETAILS
+        ========================= */
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 0;
+
+            padding: 0 1.5rem;
+        }
+
+        .detail-item {
+            padding: 1.125rem 0;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+        }
+
+        .detail-item:nth-last-child(-n + 2) {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+            font-weight: 600;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .detail-value {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+        .detail-value.secondary {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* =========================
+           PRINCIPAL
+        ========================= */
+
+        .principal-card {
+            padding: 1.5rem;
+        }
+
+        .principal-profile {
+            display: flex;
+            align-items: center;
+
+            gap: 0.875rem;
+
+            margin-bottom: 1.25rem;
+        }
+
+        .principal-avatar {
+            width: 3.25rem;
+            height: 3.25rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1rem;
+            font-weight: 800;
+
+            flex-shrink: 0;
+        }
+
+        .principal-name {
+            color: var(--navy);
+
+            font-size: 0.875rem;
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .principal-id {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+        }
+
+        .principal-divider {
+            height: 0.0625rem;
+            background: var(--border);
+
+            margin-bottom: 1rem;
+        }
+
+        /* =========================
+           PURPOSE
+        ========================= */
+
+        .purpose-content {
+            padding: 1.5rem;
+        }
+
+        .purpose-box {
+            background: #f8fafc;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.625rem;
+
+            padding: 1rem;
+        }
+
+        .purpose-title {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .purpose-description {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding: 0.3125rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-active .status-dot {
+            background: var(--success);
+        }
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline {
+            padding: 1.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+
+            gap: 0.875rem;
+
+            position: relative;
+
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item:not(:last-child)::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0.4375rem;
+            top: 1.25rem;
+            bottom: 0;
+
+            width: 0.0625rem;
+
+            background: #e2e8f0;
+        }
+
+        .timeline-dot {
+            width: 0.875rem;
+            height: 0.875rem;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+
+            border:
+                0.1875rem solid #dbeafe;
+
+            flex-shrink: 0;
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-text {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            line-height: 1.5;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-time {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        /* =========================
+           SIDEBAR INFO
+        ========================= */
+
+        .info-list {
+            padding: 0 1.5rem;
+        }
+
+        .info-row {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 1rem;
+
+            padding: 0.875rem 0;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+        }
+
+        .info-value {
+            color: var(--navy);
+
+            font-size: 0.625rem;
+            font-weight: 600;
+
+            text-align: right;
+        }
+
+        /* =========================
+           WARNING
+        ========================= */
+
+        .warning-box {
+            margin: 1.5rem;
+
+            padding: 1rem;
+
+            background: #fffbeb;
+
+            border:
+                0.0625rem solid #fde68a;
+
+            border-radius: 0.625rem;
+        }
+
+        .warning-header {
+            display: flex;
+            align-items: center;
+
+            gap: 0.5rem;
+
+            color: #92400e;
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .warning-text {
+            color: #a16207;
+
+            font-size: 0.625rem;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding:
+                    1.75rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .button {
+                flex: 1;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item:nth-last-child(-n + 2) {
+                border-bottom:
+                    0.0625rem solid #f1f5f9;
+            }
+
+            .detail-item:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .heading-icon {
+                width: 2.625rem;
+                height: 2.625rem;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                flex: none;
+            }
+
+            .card-header {
+                padding:
+                    1.125rem;
+            }
+
+            .details-grid {
+                padding:
+                    0 1.125rem;
+            }
+
+            .purpose-content,
+            .timeline,
+            .principal-card {
+                padding: 1.125rem;
+            }
+
+            .warning-box {
+                margin: 1.125rem;
+            }
+
+            .info-list {
+                padding:
+                    0 1.125rem;
+            }
+        }
+
+        /* =========================
+           VERY SMALL
+        ========================= */
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+            .heading-area {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button class="notification">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="font-size: 0.625rem; color: #94a3b8;">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- BREADCRUMB -->
+
+        <div class="breadcrumb">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <a href="consents.html">
+                Consents
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                Consent Details
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================= -->
+
+        <section class="page-header">
+
+            <div class="heading-area">
+
+                <div class="heading-icon">
+                    <i class="fa-solid fa-file-shield"></i>
+                </div>
+
+                <div>
+
+                    <h1 class="page-title">
+                        Consent Details
+                    </h1>
+
+                    <div class="record-id">
+                        Consent ID: CNS-10248
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button class="button button-secondary">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Consents
+
+                </button>
+
+
+                <button class="button button-danger">
+
+                    <i class="fa-solid fa-ban"></i>
+
+                    Withdraw Consent
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATUS
+        ========================= -->
+
+        <div class="status-banner">
+
+            <div class="status-banner-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+            <div class="status-banner-content">
+
+                <div class="status-banner-title">
+                    Consent is currently active
+                </div>
+
+                <div class="status-banner-text">
+                    This consent was granted by the data principal and has not
+                    been withdrawn or expired.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CONTENT
+        ========================= -->
+
+        <div class="main-grid">
+
+
+            <!-- LEFT COLUMN -->
+
+            <div>
+
+
+                <!-- Consent Information -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Consent Information
+                        </div>
+
+                        <div class="card-subtitle">
+                            Details of the recorded consent
+                        </div>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Consent ID
+                            </div>
+
+                            <div class="detail-value">
+                                CNS-10248
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Status
+                            </div>
+
+                            <div class="detail-value">
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Consent Type
+                            </div>
+
+                            <div class="detail-value">
+                                Explicit
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Source
+                            </div>
+
+                            <div class="detail-value secondary">
+                                Web Application
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Privacy Notice
+                            </div>
+
+                            <div class="detail-value">
+                                Privacy Notice v2.1
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Notice Version ID
+                            </div>
+
+                            <div class="detail-value secondary">
+                                NV-0021
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Consented At
+                            </div>
+
+                            <div class="detail-value">
+                                September 16, 2026
+                                <br>
+                                <span
+                                    style="
+                                        color:#94a3b8;
+                                        font-size:0.625rem;
+                                        font-weight:500;
+                                    ">
+                                    10:32 AM
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <div class="detail-label">
+                                Expiry Date
+                            </div>
+
+                            <div class="detail-value">
+                                December 16, 2026
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+                <!-- Purpose -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Consent Purpose
+                        </div>
+
+                        <div class="card-subtitle">
+                            Why this consent was collected
+                        </div>
+
+                    </div>
+
+
+                    <div class="purpose-content">
+
+                        <div class="purpose-box">
+
+                            <div class="purpose-title">
+                                Marketing Communications
+                            </div>
+
+                            <div class="purpose-description">
+                                The data principal has provided consent to
+                                receive promotional communications, product
+                                updates, offers, and other marketing-related
+                                information through permitted communication
+                                channels.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Consent Timeline -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Consent Timeline
+                        </div>
+
+                        <div class="card-subtitle">
+                            History of actions associated with this consent
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline">
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <div class="timeline-content">
+
+                                <div class="timeline-title">
+                                    Consent Granted
+                                </div>
+
+                                <div class="timeline-text">
+                                    Consent was granted by the data principal
+                                    for Marketing Communications.
+                                </div>
+
+                                <div class="timeline-time">
+                                    September 16, 2026 · 10:32 AM
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <div class="timeline-content">
+
+                                <div class="timeline-title">
+                                    Privacy Notice Accepted
+                                </div>
+
+                                <div class="timeline-text">
+                                    Privacy Notice version 2.1 was associated
+                                    with this consent.
+                                </div>
+
+                                <div class="timeline-time">
+                                    September 16, 2026 · 10:32 AM
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="timeline-item">
+
+                            <div class="timeline-dot"></div>
+
+                            <div class="timeline-content">
+
+                                <div class="timeline-title">
+                                    Consent Record Created
+                                </div>
+
+                                <div class="timeline-text">
+                                    Consent record was created in the consent
+                                    management system.
+                                </div>
+
+                                <div class="timeline-time">
+                                    September 16, 2026 · 10:32 AM
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT COLUMN -->
+
+            <aside>
+
+
+                <!-- Data Principal -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Data Principal
+                        </div>
+
+                        <div class="card-subtitle">
+                            Person associated with this consent
+                        </div>
+
+                    </div>
+
+
+                    <div class="principal-card">
+
+                        <div class="principal-profile">
+
+                            <div class="principal-avatar">
+                                AK
+                            </div>
+
+                            <div>
+
+                                <div class="principal-name">
+                                    Akash Kumar
+                                </div>
+
+                                <div class="principal-id">
+                                    Principal ID: DP-10248
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="principal-divider"></div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                User ID
+                            </span>
+
+                            <span class="info-value">
+                                10248
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Consent Records
+                            </span>
+
+                            <span class="info-value">
+                                6
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Record Metadata -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+                            Record Metadata
+                        </div>
+
+                        <div class="card-subtitle">
+                            System information
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-list">
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Created At
+                            </span>
+
+                            <span class="info-value">
+                                Sep 16, 2026
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Updated At
+                            </span>
+
+                            <span class="info-value">
+                                Sep 16, 2026
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Created By
+                            </span>
+
+                            <span class="info-value">
+                                Admin
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Source
+                            </span>
+
+                            <span class="info-value">
+                                Web Application
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Expiry Warning -->
+
+                <section class="card">
+
+                    <div class="warning-box">
+
+                        <div class="warning-header">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                            Consent Expiry
+
+                        </div>
+
+                        <div class="warning-text">
+                            This consent will expire on December 16, 2026.
+                            Further action may be required before the expiry
+                            date.
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </div>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

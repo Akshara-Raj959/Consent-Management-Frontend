@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Cookie Manager</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+
+            --navy: #0f172a;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow: 0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+            background: var(--white);
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding: 2.25rem 3rem 4rem;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            margin-bottom: 1.5rem;
+
+            color: var(--muted);
+            font-size: 0.6875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb i {
+            font-size: 0.5rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .title-section {
+            display: flex;
+            align-items: flex-start;
+
+            gap: 1rem;
+        }
+
+        .page-icon {
+            width: 3.25rem;
+            height: 3.25rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.75rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.25rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.8125rem;
+            line-height: 1.6;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .primary-button {
+            min-height: 2.5rem;
+
+            padding: 0.6875rem 1rem;
+
+            border: none;
+            border-radius: 0.5rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            white-space: nowrap;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           SUMMARY CARDS
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.75rem;
+
+            padding: 1.125rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 0.875rem;
+        }
+
+        .summary-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.875rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            color: var(--navy);
+
+            font-size: 1.375rem;
+            font-weight: 800;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-description {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        /* =========================
+           TOOLBAR
+        ========================= */
+
+        .toolbar {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.75rem;
+
+            padding: 1rem 1.125rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 1rem;
+
+            margin-bottom: 1rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .search-box {
+            flex: 1;
+
+            max-width: 25rem;
+
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 0.75rem;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            height: 2.5rem;
+
+            padding: 0 0.75rem 0 2.25rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: #f8fafc;
+
+            color: var(--text);
+
+            outline: none;
+
+            font-size: 0.6875rem;
+        }
+
+        .search-box input:focus {
+            border-color: #93c5fd;
+            background: var(--white);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .filter-select {
+            height: 2.5rem;
+
+            min-width: 9rem;
+
+            padding: 0 0.75rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            outline: none;
+
+            font-size: 0.625rem;
+        }
+
+        /* =========================
+           TABLE CARD
+        ========================= */
+
+        .table-card {
+            background: var(--white);
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.125rem 1.5rem;
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .table-title {
+            color: var(--navy);
+
+            font-size: 0.875rem;
+            font-weight: 800;
+        }
+
+        .table-count {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 65rem;
+        }
+
+        th {
+            padding: 0.875rem 1rem;
+
+            background: #f8fafc;
+
+            border-bottom: 0.0625rem solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.025rem;
+
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+
+            border-bottom: 0.0625rem solid #f1f5f9;
+
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cookie-name {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .cookie-icon {
+            width: 2.125rem;
+            height: 2.125rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.75rem;
+        }
+
+        .cookie-info {
+            display: flex;
+            flex-direction: column;
+
+            gap: 0.25rem;
+        }
+
+        .cookie-title {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        .cookie-id {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        .category {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 0.375rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+        }
+
+        .category-essential {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .category-analytics {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .category-functional {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .category-marketing {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+
+            padding: 0.375rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.5625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-active .status-dot {
+            background: var(--success);
+        }
+
+        .status-inactive {
+            background: #f1f5f9;
+            color: var(--text-secondary);
+        }
+
+        .status-inactive .status-dot {
+            background: var(--muted);
+        }
+
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .icon-button {
+            width: 2rem;
+            height: 2rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.4375rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.625rem;
+        }
+
+        .icon-button:hover {
+            color: var(--primary);
+            border-color: #bfdbfe;
+            background: #f8fafc;
+        }
+
+        .icon-button.delete:hover {
+            color: var(--danger);
+            border-color: #fecaca;
+            background: #fef2f2;
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination {
+            padding: 1rem 1.5rem;
+
+            border-top: 0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pagination-info {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .page-button {
+            min-width: 2rem;
+            height: 2rem;
+
+            padding: 0 0.5rem;
+
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.375rem;
+
+            background: var(--white);
+            color: var(--text-secondary);
+
+            font-size: 0.5625rem;
+            font-weight: 600;
+        }
+
+        .page-button:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .page-button.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+                padding: 0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding: 1.5rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .primary-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                max-width: none;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+
+        }
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .title-section {
+                gap: 0.75rem;
+            }
+
+            .page-icon {
+                width: 2.875rem;
+                height: 2.875rem;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .table-header {
+                padding: 1rem 1.125rem;
+            }
+
+            .pagination {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+        }
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.6875rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+        <div class="header-right">
+
+            <button class="notification" title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="font-size:0.625rem;color:#94a3b8;"
+                ></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+        <!-- Breadcrumb -->
+
+        <div class="breadcrumb">
+
+            <a href="#">
+                Privacy Operations
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                Cookie Manager
+            </span>
+
+        </div>
+
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div class="title-section">
+
+                <div class="page-icon">
+
+                    <i class="fa-solid fa-cookie-bite"></i>
+
+                </div>
+
+                <div>
+
+                    <h1 class="page-title">
+                        Cookie Manager
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Manage, classify, and monitor cookies used
+                        across your organization's website.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button class="primary-button">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Cookie
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY
+        ========================= -->
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Total Cookies
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    24
+                </div>
+
+                <div class="summary-description">
+                    Cookies registered in the system
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Active
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    21
+                </div>
+
+                <div class="summary-description">
+                    Currently active cookies
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Essential
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    8
+                </div>
+
+                <div class="summary-description">
+                    Required for core functionality
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+
+                    <span class="summary-label">
+                        Non-Essential
+                    </span>
+
+                </div>
+
+                <div class="summary-value">
+                    16
+                </div>
+
+                <div class="summary-description">
+                    Analytics, functional and marketing
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TOOLBAR
+        ========================= -->
+
+        <section class="toolbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search cookies..."
+                >
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <select class="filter-select">
+
+                    <option>
+                        All Categories
+                    </option>
+
+                    <option>
+                        Essential
+                    </option>
+
+                    <option>
+                        Analytics
+                    </option>
+
+                    <option>
+                        Functional
+                    </option>
+
+                    <option>
+                        Marketing
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option>
+                        All Status
+                    </option>
+
+                    <option>
+                        Active
+                    </option>
+
+                    <option>
+                        Inactive
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             COOKIE TABLE
+        ========================= -->
+
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <h2 class="table-title">
+                    Cookie Inventory
+                </h2>
+
+                <span class="table-count">
+                    24 cookies
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Cookie
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Provider
+                            </th>
+
+                            <th>
+                                Domain
+                            </th>
+
+                            <th>
+                                Duration
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <!-- Cookie 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="cookie-name">
+
+                                    <div class="cookie-icon">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </div>
+
+                                    <div class="cookie-info">
+
+                                        <span class="cookie-title">
+                                            session_id
+                                        </span>
+
+                                        <span class="cookie-id">
+                                            COOKIE-001
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="category category-essential">
+                                    Essential
+                                </span>
+
+                            </td>
+
+                            <td>
+                                First Party
+                            </td>
+
+                            <td>
+                                example.com
+                            </td>
+
+                            <td>
+                                Session
+                            </td>
+
+                            <td>
+                                HTTP
+                            </td>
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button
+                                        class="icon-button"
+                                        title="View"
+                                    >
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button
+                                        class="icon-button"
+                                        title="Edit"
+                                    >
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button
+                                        class="icon-button delete"
+                                        title="Delete"
+                                    >
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Cookie 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="cookie-name">
+
+                                    <div class="cookie-icon">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+
+                                    <div class="cookie-info">
+
+                                        <span class="cookie-title">
+                                            _ga
+                                        </span>
+
+                                        <span class="cookie-id">
+                                            COOKIE-002
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="category category-analytics">
+                                    Analytics
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Google Analytics
+                            </td>
+
+                            <td>
+                                example.com
+                            </td>
+
+                            <td>
+                                2 Years
+                            </td>
+
+                            <td>
+                                HTTP
+                            </td>
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Cookie 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="cookie-name">
+
+                                    <div class="cookie-icon">
+                                        <i class="fa-solid fa-sliders"></i>
+                                    </div>
+
+                                    <div class="cookie-info">
+
+                                        <span class="cookie-title">
+                                            preferences
+                                        </span>
+
+                                        <span class="cookie-id">
+                                            COOKIE-003
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="category category-functional">
+                                    Functional
+                                </span>
+
+                            </td>
+
+                            <td>
+                                First Party
+                            </td>
+
+                            <td>
+                                example.com
+                            </td>
+
+                            <td>
+                                6 Months
+                            </td>
+
+                            <td>
+                                HTTP
+                            </td>
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Cookie 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="cookie-name">
+
+                                    <div class="cookie-icon">
+                                        <i class="fa-solid fa-bullhorn"></i>
+                                    </div>
+
+                                    <div class="cookie-info">
+
+                                        <span class="cookie-title">
+                                            _fbp
+                                        </span>
+
+                                        <span class="cookie-id">
+                                            COOKIE-004
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="category category-marketing">
+                                    Marketing
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Meta
+                            </td>
+
+                            <td>
+                                example.com
+                            </td>
+
+                            <td>
+                                3 Months
+                            </td>
+
+                            <td>
+                                HTTP
+                            </td>
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Cookie 5 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="cookie-name">
+
+                                    <div class="cookie-icon">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </div>
+
+                                    <div class="cookie-info">
+
+                                        <span class="cookie-title">
+                                            csrf_token
+                                        </span>
+
+                                        <span class="cookie-id">
+                                            COOKIE-005
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="category category-essential">
+                                    Essential
+                                </span>
+
+                            </td>
+
+                            <td>
+                                First Party
+                            </td>
+
+                            <td>
+                                example.com
+                            </td>
+
+                            <td>
+                                Session
+                            </td>
+
+                            <td>
+                                HTTP
+                            </td>
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Cookie 6 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="cookie-name">
+
+                                    <div class="cookie-icon">
+                                        <i class="fa-solid fa-chart-column"></i>
+                                    </div>
+
+                                    <div class="cookie-info">
+
+                                        <span class="cookie-title">
+                                            _gid
+                                        </span>
+
+                                        <span class="cookie-id">
+                                            COOKIE-006
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="category category-analytics">
+                                    Analytics
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Google Analytics
+                            </td>
+
+                            <td>
+                                example.com
+                            </td>
+
+                            <td>
+                                24 Hours
+                            </td>
+
+                            <td>
+                                HTTP
+                            </td>
+
+                            <td>
+
+                                <span class="status status-inactive">
+
+                                    <span class="status-dot"></span>
+
+                                    Inactive
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="icon-button">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+
+                                    <button class="icon-button">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+
+                                    <button class="icon-button delete">
+                                        <i class="fa-regular fa-trash-can"></i>
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Pagination -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 1–6 of 24 cookies
+                </div>
+
+                <div class="pagination-buttons">
+
+                    <button class="page-button">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button class="page-button active">
+                        1
+                    </button>
+
+                    <button class="page-button">
+                        2
+                    </button>
+
+                    <button class="page-button">
+                        3
+                    </button>
+
+                    <button class="page-button">
+                        4
+                    </button>
+
+                    <button class="page-button">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

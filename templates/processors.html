@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Processors</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+
+            background: transparent;
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding:
+                2.5rem 3rem 4rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+            font-weight: 800;
+
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.875rem;
+
+            line-height: 1.6;
+        }
+
+        .add-button {
+            min-height: 2.625rem;
+
+            padding:
+                0.75rem 1.125rem;
+
+            border: none;
+
+            border-radius: 0.5rem;
+
+            background: var(--primary);
+            color: var(--white);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 0.5rem;
+
+            box-shadow:
+                0 0.25rem 0.75rem
+                rgba(37, 99, 235, 0.18);
+        }
+
+        .add-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           SUMMARY CARDS
+        ========================= */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.75rem;
+
+            padding: 1.25rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .summary-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 1rem;
+        }
+
+        .summary-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.875rem;
+        }
+
+        .summary-icon.blue {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .summary-icon.green {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .summary-icon.orange {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .summary-icon.red {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .summary-value {
+            color: var(--navy);
+
+            font-size: 1.5rem;
+            font-weight: 800;
+
+            margin-bottom: 0.3125rem;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           TABLE CARD
+        ========================= */
+
+        .table-card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .filters {
+            padding: 1.25rem 1.5rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+            align-items: center;
+
+            gap: 0.75rem;
+
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 18rem;
+
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+
+            left: 0.875rem;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 0.75rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 2.5rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: #f8fafc;
+
+            padding:
+                0 0.875rem 0 2.375rem;
+
+            outline: none;
+
+            color: var(--text);
+
+            font-size: 0.75rem;
+        }
+
+        .search-box input:focus {
+            background: var(--white);
+
+            border-color: #93c5fd;
+        }
+
+        .filter-select {
+            height: 2.5rem;
+
+            min-width: 9rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            padding: 0 0.75rem;
+
+            font-size: 0.75rem;
+
+            outline: none;
+        }
+
+        .filter-select:focus {
+            border-color: #93c5fd;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 75rem;
+
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8fafc;
+        }
+
+        th {
+            padding:
+                0.875rem 1rem;
+
+            text-align: left;
+
+            color: var(--text-secondary);
+
+            font-size: 0.625rem;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.025rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+        }
+
+        td {
+            padding: 1rem;
+
+            color: var(--text);
+
+            font-size: 0.75rem;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fafcff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* =========================
+           PROCESSOR
+        ========================= */
+
+        .processor {
+            display: flex;
+            align-items: center;
+
+            gap: 0.625rem;
+        }
+
+        .processor-avatar {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.625rem;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .processor-name {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+            font-weight: 700;
+
+            margin-bottom: 0.1875rem;
+        }
+
+        .processor-id {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+        }
+
+        /* =========================
+           CATEGORY
+        ========================= */
+
+        .category {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+
+            line-height: 1.5;
+        }
+
+        .activity-count {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 700;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding:
+                0.3125rem 0.625rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-active {
+            background: #f0fdf4;
+            color: var(--success);
+        }
+
+        .status-active .status-dot {
+            background: var(--success);
+        }
+
+        .status-review {
+            background: #fff7ed;
+            color: var(--warning);
+        }
+
+        .status-review .status-dot {
+            background: var(--warning);
+        }
+
+        .status-inactive {
+            background: #f1f5f9;
+            color: var(--text-secondary);
+        }
+
+        .status-inactive .status-dot {
+            background: var(--muted);
+        }
+
+        /* =========================
+           RISK
+        ========================= */
+
+        .risk {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .risk-dot {
+            width: 0.4375rem;
+            height: 0.4375rem;
+
+            border-radius: 50%;
+        }
+
+        .risk-low {
+            color: var(--success);
+        }
+
+        .risk-low .risk-dot {
+            background: var(--success);
+        }
+
+        .risk-medium {
+            color: var(--warning);
+        }
+
+        .risk-medium .risk-dot {
+            background: var(--warning);
+        }
+
+        .risk-high {
+            color: var(--danger);
+        }
+
+        .risk-high .risk-dot {
+            background: var(--danger);
+        }
+
+        /* =========================
+           DPA STATUS
+        ========================= */
+
+        .dpa-status {
+            display: flex;
+            align-items: center;
+
+            gap: 0.375rem;
+
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .dpa-status i {
+            font-size: 0.625rem;
+        }
+
+        .dpa-valid {
+            color: var(--success);
+        }
+
+        .dpa-pending {
+            color: var(--warning);
+        }
+
+        .dpa-expired {
+            color: var(--danger);
+        }
+
+        /* =========================
+           ASSESSMENT
+        ========================= */
+
+        .assessment-date {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+
+        .assessment-label {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            margin-top: 0.1875rem;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            align-items: center;
+
+            gap: 0.375rem;
+        }
+
+        .action-button {
+            width: 2rem;
+            height: 2rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.375rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 0.6875rem;
+        }
+
+        .action-button:hover {
+            background: #eff6ff;
+
+            border-color: #bfdbfe;
+
+            color: var(--primary);
+        }
+
+        .action-button.danger:hover {
+            background: #fef2f2;
+
+            border-color: #fecaca;
+
+            color: var(--danger);
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination {
+            padding: 1rem 1.5rem;
+
+            border-top:
+                0.0625rem solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pagination-info {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .pagination-buttons {
+            display: flex;
+            align-items: center;
+
+            gap: 0.3125rem;
+        }
+
+        .page-button {
+            width: 2rem;
+            height: 2rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.375rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .page-button:hover {
+            border-color: #bfdbfe;
+
+            color: var(--primary);
+        }
+
+        .page-button.active {
+            background: var(--primary);
+
+            border-color: var(--primary);
+
+            color: var(--white);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+
+                padding:
+                    0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding:
+                    1.75rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .add-button {
+                width: 100%;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+
+                min-width: 0;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .pagination {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 0.875rem;
+            }
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .summary-card {
+                padding: 1rem;
+            }
+
+            .filters {
+                padding: 1rem;
+            }
+
+            .pagination {
+                padding: 1rem;
+            }
+        }
+
+        /* =========================
+           VERY SMALL
+        ========================= */
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .summary-value {
+                font-size: 1.375rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button
+                class="notification"
+                title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="
+                        font-size: 0.625rem;
+                        color: #94a3b8;
+                    ">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1 class="page-title">
+                    Processors
+                </h1>
+
+                <p class="page-subtitle">
+                    Manage third-party data processors and monitor their
+                    privacy, contract, and processing status.
+                </p>
+
+            </div>
+
+
+            <button class="add-button">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Processor
+
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================= -->
+
+        <section class="summary-grid">
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon blue">
+
+                        <i class="fa-solid fa-building"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    84
+                </div>
+
+                <div class="summary-label">
+                    Total Processors
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon green">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    76
+                </div>
+
+                <div class="summary-label">
+                    Active Processors
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon orange">
+
+                        <i class="fa-solid fa-file-signature"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    5
+                </div>
+
+                <div class="summary-label">
+                    DPA Review Required
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <div class="summary-icon red">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="summary-value">
+                    3
+                </div>
+
+                <div class="summary-label">
+                    High Risk
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PROCESSOR TABLE
+        ========================= -->
+
+        <section class="table-card">
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search processor, ID, category, or activity..."
+                    >
+
+                </div>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="active">
+                        Active
+                    </option>
+
+                    <option value="review">
+                        Under Review
+                    </option>
+
+                    <option value="inactive">
+                        Inactive
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        All Risk Levels
+                    </option>
+
+                    <option value="low">
+                        Low Risk
+                    </option>
+
+                    <option value="medium">
+                        Medium Risk
+                    </option>
+
+                    <option value="high">
+                        High Risk
+                    </option>
+
+                </select>
+
+
+                <select class="filter-select">
+
+                    <option value="">
+                        DPA Status
+                    </option>
+
+                    <option value="valid">
+                        Valid
+                    </option>
+
+                    <option value="pending">
+                        Pending
+                    </option>
+
+                    <option value="expired">
+                        Expired
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Processor
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Activities
+                            </th>
+
+                            <th>
+                                Risk Level
+                            </th>
+
+                            <th>
+                                DPA Status
+                            </th>
+
+                            <th>
+                                Last Assessment
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- PROCESSOR 1 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="processor">
+
+                                    <div class="processor-avatar">
+                                        AW
+                                    </div>
+
+                                    <div>
+
+                                        <div class="processor-name">
+                                            AWS
+                                        </div>
+
+                                        <div class="processor-id">
+                                            PROC-00084
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="category">
+                                    Cloud Infrastructure
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="activity-count">
+                                    12 activities
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="risk risk-medium">
+
+                                    <span class="risk-dot"></span>
+
+                                    Medium
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="dpa-status dpa-valid">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Valid
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="assessment-date">
+                                    Sep 05, 2026
+                                </div>
+
+                                <div class="assessment-label">
+                                    11 days ago
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Processor">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Edit Processor">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- PROCESSOR 2 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="processor">
+
+                                    <div class="processor-avatar">
+                                        GS
+                                    </div>
+
+                                    <div>
+
+                                        <div class="processor-name">
+                                            Google Cloud
+                                        </div>
+
+                                        <div class="processor-id">
+                                            PROC-00083
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="category">
+                                    Cloud & Analytics
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="activity-count">
+                                    8 activities
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="risk risk-low">
+
+                                    <span class="risk-dot"></span>
+
+                                    Low
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="dpa-status dpa-valid">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Valid
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="assessment-date">
+                                    Aug 28, 2026
+                                </div>
+
+                                <div class="assessment-label">
+                                    19 days ago
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Processor">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Edit Processor">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- PROCESSOR 3 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="processor">
+
+                                    <div class="processor-avatar">
+                                        SM
+                                    </div>
+
+                                    <div>
+
+                                        <div class="processor-name">
+                                            SendGrid
+                                        </div>
+
+                                        <div class="processor-id">
+                                            PROC-00082
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="category">
+                                    Email Services
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="activity-count">
+                                    6 activities
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="risk risk-medium">
+
+                                    <span class="risk-dot"></span>
+
+                                    Medium
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="dpa-status dpa-pending">
+
+                                    <i class="fa-solid fa-clock"></i>
+
+                                    Review Required
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="assessment-date">
+                                    Aug 20, 2026
+                                </div>
+
+                                <div class="assessment-label">
+                                    27 days ago
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-review">
+
+                                    <span class="status-dot"></span>
+
+                                    Under Review
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Processor">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Edit Processor">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- PROCESSOR 4 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="processor">
+
+                                    <div class="processor-avatar">
+                                        ST
+                                    </div>
+
+                                    <div>
+
+                                        <div class="processor-name">
+                                            Stripe
+                                        </div>
+
+                                        <div class="processor-id">
+                                            PROC-00081
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="category">
+                                    Payment Processing
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="activity-count">
+                                    5 activities
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="risk risk-high">
+
+                                    <span class="risk-dot"></span>
+
+                                    High
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="dpa-status dpa-valid">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Valid
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="assessment-date">
+                                    Aug 15, 2026
+                                </div>
+
+                                <div class="assessment-label">
+                                    32 days ago
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Processor">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Edit Processor">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- PROCESSOR 5 -->
+
+                        <tr>
+
+                            <td>
+
+                                <div class="processor">
+
+                                    <div class="processor-avatar">
+                                        SG
+                                    </div>
+
+                                    <div>
+
+                                        <div class="processor-name">
+                                            Sentry
+                                        </div>
+
+                                        <div class="processor-id">
+                                            PROC-00080
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="category">
+                                    Application Monitoring
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="activity-count">
+                                    3 activities
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="risk risk-low">
+
+                                    <span class="risk-dot"></span>
+
+                                    Low
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="dpa-status dpa-valid">
+
+                                    <i class="fa-solid fa-circle-check"></i>
+
+                                    Valid
+
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="assessment-date">
+                                    Aug 10, 2026
+                                </div>
+
+                                <div class="assessment-label">
+                                    37 days ago
+                                </div>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="status status-active">
+
+                                    <span class="status-dot"></span>
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        class="action-button"
+                                        title="View Processor">
+
+                                        <i class="fa-regular fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="action-button"
+                                        title="Edit Processor">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            <div class="pagination">
+
+                <div class="pagination-info">
+                    Showing 1–5 of 84 processors
+                </div>
+
+
+                <div class="pagination-buttons">
+
+                    <button class="page-button">
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+
+                    <button class="page-button active">
+                        1
+                    </button>
+
+
+                    <button class="page-button">
+                        2
+                    </button>
+
+
+                    <button class="page-button">
+                        3
+                    </button>
+
+
+                    <button class="page-button">
+                        4
+                    </button>
+
+
+                    <button class="page-button">
+                        5
+                    </button>
+
+
+                    <button class="page-button">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System | Privacy Notice Version</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+
+            --navy: #0f172a;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --border: #e2e8f0;
+
+            --success: #16a34a;
+            --warning: #d97706;
+            --danger: #dc2626;
+
+            --shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+
+            background: var(--background);
+
+            color: var(--text);
+
+            min-height: 100vh;
+        }
+
+        button {
+            font-family: inherit;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+            height: 4.5rem;
+
+            background: var(--white);
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 3rem;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.375rem;
+            height: 2.375rem;
+
+            border-radius: 0.625rem;
+
+            background: var(--primary);
+
+            color: var(--white);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 1.0625rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+
+            font-size: 1.125rem;
+
+            font-weight: 800;
+        }
+
+        .header-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 1.25rem;
+        }
+
+        .notification {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--text-secondary);
+
+            border-radius: 0.5rem;
+
+            position: relative;
+        }
+
+        .notification:hover {
+            background: #f1f5f9;
+
+            color: var(--primary);
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            top: 0.4375rem;
+
+            right: 0.4375rem;
+
+            width: 0.4375rem;
+
+            height: 0.4375rem;
+
+            border-radius: 50%;
+
+            background: var(--danger);
+        }
+
+        .profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.625rem;
+        }
+
+        .profile-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+
+            border-radius: 50%;
+
+            background: #dbeafe;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 0.8125rem;
+
+            font-weight: 700;
+        }
+
+        .profile-info {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.125rem;
+        }
+
+        .profile-name {
+            font-size: 0.8125rem;
+
+            font-weight: 700;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 90rem;
+
+            margin: 0 auto;
+
+            padding:
+                2.25rem 3rem 4rem;
+        }
+
+        /* =========================
+           BREADCRUMB
+        ========================= */
+
+        .breadcrumb {
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            margin-bottom: 1.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb i {
+            font-size: 0.5rem;
+        }
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 2rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .title-section {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 1rem;
+        }
+
+        .page-icon {
+            width: 3.25rem;
+            height: 3.25rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.75rem;
+
+            background: #eff6ff;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 1.25rem;
+        }
+
+        .page-title {
+            color: var(--navy);
+
+            font-size: 1.75rem;
+
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .notice-id {
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+
+            font-size: 0.8125rem;
+
+            line-height: 1.6;
+        }
+
+        .header-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.625rem;
+        }
+
+        .secondary-button {
+            min-height: 2.5rem;
+
+            padding:
+                0.6875rem 1rem;
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.5rem;
+
+            background: var(--white);
+
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+
+            font-weight: 700;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            white-space: nowrap;
+        }
+
+        .secondary-button:hover {
+            color: var(--primary);
+
+            border-color: #bfdbfe;
+
+            background: #f8fafc;
+        }
+
+        .primary-button {
+            min-height: 2.5rem;
+
+            padding:
+                0.6875rem 1rem;
+
+            border: none;
+
+            border-radius: 0.5rem;
+
+            background: var(--primary);
+
+            color: var(--white);
+
+            font-size: 0.6875rem;
+
+            font-weight: 700;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            white-space: nowrap;
+        }
+
+        .primary-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           STATUS BAR
+        ========================= */
+
+        .status-bar {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.75rem;
+
+            padding: 1rem 1.25rem;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 1.5rem;
+
+            box-shadow: var(--shadow);
+        }
+
+        .status-left {
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 1.25rem;
+        }
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding:
+                0.375rem 0.75rem;
+
+            border-radius: 999rem;
+
+            font-size: 0.625rem;
+
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 0.375rem;
+
+            height: 0.375rem;
+
+            border-radius: 50%;
+        }
+
+        .status-published {
+            background: #f0fdf4;
+
+            color: var(--success);
+        }
+
+        .status-published .status-dot {
+            background: var(--success);
+        }
+
+        .status-draft {
+            background: #f1f5f9;
+
+            color: var(--text-secondary);
+        }
+
+        .status-draft .status-dot {
+            background: var(--muted);
+        }
+
+        .status-review {
+            background: #fff7ed;
+
+            color: var(--warning);
+        }
+
+        .status-review .status-dot {
+            background: var(--warning);
+        }
+
+        .status-meta {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+        }
+
+        .status-meta strong {
+            color: var(--navy);
+        }
+
+        /* =========================
+           CONTENT GRID
+        ========================= */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 2fr)
+                minmax(18rem, 1fr);
+
+            gap: 1.5rem;
+
+            align-items: start;
+        }
+
+        .main-column,
+        .side-column {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1.5rem;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: var(--white);
+
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.875rem;
+
+            box-shadow: var(--shadow);
+
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding:
+                1.125rem 1.5rem;
+
+            border-bottom:
+                0.0625rem solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .card-title {
+            color: var(--navy);
+
+            font-size: 0.875rem;
+
+            font-weight: 800;
+        }
+
+        .card-title-icon {
+            color: var(--primary);
+
+            margin-right: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* =========================
+           VERSION INFO
+        ========================= */
+
+        .version-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 1rem;
+
+            margin-bottom: 1.5rem;
+        }
+
+        .version-number {
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.75rem;
+        }
+
+        .version-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 3.5rem;
+
+            height: 2.5rem;
+
+            padding: 0 0.75rem;
+
+            background: #eff6ff;
+
+            color: var(--primary);
+
+            border-radius: 0.5rem;
+
+            font-size: 0.8125rem;
+
+            font-weight: 800;
+        }
+
+        .version-text {
+            color: var(--navy);
+
+            font-size: 0.8125rem;
+
+            font-weight: 700;
+        }
+
+        .current-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.375rem;
+
+            padding:
+                0.375rem 0.625rem;
+
+            background: #f0fdf4;
+
+            color: var(--success);
+
+            border-radius: 999rem;
+
+            font-size: 0.5625rem;
+
+            font-weight: 700;
+        }
+
+        .current-badge i {
+            font-size: 0.5625rem;
+        }
+
+        /* =========================
+           INFORMATION GRID
+        ========================= */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 1.25rem 2rem;
+        }
+
+        .info-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .info-label {
+            color: var(--muted);
+
+            font-size: 0.625rem;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.025rem;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .info-value {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NOTICE CONTENT
+        ========================= */
+
+        .notice-content {
+            border:
+                0.0625rem solid var(--border);
+
+            border-radius: 0.625rem;
+
+            padding: 1.5rem;
+
+            background: #fafcff;
+        }
+
+        .notice-content h3 {
+            color: var(--navy);
+
+            font-size: 1rem;
+
+            margin-bottom: 0.75rem;
+        }
+
+        .notice-content h4 {
+            color: var(--navy);
+
+            font-size: 0.75rem;
+
+            margin-top: 1.25rem;
+
+            margin-bottom: 0.5rem;
+        }
+
+        .notice-content p {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+
+            line-height: 1.8;
+
+            margin-bottom: 0.625rem;
+        }
+
+        .notice-content ul {
+            margin-left: 1rem;
+
+            margin-bottom: 0.75rem;
+        }
+
+        .notice-content li {
+            color: var(--text-secondary);
+
+            font-size: 0.6875rem;
+
+            line-height: 1.7;
+
+            margin-bottom: 0.25rem;
+        }
+
+        /* =========================
+           CHANGE SUMMARY
+        ========================= */
+
+        .change-box {
+            padding: 1rem;
+
+            border-radius: 0.625rem;
+
+            background: #eff6ff;
+
+            border:
+                0.0625rem solid #dbeafe;
+        }
+
+        .change-title {
+            color: var(--primary);
+
+            font-size: 0.6875rem;
+
+            font-weight: 800;
+
+            margin-bottom: 0.375rem;
+        }
+
+        .change-text {
+            color: #475569;
+
+            font-size: 0.625rem;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           SIDE INFORMATION
+        ========================= */
+
+        .side-item {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 0.75rem;
+
+            padding-bottom: 1rem;
+
+            margin-bottom: 1rem;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+        }
+
+        .side-item:last-child {
+            padding-bottom: 0;
+
+            margin-bottom: 0;
+
+            border-bottom: none;
+        }
+
+        .side-icon {
+            width: 2rem;
+            height: 2rem;
+
+            flex-shrink: 0;
+
+            border-radius: 0.5rem;
+
+            background: #eff6ff;
+
+            color: var(--primary);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 0.6875rem;
+        }
+
+        .side-label {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            text-transform: uppercase;
+
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .side-value {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           VERSION HISTORY
+        ========================= */
+
+        .history-list {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .history-item {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 0.875rem;
+
+            padding-bottom: 1.125rem;
+
+            margin-bottom: 1.125rem;
+
+            border-bottom:
+                0.0625rem solid #f1f5f9;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+
+            padding-bottom: 0;
+
+            margin-bottom: 0;
+        }
+
+        .history-version {
+            min-width: 2.75rem;
+
+            height: 1.875rem;
+
+            padding: 0 0.5rem;
+
+            border-radius: 0.375rem;
+
+            background: #f1f5f9;
+
+            color: var(--text-secondary);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 0.5625rem;
+
+            font-weight: 800;
+        }
+
+        .history-version.current {
+            background: #eff6ff;
+
+            color: var(--primary);
+        }
+
+        .history-info {
+            flex: 1;
+        }
+
+        .history-title {
+            color: var(--navy);
+
+            font-size: 0.6875rem;
+
+            font-weight: 700;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .history-date {
+            color: var(--muted);
+
+            font-size: 0.5625rem;
+
+            margin-bottom: 0.25rem;
+        }
+
+        .history-status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.25rem;
+
+            font-size: 0.5625rem;
+
+            font-weight: 700;
+        }
+
+        .history-status.published {
+            color: var(--success);
+        }
+
+        .history-status.draft {
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 2.5rem;
+
+            color: var(--muted);
+
+            font-size: 0.6875rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .topbar {
+                padding: 0 2rem;
+            }
+
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .side-column {
+                display: grid;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .side-column .card:last-child {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .topbar {
+                height: 4rem;
+
+                padding:
+                    0 1.25rem;
+            }
+
+            .brand-text {
+                font-size: 1rem;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .container {
+                padding:
+                    1.5rem 1.25rem 3rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .secondary-button,
+            .primary-button {
+                flex: 1;
+
+                justify-content: center;
+            }
+
+            .status-bar {
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                gap: 0.75rem;
+            }
+
+            .status-left {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-item.full {
+                grid-column: auto;
+            }
+
+            .side-column {
+                display: flex;
+            }
+
+            .card-header {
+                padding:
+                    1rem 1.125rem;
+            }
+
+            .card-body {
+                padding: 1.125rem;
+            }
+
+            .notice-content {
+                padding: 1.125rem;
+            }
+
+        }
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .topbar {
+                padding: 0 1rem;
+            }
+
+            .brand-icon {
+                width: 2.125rem;
+                height: 2.125rem;
+            }
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .container {
+                padding-left: 1rem;
+
+                padding-right: 1rem;
+            }
+
+            .title-section {
+                gap: 0.75rem;
+            }
+
+            .page-icon {
+                width: 2.875rem;
+                height: 2.875rem;
+            }
+
+            .page-title {
+                font-size: 1.375rem;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .secondary-button,
+            .primary-button {
+                width: 100%;
+            }
+
+            .version-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+
+        }
+
+        /* =========================
+           VERY SMALL
+        ========================= */
+
+        @media (max-width: 22.5rem) {
+
+            .brand-text {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         TOPBAR
+    ========================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <button
+                class="notification"
+                title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AR
+                </div>
+
+                <div class="profile-info">
+
+                    <span class="profile-name">
+                        Admin User
+                    </span>
+
+                    <span class="profile-role">
+                        Administrator
+                    </span>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-chevron-down"
+                    style="
+                        font-size: 0.625rem;
+                        color: #94a3b8;
+                    ">
+                </i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- BREADCRUMB -->
+
+        <div class="breadcrumb">
+
+            <a href="#">
+                Privacy Notices
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <a href="#">
+                Website Privacy Notice
+            </a>
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+            <span>
+                Version 3.0
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================= -->
+
+        <section class="page-header">
+
+            <div class="title-section">
+
+                <div class="page-icon">
+
+                    <i class="fa-solid fa-file-lines"></i>
+
+                </div>
+
+                <div>
+
+                    <h1 class="page-title">
+                        Website Privacy Notice
+                    </h1>
+
+                    <div class="notice-id">
+                        NOTICE-001
+                    </div>
+
+                    <p class="page-subtitle">
+                        Detailed information and version history for
+                        the Website Privacy Notice.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button class="secondary-button">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </button>
+
+
+                <button class="secondary-button">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Edit Version
+
+                </button>
+
+
+                <button class="primary-button">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    New Version
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATUS BAR
+        ========================= -->
+
+        <div class="status-bar">
+
+            <div class="status-left">
+
+                <span class="status status-published">
+
+                    <span class="status-dot"></span>
+
+                    Published
+
+                </span>
+
+                <span class="status-meta">
+
+                    Version
+                    <strong>3.0</strong>
+
+                </span>
+
+                <span class="status-meta">
+
+                    Published by
+                    <strong>Admin User</strong>
+
+                </span>
+
+            </div>
+
+
+            <span class="status-meta">
+
+                Effective from:
+                <strong>Sep 01, 2026</strong>
+
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             CONTENT GRID
+        ========================= -->
+
+        <div class="content-grid">
+
+
+            <!-- =====================
+                 MAIN COLUMN
+            ===================== -->
+
+            <div class="main-column">
+
+
+                <!-- VERSION DETAILS -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-code-branch card-title-icon">
+                            </i>
+
+                            Version Details
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+
+                        <div class="version-header">
+
+                            <div class="version-number">
+
+                                <span class="version-badge">
+                                    v3.0
+                                </span>
+
+                                <span class="version-text">
+                                    Current Privacy Notice Version
+                                </span>
+
+                            </div>
+
+
+                            <span class="current-badge">
+
+                                <i class="fa-solid fa-circle-check"></i>
+
+                                Current Version
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="info-grid">
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Version Number
+                                </div>
+
+                                <div class="info-value">
+                                    3.0
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Status
+                                </div>
+
+                                <div class="info-value">
+
+                                    <span class="status status-published">
+
+                                        <span class="status-dot"></span>
+
+                                        Published
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Effective From
+                                </div>
+
+                                <div class="info-value">
+                                    September 01, 2026
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Effective To
+                                </div>
+
+                                <div class="info-value">
+                                    —
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Published At
+                                </div>
+
+                                <div class="info-value">
+                                    September 01, 2026
+                                </div>
+
+                            </div>
+
+
+                            <div class="info-item">
+
+                                <div class="info-label">
+                                    Last Updated
+                                </div>
+
+                                <div class="info-value">
+                                    September 01, 2026
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CHANGE SUMMARY -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-list-check card-title-icon">
+                            </i>
+
+                            Change Summary
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="change-box">
+
+                            <div class="change-title">
+                                Changes in Version 3.0
+                            </div>
+
+                            <div class="change-text">
+
+                                Updated information about data collection,
+                                retention periods, third-party service
+                                providers, and user rights. Clarified the
+                                purposes for which personal data may be
+                                processed.
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PRIVACY NOTICE CONTENT -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-file-contract card-title-icon">
+                            </i>
+
+                            Privacy Notice Content
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="notice-content">
+
+
+                            <h3>
+                                Website Privacy Notice
+                            </h3>
+
+
+                            <p>
+
+                                This Privacy Notice explains how the
+                                organization collects, uses, stores, and
+                                protects personal information when users
+                                access or use its website and related
+                                services.
+
+                            </p>
+
+
+                            <h4>
+                                1. Information We Collect
+                            </h4>
+
+                            <p>
+
+                                We may collect information that users
+                                provide directly, information generated
+                                through their use of the website, and
+                                information received from authorized
+                                third-party services.
+
+                            </p>
+
+
+                            <ul>
+
+                                <li>
+                                    Identity and contact information
+                                    provided by the user.
+                                </li>
+
+                                <li>
+                                    Account and authentication information.
+                                </li>
+
+                                <li>
+                                    Website usage and technical information.
+                                </li>
+
+                                <li>
+                                    Transaction and service-related
+                                    information.
+                                </li>
+
+                            </ul>
+
+
+                            <h4>
+                                2. How We Use Personal Data
+                            </h4>
+
+                            <p>
+
+                                Personal information may be processed to
+                                provide requested services, maintain account
+                                security, improve our services, communicate
+                                with users, and comply with applicable
+                                legal obligations.
+
+                            </p>
+
+
+                            <h4>
+                                3. Data Retention
+                            </h4>
+
+                            <p>
+
+                                Personal information is retained only for
+                                as long as necessary to fulfill the purposes
+                                for which it was collected, subject to
+                                applicable legal and operational requirements.
+
+                            </p>
+
+
+                            <h4>
+                                4. Data Sharing
+                            </h4>
+
+                            <p>
+
+                                Personal information may be shared with
+                                authorized service providers or other
+                                parties where necessary to provide services,
+                                meet contractual obligations, or comply
+                                with applicable requirements.
+
+                            </p>
+
+
+                            <h4>
+                                5. Your Privacy Rights
+                            </h4>
+
+                            <p>
+
+                                Users may exercise applicable privacy rights,
+                                including requesting access to information,
+                                correction of inaccurate information,
+                                withdrawal of consent where applicable,
+                                and deletion subject to applicable
+                                requirements.
+
+                            </p>
+
+
+                            <h4>
+                                6. Contact Us
+                            </h4>
+
+                            <p>
+
+                                For privacy-related questions or requests,
+                                users may contact the organization's
+                                designated privacy or support team.
+
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+            <!-- =====================
+                 SIDE COLUMN
+            ===================== -->
+
+            <aside class="side-column">
+
+
+                <!-- PUBLICATION DETAILS -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+                            Publication Details
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Created By
+                                </div>
+
+                                <div class="side-value">
+                                    Admin User
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-upload"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Published By
+                                </div>
+
+                                <div class="side-value">
+                                    Admin User
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Published At
+                                </div>
+
+                                <div class="side-value">
+                                    Sep 01, 2026
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Effective From
+                                </div>
+
+                                <div class="side-value">
+                                    Sep 01, 2026
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="side-item">
+
+                            <div class="side-icon">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="side-label">
+                                    Effective To
+                                </div>
+
+                                <div class="side-value">
+                                    No expiry defined
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- VERSION HISTORY -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2 class="card-title">
+
+                            <i
+                                class="fa-solid fa-clock-rotate-left card-title-icon">
+                            </i>
+
+                            Version History
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="history-list">
+
+
+                            <!-- VERSION 3 -->
+
+                            <div class="history-item">
+
+                                <div class="history-version current">
+                                    v3.0
+                                </div>
+
+                                <div class="history-info">
+
+                                    <div class="history-title">
+                                        Current Version
+                                    </div>
+
+                                    <div class="history-date">
+                                        Sep 01, 2026
+                                    </div>
+
+                                    <span class="history-status published">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        Published
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- VERSION 2 -->
+
+                            <div class="history-item">
+
+                                <div class="history-version">
+                                    v2.0
+                                </div>
+
+                                <div class="history-info">
+
+                                    <div class="history-title">
+                                        Previous Version
+                                    </div>
+
+                                    <div class="history-date">
+                                        May 15, 2026
+                                    </div>
+
+                                    <span class="history-status published">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        Published
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- VERSION 1 -->
+
+                            <div class="history-item">
+
+                                <div class="history-version">
+                                    v1.0
+                                </div>
+
+                                <div class="history-info">
+
+                                    <div class="history-title">
+                                        Initial Version
+                                    </div>
+
+                                    <div class="history-date">
+                                        Jan 10, 2026
+                                    </div>
+
+                                    <span class="history-status published">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        Published
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </aside>
+
+        </div>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="footer">
+
+            <span>
+                Consent Management System
+            </span>
+
+            <span> • </span>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <span> • </span>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </footer>
+
+
+    </main>
+
+</body>
+</html>
