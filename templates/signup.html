@@ -1,54 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consent Management System | Create Account</title>
-
     <!-- Google Font -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
     /* =========================================================
    ROOT
 ========================================================= */
-
 :root {
-
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
-
     --navy: #0f172a;
     --navy-light: #172554;
-
     --background: #f5f7fb;
-
     --white: #ffffff;
-
     --text: #0f172a;
     --text-secondary: #64748b;
-
     --border: #dbe3ef;
-
     --input-background: #f8fafc;
-
     --success: #16a34a;
-
 }
 
 
@@ -57,109 +33,64 @@
 ========================================================= */
 
 * {
-
     margin: 0;
-
     padding: 0;
-
     box-sizing: border-box;
-
 }
 
 
 html {
-
     font-size: 100%;
-
 }
 
 
 body {
-
     min-height: 100vh;
-
     font-family: "Inter", sans-serif;
-
     background: var(--background);
-
     color: var(--text);
-
 }
-
-
 button,
 input,
 select {
-
     font-family: inherit;
-
 }
-
-
 button {
-
     cursor: pointer;
-
 }
-
-
 a {
-
     text-decoration: none;
-
 }
-
-
-
 /* =========================================================
    PAGE
 ========================================================= */
 
 .signup-page {
-
     min-height: 100vh;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     padding: 2rem;
-
 }
 
 
 .signup-container {
-
     width: 100%;
-
     max-width: 75rem;
-
     display: grid;
-
     grid-template-columns: 0.9fr 1.1fr;
-
     background: var(--white);
-
     border-radius: 1.5rem;
-
     overflow: hidden;
-
     box-shadow:
         0 1.5rem 4rem
         rgba(15, 23, 42, 0.15);
-
 }
-
-
-
 /* =========================================================
    LEFT PANEL
 ========================================================= */
 
 .signup-brand-panel {
-
     background:
         linear-gradient(
             145deg,
@@ -168,63 +99,37 @@ a {
         );
 
     color: var(--white);
-
     padding: 3.5rem;
-
     display: flex;
-
     min-height: 53rem;
-
 }
 
 
 .brand-content {
-
     width: 100%;
-
     display: flex;
-
     flex-direction: column;
-
 }
-
-
-
 /* =========================================================
    BRAND LOGO
 ========================================================= */
-
 .brand-logo {
-
     display: flex;
-
     align-items: center;
-
     gap: 0.75rem;
-
     color: var(--white);
-
     font-size: 0.9375rem;
-
     font-weight: 800;
-
 }
 
 
 .brand-icon {
-
     width: 2.75rem;
-
     height: 2.75rem;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     border-radius: 0.75rem;
-
     background:
         rgba(37, 99, 235, 0.2);
 
@@ -1278,114 +1183,42 @@ a {
 <body>
 
     <main class="signup-page">
-
         <section class="signup-container">
-
-
             <!-- ==========================================
                  LEFT BRAND PANEL
             =========================================== -->
-
             <div class="signup-brand-panel">
-
                 <div class="brand-content">
-
-
-                    <a
-                        href="login.html"
-                        class="brand-logo"
-                    >
-
+                    <a href="/login" class="brand-logo">
                         <div class="brand-icon">
-
                             <i class="fa-solid fa-shield-halved"></i>
-
                         </div>
-
-                        <span>
-                            Consent Management
-                        </span>
-
+                        <span>Consent Management</span>
                     </a>
-
-
                     <div class="brand-main">
-
-                        <span class="brand-badge">
-                            ORGANISATION ONBOARDING
-                        </span>
-
-
-                        <h1>
-                            Take control of
-                            <span>consent.</span>
-                        </h1>
-
-
-                        <p>
-                            Create your organisation account and
-                            manage the complete consent lifecycle
-                            from one secure platform.
-                        </p>
-
-
+                        <span class="brand-badge">ORGANISATION ONBOARDING</span>
+                        <h1>Take control of<span>consent.</span></h1>
+                        <p>Create your organisation account and manage the complete consent lifecycle from one secure platform.</p>
                         <div class="feature-list">
-
-
                             <div class="feature-item">
-
-                                <div class="feature-icon">
-                                    <i class="fa-solid fa-user-check"></i>
-                                </div>
-
+                                <div class="feature-icon"><i class="fa-solid fa-user-check"></i></div>
                                 <div>
-
-                                    <h3>
-                                        Consent Management
-                                    </h3>
-
-                                    <p>
-                                        Create, track, update and
-                                        withdraw user consent.
-                                    </p>
-
+                                    <h3>Consent Management</h3>
+                                    <p>Create, track, update and withdraw user consent.</p>
                                 </div>
-
                             </div>
-
-
-
                             <div class="feature-item">
-
-                                <div class="feature-icon">
-                                    <i class="fa-solid fa-file-shield"></i>
-                                </div>
-
+                                <div class="feature-icon"><i class="fa-solid fa-file-shield"></i></div>
                                 <div>
-
-                                    <h3>
-                                        Privacy Governance
-                                    </h3>
-
-                                    <p>
-                                        Manage privacy notices,
-                                        processors and assessments.
-                                    </p>
-
+                                    <h3>Privacy Governance</h3>
+                                    <p>Manage privacy notices, processors and assessments.</p>
                                 </div>
-
                             </div>
-
-
-
                             <div class="feature-item">
-
                                 <div class="feature-icon">
                                     <i class="fa-solid fa-chart-line"></i>
                                 </div>
-
                                 <div>
-
                                     <h3>
                                         Centralised Visibility
                                     </h3>
@@ -1487,32 +1320,15 @@ a {
                          SIGNUP FORM
                     ======================================= -->
 
-                    <form
-                        action="/auth/signup"
-                        method="POST"
-                        class="signup-form"
-                    >
-
-
+                    <form id="signupForm" class="signup-form">
                         <!-- ==================================
                              ORGANISATION INFORMATION
                         =================================== -->
-
                         <div class="section-heading">
-
-                            <div class="section-number">
-                                01
-                            </div>
-
+                            <div class="section-number">01</div>
                             <div>
-
-                                <h3>
-                                    Organisation Information
-                                </h3>
-
-                                <p>
-                                    Tell us about your organisation.
-                                </p>
+                                <h3>Organisation Information</h3>
+                                <p>Tell us about your organisation.</p>
 
                             </div>
 
@@ -1532,21 +1348,9 @@ a {
 
                                 <i class="fa-regular fa-building"></i>
 
-                                <input
-                                    type="text"
-                                    id="organisationName"
-                                    name="organisation_name"
-                                    placeholder="Enter organisation name"
-                                    autocomplete="organization"
-                                    required
-                                >
-
+                                <input type="text" id="organisationName" name="organization_name" placeholder="Enter organisation name" autocomplete="organization" required>
                             </div>
-
                         </div>
-
-
-
                         <!-- INDUSTRY + WEBSITE -->
 
                         <div class="form-grid">
@@ -1562,14 +1366,8 @@ a {
 
                                     <i class="fa-solid fa-briefcase"></i>
 
-                                    <select
-                                        id="industry"
-                                        name="industry"
-                                        required
-                                    >
-
-                                        <option
-                                            value=""
+                                    <select id="industry" name="industry" required>
+                                        <option value=""
                                             selected
                                             disabled
                                         >
@@ -1929,7 +1727,7 @@ a {
 
                         Already have an account?
 
-                        <a href="login.html">
+                        <a href="login">
                             Sign in
                         </a>
 
@@ -1972,88 +1770,209 @@ a {
         </section>
 
     </main>
+<script>
+    function togglePassword(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+
+        if (input.type === "password") {
+            input.type = "text";
+
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
 
 
+    // ==========================================================
+    // SIGNUP
+    // ==========================================================
 
-    <!-- ==========================================
-         JAVASCRIPT
-    =========================================== -->
+    const form = document.getElementById("signupForm");
 
-    <script>
+    form.addEventListener("submit", async function (event) {
 
-        function togglePassword(
-            inputId,
-            iconId
-        ) {
-
-            const input =
-                document.getElementById(inputId);
-
-            const icon =
-                document.getElementById(iconId);
+        event.preventDefault();
 
 
-            if (input.type === "password") {
+        // ------------------------------------------------------
+        // Get values
+        // ------------------------------------------------------
 
-                input.type = "text";
+        const organizationName =
+            document.getElementById("organisationName").value.trim();
 
-                icon.classList.remove(
-                    "fa-eye"
-                );
+        const fullName =
+            document.getElementById("fullName").value.trim();
 
-                icon.classList.add(
-                    "fa-eye-slash"
-                );
+        const email =
+            document.getElementById("email").value.trim();
 
-            } else {
+        const password =
+            document.getElementById("password").value;
 
-                input.type = "password";
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
 
-                icon.classList.remove(
-                    "fa-eye-slash"
-                );
 
-                icon.classList.add(
-                    "fa-eye"
-                );
+        // ------------------------------------------------------
+        // Check passwords
+        // ------------------------------------------------------
 
-            }
+        if (password !== confirmPassword) {
 
+            alert("Passwords do not match.");
+
+            return;
         }
 
 
-        const form =
-            document.querySelector(".signup-form");
+        // ------------------------------------------------------
+        // Split full name
+        // ------------------------------------------------------
+
+        const nameParts = fullName.split(/\s+/);
+
+        const firstName = nameParts[0];
+
+        const lastName =
+            nameParts.slice(1).join(" ") || "";
 
 
-        form.addEventListener(
-            "submit",
-            function(event) {
+        // ------------------------------------------------------
+        // Prepare backend payload
+        // ------------------------------------------------------
 
-                const password =
-                    document.getElementById("password").value;
+        const payload = {
 
-                const confirmPassword =
-                    document.getElementById(
-                        "confirmPassword"
-                    ).value;
+            organization_name: organizationName,
+
+            email: email,
+
+            password: password,
+
+            first_name: firstName,
+
+            last_name: lastName
+
+        };
 
 
-                if (password !== confirmPassword) {
+        console.log("Signup payload:", payload);
 
-                    event.preventDefault();
 
-                    alert(
-                        "Passwords do not match."
-                    );
+        // ------------------------------------------------------
+        // Button loading state
+        // ------------------------------------------------------
 
+        const button =
+            form.querySelector(".signup-button");
+
+        const originalButtonHTML =
+            button.innerHTML;
+
+        button.disabled = true;
+
+        button.innerHTML = `
+            <span>Creating account...</span>
+        `;
+
+
+        try {
+
+            // --------------------------------------------------
+            // Send request to FastAPI
+            // --------------------------------------------------
+
+            const response = await fetch(
+                "/api/v1/auth/register",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(payload)
                 }
+            );
 
+
+            // --------------------------------------------------
+            // Parse response
+            // --------------------------------------------------
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "Backend response:",
+                result
+            );
+
+
+            // --------------------------------------------------
+            // Handle FastAPI error
+            // --------------------------------------------------
+
+            if (!response.ok) {
+
+                let errorMessage =
+                    "Registration failed.";
+
+                if (typeof result.detail === "string") {
+
+                    errorMessage =
+                        result.detail;
+
+                } else if (Array.isArray(result.detail)) {
+                    errorMessage =result.detail.map(error => error.msg).join("\n");
+                }
+                alert(errorMessage);
+                button.disabled = false;
+                button.innerHTML =originalButtonHTML;
+                return;
             }
-        );
+            // --------------------------------------------------
+            // Registration successful
+            // --------------------------------------------------
+            console.log("User created:",result);
+            alert("Organisation account created successfully!");
+            // --------------------------------------------------
+            // Redirect to login
+            // --------------------------------------------------
+            window.location.href =
+                "login.html";
 
-    </script>
 
+        } catch (error) {
+
+            console.error(
+                "Signup error:",
+                error
+            );
+
+
+            alert(
+                "Unable to connect to the server.\n\n" +
+                "Please make sure FastAPI is running."
+            );
+
+
+            button.disabled = false;
+
+            button.innerHTML =
+                originalButtonHTML;
+        }
+
+    });
+</script>
 </body>
 
 </html>

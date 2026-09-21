@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Consent Management System | Dashboard</title>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
+        rel="stylesheet">
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         :root {
             --primary: #2563eb;
@@ -51,6 +45,312 @@
             color: var(--text);
             min-height: 100vh;
         }
+
+        /* =========================
+        SIDEBAR
+        ========================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 16rem;
+
+    background: #0f172a;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+
+    border-right: 0.0625rem solid #1e293b;
+}
+
+
+/* =========================
+   SIDEBAR BRAND
+========================= */
+
+.sidebar-brand {
+    height: 4.5rem;
+
+    display: flex;
+    align-items: center;
+
+    gap: 0.75rem;
+
+    padding: 0 1.25rem;
+
+    border-bottom: 0.0625rem solid #1e293b;
+
+    color: #ffffff;
+
+    font-size: 0.9375rem;
+    font-weight: 700;
+}
+
+.sidebar-logo {
+    width: 2.25rem;
+    height: 2.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #2563eb;
+
+    border-radius: 0.625rem;
+
+    color: #ffffff;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.sidebar-nav {
+    flex: 1;
+
+    padding: 1rem 0.75rem;
+
+    overflow-y: auto;
+}
+
+.nav-section-title {
+    padding: 0.875rem 0.625rem 0.5rem;
+
+    color: #64748b;
+
+    font-size: 0.5625rem;
+    font-weight: 700;
+
+    letter-spacing: 0.0625rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+
+    gap: 0.75rem;
+
+    width: 100%;
+
+    padding: 0.6875rem 0.75rem;
+
+    margin-bottom: 0.1875rem;
+
+    border-radius: 0.5rem;
+
+    color: #94a3b8;
+
+    text-decoration: none;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.sidebar-link i {
+    width: 1.125rem;
+
+    text-align: center;
+
+    font-size: 0.8125rem;
+}
+
+.sidebar-link:hover {
+    background: #1e293b;
+    color: #ffffff;
+}
+
+.sidebar-link.active {
+    background: #2563eb;
+    color: #ffffff;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   SIDEBAR USER
+========================= */
+
+.sidebar-bottom {
+    padding: 0.75rem;
+
+    border-top: 0.0625rem solid #1e293b;
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+
+    gap: 0.625rem;
+
+    padding: 0.5rem;
+}
+
+.sidebar-avatar {
+    width: 2.125rem;
+    height: 2.125rem;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+    color: #2563eb;
+
+    font-size: 0.6875rem;
+    font-weight: 700;
+}
+
+.sidebar-user-info {
+    min-width: 0;
+}
+
+.sidebar-user-info strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+
+.sidebar-user-info span {
+    display: block;
+
+    margin-top: 0.125rem;
+
+    color: #64748b;
+
+    font-size: 0.5625rem;
+}
+
+
+/* =========================
+   MAIN CONTENT OFFSET
+========================= */
+
+body {
+    padding-left: 16rem;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+    padding-left: 2rem;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 64rem) {
+
+    .sidebar {
+        width: 4.5rem;
+    }
+
+    body {
+        padding-left: 4.5rem;
+    }
+
+    .sidebar-brand {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .sidebar-brand span {
+        display: none;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+        padding: 0.75rem;
+    }
+
+    .sidebar-link span {
+        display: none;
+    }
+
+    .sidebar-link i {
+        width: auto;
+        font-size: 0.9375rem;
+    }
+
+    .nav-section-title {
+        text-align: center;
+        font-size: 0;
+        padding: 0.75rem 0;
+    }
+
+    .nav-section-title::after {
+        content: "";
+        display: block;
+
+        width: 1.5rem;
+        height: 0.0625rem;
+
+        margin: auto;
+
+        background: #334155;
+    }
+
+    .sidebar-user {
+        justify-content: center;
+        padding: 0.5rem 0;
+    }
+
+    .sidebar-user-info {
+        display: none;
+    }
+
+    .topbar {
+        padding-left: 1.5rem;
+    }
+}
+
+
+@media (max-width: 48rem) {
+
+    .sidebar {
+        width: 4rem;
+    }
+
+    body {
+        padding-left: 4rem;
+    }
+
+    .sidebar-logo {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .sidebar-brand {
+        height: 4rem;
+    }
+
+    .topbar {
+        padding-left: 1rem;
+    }
+}
 
         button,
         input {
@@ -754,550 +1054,456 @@
         }
     </style>
 </head>
-
 <body>
+    <!-- =========================
+     SIDEBAR
+========================= -->
 
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+
+        <div class="sidebar-logo">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <span>Consent Management</span>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <div class="nav-section-title">
+            OVERVIEW
+        </div>
+
+        <a href="dashboard.html" class="sidebar-link active">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Dashboard</span>
+        </a>
+
+
+        <div class="nav-section-title">
+            PRIVACY OPERATIONS
+        </div>
+
+        <a href="consents.html" class="sidebar-link">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Consent Management</span>
+        </a>
+
+        <a href="data-principals.html" class="sidebar-link">
+            <i class="fa-solid fa-users"></i>
+            <span>Data Principals</span>
+        </a>
+
+        <a href="deletion-requests.html" class="sidebar-link">
+            <i class="fa-solid fa-trash-can"></i>
+            <span>Deletion Requests</span>
+        </a>
+
+        <a href="processors.html" class="sidebar-link">
+            <i class="fa-solid fa-database"></i>
+            <span>Processors</span>
+        </a>
+
+
+        <div class="nav-section-title">
+            COMPLIANCE
+        </div>
+
+        <a href="dpia.html" class="sidebar-link">
+            <i class="fa-solid fa-file-shield"></i>
+            <span>DPIA</span>
+        </a>
+
+        <a href="privacy-notices.html" class="sidebar-link">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Privacy Notices</span>
+        </a>
+
+        <a href="cookie-manager.html" class="sidebar-link">
+            <i class="fa-solid fa-cookie-bite"></i>
+            <span>Cookie Manager</span>
+        </a>
+
+
+        <div class="nav-section-title">
+            INTEGRATIONS
+        </div>
+
+        <a href="integrations.html" class="sidebar-link">
+            <i class="fa-solid fa-plug"></i>
+            <span>Integrations</span>
+        </a>
+
+        <a href="webhooks.html" class="sidebar-link">
+            <i class="fa-solid fa-link"></i>
+            <span>Webhooks</span>
+        </a>
+
+
+        <div class="nav-section-title">
+            ADMINISTRATION
+        </div>
+
+        <a href="audit-logs.html" class="sidebar-link">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Audit Logs</span>
+        </a>
+
+        <a href="settings.html" class="sidebar-link">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="sidebar-user">
+
+            <div class="sidebar-avatar">
+                AU
+            </div>
+
+            <div class="sidebar-user-info">
+                <strong>Admin User</strong>
+                <span>Administrator</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
     <!-- =========================
          HEADER
     ========================= -->
-
     <header class="topbar">
-
         <div class="brand">
             <div class="brand-icon">
                 <i class="fa-solid fa-shield-halved"></i>
             </div>
-
-            <span class="brand-text">
-                Consent Management
-            </span>
+            <span class="brand-text">Consent Management</span>
         </div>
-
         <div class="header-right">
-
             <button class="notification" title="Notifications">
                 <i class="fa-regular fa-bell"></i>
                 <span class="notification-dot"></span>
             </button>
-
             <div class="profile">
-
-                <div class="profile-avatar">
-                    AR
-                </div>
-
+                <div class="profile-avatar">AR</div>
                 <div class="profile-info">
-                    <span class="profile-name">
-                        Admin User
-                    </span>
-
-                    <span class="profile-role">
-                        Administrator
-                    </span>
+                    <span class="profile-name">Admin User</span>
+                    <span class="profile-role">Administrator</span>
                 </div>
-
                 <i class="fa-solid fa-chevron-down"
                    style="font-size: 0.625rem; color: #94a3b8;">
                 </i>
-
             </div>
-
         </div>
-
     </header>
-
-
     <!-- =========================
          DASHBOARD
     ========================= -->
-
     <main class="dashboard-container">
-
         <!-- Page Header -->
-
         <section class="page-header">
-
             <div>
-                <h1 class="page-title">
-                    Dashboard
-                </h1>
-
+                <h1 class="page-title">Dashboard</h1>
                 <p class="page-subtitle">
                     Monitor consent, privacy operations, and data protection
                     activities from one place.
                 </p>
             </div>
-
             <div class="date-info">
                 <i class="fa-regular fa-calendar"></i>
                 <span>Today, September 16, 2026</span>
             </div>
-
         </section>
-
 
         <!-- =========================
              STATISTICS
         ========================= -->
-
         <section class="stats-grid">
-
             <div class="stat-card">
-
                 <div class="stat-top">
-
                     <div class="stat-icon blue">
                         <i class="fa-solid fa-users"></i>
                     </div>
-
                     <span class="stat-change positive">
                         <i class="fa-solid fa-arrow-up"></i>
                         8.4%
                     </span>
-
                 </div>
-
-                <div class="stat-value">
-                    2,486
-                </div>
-
-                <div class="stat-label">
-                    Total Data Principals
-                </div>
-
+                <div class="stat-value">2,486</div>
+                <div class="stat-label">Total Data Principals</div>
             </div>
-
-
             <div class="stat-card">
-
                 <div class="stat-top">
-
                     <div class="stat-icon green">
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
-
                     <span class="stat-change positive">
-                        <i class="fa-solid fa-arrow-up"></i>
-                        5.2%
-                    </span>
-
+                        <i class="fa-solid fa-arrow-up"></i>5.2%</span>
                 </div>
-
-                <div class="stat-value">
-                    1,942
-                </div>
-
-                <div class="stat-label">
-                    Active Consents
-                </div>
-
+                <div class="stat-value">1,942</div>
+                <div class="stat-label">Active Consents</div>
             </div>
-
-
             <div class="stat-card">
-
                 <div class="stat-top">
-
                     <div class="stat-icon orange">
                         <i class="fa-solid fa-clock"></i>
                     </div>
-
-                    <span class="stat-change">
-                        This week
-                    </span>
-
+                    <span class="stat-change">This week</span>
                 </div>
-
                 <div class="stat-value">
                     37
                 </div>
-
                 <div class="stat-label">
                     Pending Requests
                 </div>
-
             </div>
-
-
             <div class="stat-card">
-
                 <div class="stat-top">
-
                     <div class="stat-icon red">
                         <i class="fa-solid fa-triangle-exclamation"></i>
                     </div>
-
                     <span class="stat-change negative">
                         <i class="fa-solid fa-arrow-up"></i>
                         3
                     </span>
-
                 </div>
-
                 <div class="stat-value">
                     12
                 </div>
-
                 <div class="stat-label">
                     High Risk Items
                 </div>
-
             </div>
-
         </section>
-
-
         <!-- =========================
              MAIN CONTENT
         ========================= -->
-
         <section class="main-grid">
-
-
             <!-- Recent Activity -->
-
             <div class="card">
-
                 <div class="card-header">
-
                     <div>
                         <div class="card-title">
                             Recent Activity
                         </div>
-
                         <div class="card-subtitle">
                             Latest privacy and consent operations
                         </div>
                     </div>
-
                     <button class="view-link">
                         View all
                     </button>
-
                 </div>
-
-
                 <div class="activity-list">
-
                     <div class="activity-item">
-
                         <div class="activity-icon green">
                             <i class="fa-solid fa-check"></i>
                         </div>
-
                         <div class="activity-content">
-
                             <div class="activity-text">
                                 New consent recorded for Marketing
                                 Communications.
                             </div>
-
                             <div class="activity-time">
                                 12 minutes ago
                             </div>
-
                         </div>
-
                     </div>
-
-
                     <div class="activity-item">
-
                         <div class="activity-icon orange">
                             <i class="fa-solid fa-clock"></i>
                         </div>
-
                         <div class="activity-content">
-
                             <div class="activity-text">
                                 Data deletion request is awaiting review.
                             </div>
-
                             <div class="activity-time">
                                 34 minutes ago
                             </div>
-
                         </div>
-
                     </div>
-
-
                     <div class="activity-item">
-
                         <div class="activity-icon blue">
                             <i class="fa-solid fa-file-shield"></i>
                         </div>
-
                         <div class="activity-content">
-
                             <div class="activity-text">
                                 Privacy Notice v2.1 was published successfully.
                             </div>
-
                             <div class="activity-time">
                                 1 hour ago
                             </div>
-
                         </div>
-
                     </div>
-
-
                     <div class="activity-item">
-
                         <div class="activity-icon red">
                             <i class="fa-solid fa-triangle-exclamation"></i>
                         </div>
-
                         <div class="activity-content">
-
                             <div class="activity-text">
                                 A high-risk DPIA item requires mitigation.
                             </div>
-
                             <div class="activity-time">
                                 2 hours ago
                             </div>
-
                         </div>
-
                     </div>
-
-
                     <div class="activity-item">
-
                         <div class="activity-icon green">
                             <i class="fa-solid fa-user-check"></i>
                         </div>
-
                         <div class="activity-content">
-
                             <div class="activity-text">
                                 Data principal request was successfully completed.
                             </div>
-
                             <div class="activity-time">
                                 3 hours ago
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
-
             <!-- Quick Actions -->
-
             <div class="card">
-
                 <div class="card-header">
-
                     <div>
                         <div class="card-title">
                             Quick Actions
                         </div>
-
                         <div class="card-subtitle">
                             Frequently used operations
                         </div>
                     </div>
-
                 </div>
-
-
                 <div class="actions-list">
-
                     <button class="action">
-
                         <div class="action-icon">
                             <i class="fa-solid fa-user-plus"></i>
                         </div>
-
                         <div class="action-content">
-
                             <div class="action-title">
                                 Add Data Principal
                             </div>
-
                             <div class="action-description">
                                 Register a new data principal
                             </div>
-
                         </div>
-
                         <i class="fa-solid fa-chevron-right action-arrow"></i>
-
                     </button>
-
-
                     <button class="action">
-
                         <div class="action-icon">
                             <i class="fa-solid fa-file-circle-plus"></i>
                         </div>
-
                         <div class="action-content">
-
                             <div class="action-title">
                                 Create Privacy Notice
                             </div>
-
                             <div class="action-description">
                                 Create a new privacy notice
                             </div>
-
                         </div>
-
                         <i class="fa-solid fa-chevron-right action-arrow"></i>
-
                     </button>
-
-
                     <button class="action">
-
                         <div class="action-icon">
                             <i class="fa-solid fa-clipboard-check"></i>
                         </div>
-
                         <div class="action-content">
-
                             <div class="action-title">
                                 Start DPIA
                             </div>
-
                             <div class="action-description">
                                 Create a privacy impact assessment
                             </div>
-
                         </div>
-
                         <i class="fa-solid fa-chevron-right action-arrow"></i>
-
                     </button>
-
-
                     <button class="action">
-
                         <div class="action-icon">
                             <i class="fa-solid fa-cookie-bite"></i>
                         </div>
-
                         <div class="action-content">
-
                             <div class="action-title">
                                 Manage Cookies
                             </div>
-
                             <div class="action-description">
                                 Review and manage cookies
                             </div>
-
                         </div>
-
                         <i class="fa-solid fa-chevron-right action-arrow"></i>
-
                     </button>
-
-
                     <button class="action">
-
                         <div class="action-icon">
                             <i class="fa-solid fa-plug"></i>
                         </div>
-
                         <div class="action-content">
-
                             <div class="action-title">
                                 External Integrations
                             </div>
-
                             <div class="action-description">
                                 Manage connected services
                             </div>
-
                         </div>
-
                         <i class="fa-solid fa-chevron-right action-arrow"></i>
-
                     </button>
-
                 </div>
-
             </div>
-
         </section>
-
 
         <!-- =========================
              CONSENT OVERVIEW
         ========================= -->
-
         <section class="consent-section">
-
             <div class="card">
-
                 <div class="card-header">
-
                     <div>
                         <div class="card-title">
                             Consent Overview
                         </div>
-
                         <div class="card-subtitle">
                             Current consent distribution
                         </div>
                     </div>
-
                     <button class="view-link">
                         Manage Consents
                     </button>
-
                 </div>
-
-
                 <div class="consent-content">
-
                     <div class="progress-row">
-
                         <div class="progress-header">
-
                             <span class="progress-label">
                                 Active
                             </span>
-
                             <span class="progress-value">
                                 78%
                             </span>
-
                         </div>
-
                         <div class="progress-bar">
                             <div
                                 class="progress-fill green-fill"
                                 style="width: 78%;">
                             </div>
                         </div>
-
                     </div>
-
-
                     <div class="progress-row">
-
                         <div class="progress-header">
-
                             <span class="progress-label">
                                 Withdrawn
                             </span>
-
                             <span class="progress-value">
                                 14%
                             </span>
-
                         </div>
-
                         <div class="progress-bar">
                             <div
                                 class="progress-fill"
@@ -1306,61 +1512,39 @@
                         </div>
 
                     </div>
-
-
                     <div class="progress-row">
-
                         <div class="progress-header">
-
                             <span class="progress-label">
                                 Expired
                             </span>
-
                             <span class="progress-value">
                                 8%
                             </span>
-
                         </div>
-
                         <div class="progress-bar">
                             <div
                                 class="progress-fill orange-fill"
                                 style="width: 8%;">
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
-
-
         <!-- Footer -->
-
         <footer class="footer">
-
             <span>
                 Consent Management System
             </span>
-
             <span> • </span>
-
             <a href="#">
                 Privacy
             </a>
-
             <span> • </span>
-
             <a href="#">
                 Terms
             </a>
-
         </footer>
-
     </main>
-
 </body>
 </html>
