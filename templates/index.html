@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Consent Management System</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --navy: #0f172a;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --muted: #94a3b8;
+            --background: #f5f7fb;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --success: #16a34a;
+            --card-shadow:
+                0 0.625rem 1.875rem rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--white);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 4.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4rem;
+            border-bottom: 0.0625rem solid var(--border);
+            background: rgba(255, 255, 255, 0.96);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 0.625rem;
+            font-size: 1.125rem;
+        }
+
+        .brand-text {
+            color: var(--navy);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-login {
+            padding: 0.625rem 1rem;
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            background: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-login:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            padding: 0.6875rem 1.125rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 38rem;
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fbff 0%,
+                    #ffffff 100%
+                );
+            display: flex;
+            align-items: center;
+            padding: 5rem 4rem;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 78rem;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .hero-content {
+            max-width: 42rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4375rem 0.75rem;
+            border-radius: 999rem;
+            background: #eff6ff;
+            color: var(--primary);
+            border: 0.0625rem solid #dbeafe;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-badge i {
+            font-size: 0.625rem;
+        }
+
+        .hero-title {
+            color: var(--navy);
+            font-size: 3.25rem;
+            line-height: 1.12;
+            font-weight: 800;
+            letter-spacing: -0.0625rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 37rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+        }
+
+        .hero-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8125rem 1.25rem;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .hero-btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .hero-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--white);
+            color: var(--text);
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .hero-btn-secondary:hover {
+            border-color: #bfdbfe;
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           HERO VISUAL
+        ========================= */
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-preview {
+            width: 100%;
+            max-width: 31rem;
+            background: var(--white);
+            border: 0.0625rem solid var(--border);
+            border-radius: 1rem;
+            box-shadow:
+                0 1.25rem 3.75rem rgba(15, 23, 42, 0.12);
+            overflow: hidden;
+        }
+
+        .preview-header {
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            border-bottom: 0.0625rem solid var(--border);
+        }
+
+        .preview-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .preview-logo {
+            width: 1.75rem;
+            height: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.4375rem;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.75rem;
+        }
+
+        .preview-brand-text {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .preview-profile {
+            width: 1.75rem;
+            height: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: var(--primary);
+            font-size: 0.625rem;
+            font-weight: 700;
+        }
+
+        .preview-body {
+            padding: 1.25rem;
+            background: #f8fafc;
+        }
+
+        .preview-title {
+            color: var(--navy);
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .preview-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 0.875rem;
+        }
+
+        .preview-card {
+            background: var(--white);
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.625rem;
+            padding: 0.875rem;
+        }
+
+        .preview-card-icon {
+            width: 1.75rem;
+            height: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.4375rem;
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 0.6875rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .preview-card-value {
+            color: var(--navy);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .preview-card-label {
+            color: var(--text-secondary);
+            font-size: 0.5625rem;
+            margin-top: 0.1875rem;
+        }
+
+        .preview-activity {
+            background: var(--white);
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.625rem;
+            padding: 0.875rem;
+        }
+
+        .preview-activity-title {
+            color: var(--navy);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .preview-row {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.5rem 0;
+            border-bottom: 0.0625rem solid #f1f5f9;
+        }
+
+        .preview-row:last-child {
+            border-bottom: none;
+        }
+
+        .preview-dot {
+            width: 0.4375rem;
+            height: 0.4375rem;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .preview-row-text {
+            flex: 1;
+            color: var(--text-secondary);
+            font-size: 0.5625rem;
+        }
+
+        .preview-row-time {
+            color: var(--muted);
+            font-size: 0.5rem;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            padding: 5rem 4rem;
+            background: var(--white);
+        }
+
+        .section-container {
+            max-width: 78rem;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 42rem;
+            margin: 0 auto 3rem;
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.0625rem;
+            margin-bottom: 0.625rem;
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .feature-card {
+            padding: 1.5rem;
+            border: 0.0625rem solid var(--border);
+            border-radius: 0.875rem;
+            background: var(--white);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-0.1875rem);
+            border-color: #bfdbfe;
+            box-shadow: var(--card-shadow);
+        }
+
+        .feature-icon {
+            width: 2.75rem;
+            height: 2.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.625rem;
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            color: var(--navy);
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+            padding: 4rem;
+            background: #f8fafc;
+        }
+
+        .cta-box {
+            max-width: 78rem;
+            margin: 0 auto;
+            padding: 3.25rem;
+            background: var(--navy);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .cta-title {
+            color: var(--white);
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-description {
+            max-width: 38rem;
+            margin: 0 auto 1.5rem;
+            color: #94a3b8;
+            font-size: 0.8125rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            padding: 2rem 4rem;
+            background: var(--white);
+            border-top: 0.0625rem solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 78rem;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-icon {
+            width: 1.75rem;
+            height: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 0.4375rem;
+            font-size: 0.6875rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.625rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            font-size: 0.625rem;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 64rem) {
+
+            .navbar {
+                padding: 0 2rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem;
+            }
+
+            .hero-container {
+                gap: 3rem;
+            }
+
+            .hero-title {
+                font-size: 2.75rem;
+            }
+
+            .features {
+                padding: 4rem 2rem;
+            }
+
+            .cta {
+                padding: 3rem 2rem;
+            }
+
+            .footer {
+                padding: 2rem;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 48rem) {
+
+            .navbar {
+                height: 4.25rem;
+                padding: 0 1.25rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 3.5rem 1.25rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .hero-description {
+                font-size: 0.875rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero-visual {
+                width: 100%;
+            }
+
+            .features {
+                padding: 3.5rem 1.25rem;
+            }
+
+            .section-title {
+                font-size: 1.625rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 2rem 1.25rem;
+            }
+
+            .cta-box {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .footer {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+
+        /* =========================
+           SMALL MOBILE
+        ========================= */
+
+        @media (max-width: 30rem) {
+
+            .brand-text {
+                font-size: 0.875rem;
+            }
+
+            .nav-actions .btn-login {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 1.875rem;
+            }
+
+            .hero-description {
+                font-size: 0.8125rem;
+            }
+
+            .hero-btn-primary,
+            .hero-btn-secondary {
+                width: 100%;
+            }
+
+            .dashboard-preview {
+                max-width: 100%;
+            }
+
+            .preview-body {
+                padding: 1rem;
+            }
+
+            .cta-title {
+                font-size: 1.5rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span class="brand-text">
+                Consent Management
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#features" class="nav-link">
+                Features
+            </a>
+
+            <a href="#about" class="nav-link">
+                About
+            </a>
+
+            <a href="#security" class="nav-link">
+                Privacy & Security
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="btn-login">
+                Sign In
+            </a>
+
+            <a href="signup.html" class="btn-primary">
+                Get Started
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        PRIVACY & CONSENT MANAGEMENT
+                    </div>
+
+
+                    <h1 class="hero-title">
+                        Manage Consent.
+                        <br>
+                        Protect <span>Privacy.</span>
+                    </h1>
+
+
+                    <p class="hero-description">
+                        A centralized platform to manage user consent,
+                        privacy operations, data principal requests,
+                        compliance activities, and integrations from
+                        one secure workspace.
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a href="signup.html" class="hero-btn-primary">
+                            Get Started
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="#features" class="hero-btn-secondary">
+                            Explore Features
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Dashboard Preview -->
+
+                <div class="hero-visual">
+
+                    <div class="dashboard-preview">
+
+                        <div class="preview-header">
+
+                            <div class="preview-brand">
+
+                                <div class="preview-logo">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+
+                                <span class="preview-brand-text">
+                                    Consent Management
+                                </span>
+
+                            </div>
+
+                            <div class="preview-profile">
+                                AR
+                            </div>
+
+                        </div>
+
+
+                        <div class="preview-body">
+
+                            <div class="preview-title">
+                                Privacy Dashboard
+                            </div>
+
+
+                            <div class="preview-stats">
+
+                                <div class="preview-card">
+
+                                    <div class="preview-card-icon">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+
+                                    <div class="preview-card-value">
+                                        2,486
+                                    </div>
+
+                                    <div class="preview-card-label">
+                                        Data Principals
+                                    </div>
+
+                                </div>
+
+
+                                <div class="preview-card">
+
+                                    <div class="preview-card-icon">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </div>
+
+                                    <div class="preview-card-value">
+                                        1,942
+                                    </div>
+
+                                    <div class="preview-card-label">
+                                        Active Consents
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="preview-activity">
+
+                                <div class="preview-activity-title">
+                                    Recent Activity
+                                </div>
+
+
+                                <div class="preview-row">
+
+                                    <div class="preview-dot"></div>
+
+                                    <div class="preview-row-text">
+                                        New consent recorded
+                                    </div>
+
+                                    <div class="preview-row-time">
+                                        12m
+                                    </div>
+
+                                </div>
+
+
+                                <div class="preview-row">
+
+                                    <div class="preview-dot"></div>
+
+                                    <div class="preview-row-text">
+                                        Privacy notice published
+                                    </div>
+
+                                    <div class="preview-row-time">
+                                        1h
+                                    </div>
+
+                                </div>
+
+
+                                <div class="preview-row">
+
+                                    <div class="preview-dot"></div>
+
+                                    <div class="preview-row-text">
+                                        Data request completed
+                                    </div>
+
+                                    <div class="preview-row-time">
+                                        3h
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FEATURES
+        ========================= -->
+
+        <section class="features" id="features">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Platform
+                    </div>
+
+                    <h2 class="section-title">
+                        Everything for Privacy Operations
+                    </h2>
+
+                    <p class="section-description">
+                        Manage consent, privacy requests, compliance
+                        workflows, and connected systems through one
+                        centralized platform.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Consent Management
+                        </h3>
+
+                        <p class="feature-description">
+                            Record, manage, monitor, and track consent
+                            preferences throughout their lifecycle.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Data Principal Rights
+                        </h3>
+
+                        <p class="feature-description">
+                            Manage privacy requests and provide a
+                            structured workflow for data principal
+                            operations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Privacy Compliance
+                        </h3>
+
+                        <p class="feature-description">
+                            Organize DPIAs, privacy notices, processors,
+                            cookies, and other compliance activities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Deletion Workflows
+                        </h3>
+
+                        <p class="feature-description">
+                            Track deletion requests, approvals,
+                            processing status, and completion activities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-plug"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            External Integrations
+                        </h3>
+
+                        <p class="feature-description">
+                            Connect privacy operations with external
+                            systems and services through integrations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Webhooks & Events
+                        </h3>
+
+                        <p class="feature-description">
+                            Configure event-driven notifications for
+                            privacy and consent activities.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ABOUT / SECURITY
+        ========================= -->
+
+        <section class="cta" id="about">
+
+            <div class="cta-box" id="security">
+
+                <h2 class="cta-title">
+                    Bring Privacy Operations Together
+                </h2>
+
+                <p class="cta-description">
+                    Centralize your consent and privacy workflows
+                    with a structured platform designed to make
+                    privacy operations easier to monitor and manage.
+                </p>
+
+                <a href="signup.html" class="cta-button">
+                    Create Your Account
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <div class="footer-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <span class="footer-text">
+                    © 2026 Consent Management System
+                </span>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#" class="footer-link">
+                    Privacy
+                </a>
+
+                <a href="#" class="footer-link">
+                    Terms
+                </a>
+
+                <a href="login.html" class="footer-link">
+                    Sign In
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
